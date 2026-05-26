@@ -1,0 +1,6 @@
+{
+  "name": "Latvijas Restarts",
+  "description": "Biedrība cilvēkiem, kas vēlas stipru, godīgu un modernu Latviju. Modernas politiskās kustības vietne.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

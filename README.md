@@ -1,11 +1,37 @@
-<div align="center">
+# Latvijas Restarts
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Biedrības "Latvijas Restarts" mājaslapa. Neatkarīga organizācija modernai, tiesiskai un ekonomiski spēcīgai Latvijai.
 
-  <h1>Built with AI Studio</h2>
+## Tehnoloģiju steks
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+- React 18
+- Vite
+- TypeScript
+- Tailwind CSS
+- Framer Motion (motion/react)
+- Lucide React (ikonas)
+- React Router (navigācija)
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Darba sākšana
 
-</div>
+1. Instalējiet atkarības:
+   ```bash
+   npm install
+   ```
+
+2. Palaidiet izstrādes serveri:
+   ```bash
+   npm run dev
+   ```
+
+3. Veidojiet produkcijas versiju:
+   ```bash
+   npm run build
+   ```
+
+## Mērķi
+
+- Ekonomikas restarts
+- Taisnīga pārvaldība
+- Modernas tehnoloģijas
+- Cilvēkkapitāla attīstība
