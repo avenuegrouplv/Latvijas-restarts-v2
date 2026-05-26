@@ -855,10 +855,9 @@ const Footer = () => {
           </div>
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-zinc-500 text-sm">
             <div className="flex items-center gap-4 text-center md:text-left">
-              <p className="w-full">2026 © Biedrība “Latvijas restarts”. Visas tiesības aizsargātas.</p>
+              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
-              <Link to="/vizija" className="hover:text-white transition-colors">Vīzija</Link>
               <Link to="/privatuma-politika" className="hover:text-white transition-colors">Privātuma politika</Link>
               <button 
                 onClick={() => setIsCookiesModalOpen(true)} 
@@ -2262,67 +2261,7 @@ const NewsDetailPage = ({ openRegistration }: { openRegistration: (id: string) =
   return <div className="pt-40 text-center min-h-screen">Raksts netika atrasts.</div>;
 };
 
-const VisionPage = () => (
-  <section className="pt-52 pb-24 bg-white min-h-screen">
-    <div className="max-w-4xl mx-auto px-6">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <ModernTitle 
-          title="Mūsu vīzija" 
-          subtitle="Latvijas restarts"
-        />
-        
-        <div className="prose prose-lg max-w-none prose-headings:text-zinc-900 prose-headings:font-black prose-p:text-zinc-600 prose-p:leading-relaxed prose-strong:text-zinc-900">
-          <div className="rounded-[2.5rem] overflow-hidden mb-12 shadow-2xl h-[400px] relative group">
-            <img 
-              src="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=2000"
-              alt="Latvijas nākotnes vīzija"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-latvia-red/20 to-transparent" />
-          </div>
 
-          <p className="text-xl font-bold text-zinc-900 mb-8 border-l-4 border-latvia-red pl-6 leading-relaxed">
-            Mēs iestājamies par modernu, tiesisku un ekonomiski spēcīgu Latviju, kuras attīstības centrā ir cilvēks, ģimene un sabiedrības kopējā labklājība. Mūsu mērķis ir valsts, kurā ikvienam ir iespējas dzīvot droši, strādāt cienīgos apstākļos un veidot nākotni sev un saviem bērniem.
-          </p>
-
-          <h3 className="text-2xl font-black text-zinc-900 mt-12 mb-6 uppercase">Vērtības un izglītība</h3>
-          <p>
-            Mēs ticam Latvijai kā valstij, kurā tiek cienītas ģimenes vērtības, nodrošināta kvalitatīva un pieejama izglītība. Mūsu fokuss ir radīt vidi, kur bērni var augt droši, attīstīt savus talantus un pilnvērtīgi sagatavoties rītdienas izaicinājumiem. Kvalitatīva izglītība ir mūsu tautas ilgtspējas un konkurētspējas pamats.
-          </p>
-
-          <h3 className="text-2xl font-black text-zinc-900 mt-12 mb-6 uppercase">Ilgtspēja un resursi</h3>
-          <p>
-            Mūsu vīzijā Latvija ir zaļa un ilgtspējīga valsts, kas saudzē un gudri izmanto savus dabas resursus, vienlaikus attīstot mūsdienīgu ekonomiku un stiprinot enerģētisko neatkarību. Tā ir valsts, kur līdzsvaroti attīstās gan pilsētas, gan reģioni, radot vienlīdzīgas iespējas visā mūsu zemē. Mērķis ir panākt, ka Latvijas daba kļūst par mūsu ekonomisko priekšrocību.
-          </p>
-
-          <div className="my-12 p-10 bg-zinc-50 rounded-[2.5rem] border border-zinc-100 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-latvia-red" />
-            <p className="italic text-zinc-700 text-lg">
-              "Mēs redzam Latviju kā stipru, atbildīgu un uz nākotni vērstu valsti, kuras pamatā ir godīga pārvaldība, sabiedrības uzticēšanās un kopīga atbildība par mūsu valsts attīstību."
-            </p>
-          </div>
-
-          <p className="mt-8">
-            Šī vīzija nav tikai ideāls — tas ir konkrēts plāns, pie kura mēs strādājam katru dienu. Apvienojot nozares ekspertu zināšanas ar sabiedrības aktīvo iesaisti, mēs veidojam Latviju, ar kuru lepoties varēs arī nākamās paaudzes. Latvijas restarts sākas ar katru no mums.
-          </p>
-        </div>
-
-        <div className="mt-16 flex flex-col sm:flex-row gap-6">
-          <Link to="/kontakti" className="bg-latvia-red text-white border-2 border-latvia-red inline-flex items-center justify-center font-bold text-lg px-10 py-5 rounded-full hover:bg-zinc-900 hover:border-zinc-900 transition-all shadow-xl font-display uppercase">
-            Sazināties ar mums
-          </Link>
-          <Link to="/programma" className="bg-white border-2 border-latvia-red text-latvia-red inline-flex items-center justify-center font-bold text-lg px-10 py-5 rounded-full hover:bg-latvia-red hover:text-white transition-all shadow-md font-display uppercase">
-            Mūsu rīcības plāns
-          </Link>
-        </div>
-      </motion.div>
-    </div>
-  </section>
-);
 
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -2744,7 +2683,6 @@ export default function App() {
       <PageLayout>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/vizija" element={<VisionPage />} />
           <Route path="/par-biedribu" element={<AboutPage />} />
           <Route path="/statuti" element={<StatutesPage />} />
           <Route path="/iesniegums" element={<JoinFormPage />} />
