@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+/assets/.aistudio/
+*.zip
+*.pptx
