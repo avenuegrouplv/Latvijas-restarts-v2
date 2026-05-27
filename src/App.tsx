@@ -2398,58 +2398,63 @@ const CookieBanner = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div 
-          initial={{ y: 200, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 200, opacity: 0 }}
-          transition={{ 
-            type: "spring", 
-            damping: 25, 
-            stiffness: 100
-          }}
-          className="fixed bottom-0 left-0 right-0 md:bottom-6 md:right-6 md:left-auto z-[9999] p-4 md:p-0 max-w-lg w-full pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-[9999] flex items-center justify-center p-4 sm:p-6"
         >
-          <div className="bg-white rounded-3xl p-5 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-100 relative w-full pointer-events-auto overflow-hidden">
+          <motion.div 
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            transition={{ 
+              type: "spring", 
+              damping: 25, 
+              stiffness: 150
+            }}
+            className="bg-white rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-zinc-100 relative max-w-2xl w-full overflow-hidden"
+          >
             {/* Visual accent */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-latvia-red" />
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-latvia-red" />
             
             <button 
               onClick={handleDecline}
-              className="absolute top-4 right-4 text-zinc-400 hover:text-latvia-red transition-all p-1.5 hover:bg-latvia-red/5 rounded-full group"
+              className="absolute top-5 right-5 text-zinc-400 hover:text-latvia-red transition-all p-1.5 hover:bg-latvia-red/5 rounded-full group cursor-pointer"
               aria-label="Aizvērt"
             >
-              <X className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
+              <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
             </button>
             
-            <div className="pr-6">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 bg-latvia-red/10 rounded-lg flex items-center justify-center text-latvia-red shrink-0">
-                  <ShieldCheck className="w-5 h-5" />
+            <div className="pr-4 sm:pr-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-latvia-red/10 rounded-xl flex items-center justify-center text-latvia-red shrink-0">
+                  <ShieldCheck className="w-6 h-6" />
                 </div>
-                <h3 className="font-display font-black uppercase text-xs sm:text-sm tracking-tight text-zinc-900">
+                <h3 className="font-display font-black uppercase text-sm sm:text-base md:text-lg tracking-tight text-zinc-900">
                   Šī vietne izmanto sīkdatnes
                 </h3>
               </div>
 
-              <p className="text-zinc-600 text-[11px] sm:text-xs leading-relaxed mb-4 font-medium">
+              <p className="text-zinc-600 text-[11px] sm:text-sm leading-relaxed mb-6 font-medium">
                 Mēs izmantojam savas un trešo pušu sīkdatnes, lai nodrošinātu un uzlabotu tīmekļa vietnes darbību, pielāgotu informāciju par mūsu produktiem un pakalpojumiem, kā arī analizētu vietnes apmeklējumu. Spiežot «Apstiprināt visas», jūs piekrītat visu sīkdatņu izmantošanai. Sīkdatņu loga aizvēršana ar «X» neaktivizē sīkdatnes. Lapas apakšējā stūrī lasiet vairāk par <Link to="/sikdatnu-politika" className="text-latvia-red underline font-bold hover:underline">Sīkdatņu politiku</Link> un <Link to="/privatuma-politika" className="text-latvia-red underline font-bold hover:underline">Privātuma politiku</Link>.
               </p>
 
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button 
                   onClick={handleAccept}
-                  className="py-2.5 px-5 bg-latvia-red text-white text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-900 transition-all shadow-md hover:shadow-latvia-red/10 active:scale-[0.98] font-display flex-1 sm:flex-none text-center cursor-pointer"
+                  className="py-3 px-6 bg-latvia-red text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-900 transition-all shadow-md hover:shadow-latvia-red/10 active:scale-[0.98] font-display flex-1 text-center cursor-pointer"
                 >
                   Apstiprināt visas
                 </button>
                 <button 
                   onClick={handleDecline}
-                  className="py-2.5 px-5 bg-zinc-100 text-zinc-600 text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-200 transition-all active:scale-[0.98] font-display flex-1 sm:flex-none text-center cursor-pointer"
+                  className="py-3 px-6 bg-zinc-100 text-zinc-600 text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-200 transition-all active:scale-[0.98] font-display flex-1 text-center cursor-pointer"
                 >
                   Noraidīt
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
