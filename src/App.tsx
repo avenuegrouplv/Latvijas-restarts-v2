@@ -2406,43 +2406,44 @@ const CookieBanner = () => {
             damping: 25, 
             stiffness: 100
           }}
-          className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-10 flex justify-center pointer-events-none"
+          className="fixed bottom-0 left-0 right-0 md:bottom-6 md:right-6 md:left-auto z-[9999] p-4 md:p-0 max-w-lg w-full pointer-events-none"
         >
-          <div className="bg-white rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 shadow-[0_-20px_80px_rgba(0,0,0,0.25)] border border-zinc-100 relative max-w-5xl w-full pointer-events-auto overflow-hidden">
+          <div className="bg-white rounded-3xl p-5 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-100 relative w-full pointer-events-auto overflow-hidden">
             {/* Visual accent */}
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-latvia-red" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-latvia-red" />
             
             <button 
-              onClick={handleDismiss}
-              className="absolute top-4 right-4 md:top-8 md:right-8 text-zinc-300 hover:text-latvia-red transition-all p-2 hover:bg-latvia-red/5 rounded-full group"
+              onClick={handleDecline}
+              className="absolute top-4 right-4 text-zinc-400 hover:text-latvia-red transition-all p-1.5 hover:bg-latvia-red/5 rounded-full group"
               aria-label="Aizvērt"
             >
-              <X className="w-5 h-5 md:w-8 md:h-8 group-hover:rotate-90 transition-transform duration-300" />
+              <X className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
             </button>
             
-            <div className="md:pr-20">
-              <div className="flex items-center gap-3 mb-4 md:mb-6">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-latvia-red/10 rounded-xl flex items-center justify-center text-latvia-red">
-                  <ShieldCheck className="w-6 h-6 md:w-7 md:h-7" />
+            <div className="pr-6">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 bg-latvia-red/10 rounded-lg flex items-center justify-center text-latvia-red shrink-0">
+                  <ShieldCheck className="w-5 h-5" />
                 </div>
-                <h3 className="font-display font-black uppercase text-sm md:text-xl tracking-tight text-zinc-900">Sīkdatņu lietošana</h3>
+                <h3 className="font-display font-black uppercase text-xs sm:text-sm tracking-tight text-zinc-900">
+                  Šī vietne izmanto sīkdatnes
+                </h3>
               </div>
 
-              <p className="text-zinc-600 text-[11px] md:text-lg leading-relaxed mb-6 md:mb-10 font-medium">
-                Mēs izmantojam sīkdatnes, lai nodrošinātu mājaslapas darbību un uzlabotu lietotāja pieredzi. Spiežot "Apstiprināt", jūs piekrītat visām sīkdatnēm. 
-                Vairāk informācijas <Link to="/sikdatnu-politika" className="text-latvia-red underline font-extrabold hover:no-underline">Sīkdatņu politikā</Link> un <Link to="/privatuma-politika" className="text-latvia-red underline font-extrabold hover:no-underline">Privātuma politikā</Link>.
+              <p className="text-zinc-600 text-[11px] sm:text-xs leading-relaxed mb-4 font-medium">
+                Mēs izmantojam savas un trešo pušu sīkdatnes, lai nodrošinātu un uzlabotu tīmekļa vietnes darbību, pielāgotu informāciju par mūsu produktiem un pakalpojumiem, kā arī analizētu vietnes apmeklējumu. Spiežot «Apstiprināt visas», jūs piekrītat visu sīkdatņu izmantošanai. Sīkdatņu loga aizvēršana ar «X» neaktivizē sīkdatnes. Lapas apakšējā stūrī lasiet vairāk par <Link to="/sikdatnu-politika" className="text-latvia-red underline font-bold hover:underline">Sīkdatņu politiku</Link> un <Link to="/privatuma-politika" className="text-latvia-red underline font-bold hover:underline">Privātuma politiku</Link>.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-6">
+              <div className="flex gap-2">
                 <button 
                   onClick={handleAccept}
-                  className="py-3 md:py-4 px-8 md:px-12 bg-latvia-red text-white text-[10px] md:text-sm font-black uppercase tracking-widest rounded-2xl hover:bg-zinc-900 transition-all shadow-xl hover:shadow-latvia-red/20 active:scale-[0.98] font-display flex-1 md:flex-none"
+                  className="py-2.5 px-5 bg-latvia-red text-white text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-900 transition-all shadow-md hover:shadow-latvia-red/10 active:scale-[0.98] font-display flex-1 sm:flex-none text-center cursor-pointer"
                 >
                   Apstiprināt visas
                 </button>
                 <button 
                   onClick={handleDecline}
-                  className="py-3 md:py-4 px-8 md:px-12 bg-zinc-100 text-zinc-500 text-[10px] md:text-sm font-black uppercase tracking-widest rounded-2xl hover:bg-zinc-200 transition-all active:scale-[0.98] font-display flex-1 md:flex-none"
+                  className="py-2.5 px-5 bg-zinc-100 text-zinc-600 text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-200 transition-all active:scale-[0.98] font-display flex-1 sm:flex-none text-center cursor-pointer"
                 >
                   Noraidīt
                 </button>
