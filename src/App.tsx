@@ -855,7 +855,7 @@ const Footer = () => {
           </div>
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-zinc-500 text-sm">
             <div className="flex items-center gap-4 text-center md:text-left">
-              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas.</p>
+              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
               <Link to="/privatuma-politika" className="hover:text-white transition-colors">Privātuma politika</Link>
