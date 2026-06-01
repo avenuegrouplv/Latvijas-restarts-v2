@@ -855,7 +855,7 @@ const Footer = () => {
           </div>
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-zinc-500 text-sm">
             <div className="flex items-center gap-4 text-center md:text-left">
-              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas</p>
+              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas.</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
               <Link to="/privatuma-politika" className="hover:text-white transition-colors">Privātuma politika</Link>
@@ -874,9 +874,105 @@ const Footer = () => {
   );
 };
 
+// --- Custom SEO Hook with JSON-LD Organization Structured Data ---
+interface SEOProps {
+  title: string;
+  description: string;
+  ogType?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+}
+
+const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = false }: SEOProps) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // 1. Update Title
+    const formattedTitle = title.endsWith('Latvijas Restarts') ? title : `${title} | Latvijas Restarts`;
+    document.title = formattedTitle;
+
+    // Helper to select/create meta tags
+    const setMetaTag = (attrs: Record<string, string>, content: string) => {
+      let selector = 'meta';
+      for (const [key, value] of Object.entries(attrs)) {
+        selector += `[${key}="${value}"]`;
+      }
+      let element = document.head.querySelector(selector);
+      if (!element) {
+        element = document.createElement('meta');
+        for (const [key, value] of Object.entries(attrs)) {
+          element.setAttribute(key, value);
+        }
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    // 2. Update meta description
+    setMetaTag({ name: 'description' }, description);
+
+    // 3. Update Open Graph
+    setMetaTag({ property: 'og:title' }, formattedTitle);
+    setMetaTag({ property: 'og:description' }, description);
+    setMetaTag({ property: 'og:url' }, window.location.origin + location.pathname);
+    setMetaTag({ property: 'og:type' }, ogType);
+    setMetaTag({ property: 'og:site_name' }, 'Biedrība Latvijas restarts');
+
+    const defaultImage = 'https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp';
+    setMetaTag({ property: 'og:image' }, ogImage || defaultImage);
+
+    // 4. Update Twitter specific
+    setMetaTag({ name: 'twitter:card' }, 'summary_large_image');
+    setMetaTag({ name: 'twitter:title' }, formattedTitle);
+    setMetaTag({ name: 'twitter:description' }, description);
+    setMetaTag({ name: 'twitter:image' }, ogImage || defaultImage);
+
+    // 5. Indexing control
+    if (noIndex) {
+      setMetaTag({ name: 'robots' }, 'noindex, nofollow');
+    } else {
+      setMetaTag({ name: 'robots' }, 'index, follow');
+    }
+
+    // 6. JSON-LD Schema Markup for Organization
+    let schemaScript = document.getElementById('jsonld-org');
+    if (!schemaScript) {
+      schemaScript = document.createElement('script');
+      schemaScript.id = 'jsonld-org';
+      schemaScript.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(schemaScript);
+    }
+    const schemaMarkup = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Biedrība Latvijas restarts",
+      "url": window.location.origin,
+      "logo": "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp",
+      "description": "Neatkarīga organizācija modernai, tiesiskai un ekonomiski spēcīgai Latvijai.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ogļu iela 12A",
+        "addressLocality": "Rīga",
+        "postalCode": "LV-1048",
+        "addressCountry": "LV"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@latvijasrestarts.lv",
+        "contactType": "Klientu atbalsts"
+      }
+    };
+    schemaScript.textContent = JSON.stringify(schemaMarkup);
+  }, [title, description, ogType, ogImage, noIndex, location.pathname]);
+};
+
 // --- Page Components ---
 
 const HomePage = () => {
+  useSEO({
+    title: "Sākums",
+    description: "Biedrība Latvijas Restarts apvieno dažādu jomu profesionāļus un ekspertus sekmīgai krīžu pārvarēšanai un dinamiskai Latvijas attīstībai."
+  });
   return (
     <>
       <Hero />
@@ -1063,8 +1159,13 @@ const NewsSummary = () => (
 
 // --- Full Page Components ---
 
-const AboutPage = () => (
-  <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
+const AboutPage = () => {
+  useSEO({
+    title: "Par biedrību",
+    description: "Uzziniet vairāk par biedrību Latvijas Restarts, mūsu mērķiem, vērtībām un rīcības komandu."
+  });
+  return (
+    <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
     <div className="max-w-7xl mx-auto px-6">
       <ModernTitle 
         title="Par biedrību" 
@@ -1186,10 +1287,16 @@ const AboutPage = () => (
       <SectionBottomNav />
     </div>
   </section>
-);
+  );
+};
 
-const StatutesPage = () => (
-  <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
+const StatutesPage = () => {
+  useSEO({
+    title: "Biedrības Statūti",
+    description: "Biedrības Latvijas Restarts oficiālie statūti un darbības pamatprincipi."
+  });
+  return (
+    <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
     <div className="max-w-4xl mx-auto px-6">
       <Link to="/par-biedribu" className="inline-flex items-center gap-2 text-latvia-red font-bold mb-12 hover:gap-4 transition-all">
         <ChevronRight className="w-5 h-5 rotate-180" /> Atpakaļ uz "Par biedrību"
@@ -1358,9 +1465,14 @@ const StatutesPage = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const JoinFormPage = () => {
+  useSEO({
+    title: "Iesniegums dalībai",
+    description: "Aizpildiet un iesniedziet pieteikuma anketu, lai kļūtu par biedrības Latvijas Restarts biedru vai asociēto biedru."
+  });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -1556,8 +1668,13 @@ const JoinFormPage = () => {
   );
 };
 
-const ProgramPage = () => (
-  <section className="pt-32 md:pt-52 pb-24 bg-zinc-50 min-h-screen relative overflow-hidden">
+const ProgramPage = () => {
+  useSEO({
+    title: "Mūsu Programma",
+    description: "Iepazīstieties ar Latvijas Restarts rīcības plānu ekonomikas, valsts pārvaldes, nodokļu reformām un valsts drošībai."
+  });
+  return (
+    <section className="pt-32 md:pt-52 pb-24 bg-zinc-50 min-h-screen relative overflow-hidden">
     <LatvianPattern className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none" />
     <div className="max-w-7xl mx-auto px-6 relative z-10">
       <ModernTitle 
@@ -1594,11 +1711,17 @@ const ProgramPage = () => (
       <SectionBottomNav />
     </div>
   </section>
-);
+  );
+};
 
 const ProgramDetailPage = () => {
   const { id } = useParams();
   const item = PROGRAM_DATA.find(p => p.id === id);
+
+  useSEO({
+    title: item ? `${item.title}` : "Programma",
+    description: item ? `${item.description.substring(0, 150)}` : "Biedrības Latvijas Restarts rīcības programma un darba joma."
+  });
 
   if (!item) {
     return <div className="pt-52 text-center min-h-screen font-display">Informācija netika atrasta.</div>;
@@ -1769,6 +1892,11 @@ const MemberProfilePage = () => {
   const { id } = useParams();
   const member = BOARD_MEMBERS.find(m => m.id === id);
 
+  useSEO({
+    title: member ? `${member.name} - Valdes loceklis` : "Biedra profils",
+    description: member ? `${member.name} (${member.role}) darbība un tēmas biedrībā Latvijas Restarts.` : "Latvijas Restarts biedra profils."
+  });
+
   if (!member) return null;
 
   return (
@@ -1862,6 +1990,11 @@ const MemberTopicDetailPage = () => {
   const member = BOARD_MEMBERS.find(m => m.id === id);
   const topic = member?.focus.find(f => f.id === topicId);
 
+  useSEO({
+    title: topic ? `${topic.title}` : "Tēma",
+    description: topic ? `${topic.content.substring(0, 150)}...` : "Latvijas Restarts biedra darba virziens."
+  });
+
   if (!member || !topic) return null;
 
   return (
@@ -1916,8 +2049,13 @@ const MemberTopicDetailPage = () => {
   );
 };
 
-const NewsPage = () => (
-  <section className="pt-32 md:pt-52 pb-24 bg-zinc-50 min-h-screen">
+const NewsPage = () => {
+  useSEO({
+    title: "Aktualitātes un Jaunumi",
+    description: "Lasiet jaunākās ziņas, viedokļus un paziņojumus par biedrības Latvijas Restarts aktivitātēm un mērķiem."
+  });
+  return (
+    <section className="pt-32 md:pt-52 pb-24 bg-zinc-50 min-h-screen">
     <div className="max-w-7xl mx-auto px-6">
       <ModernTitle 
         title="Aktualitātes" 
@@ -1943,7 +2081,8 @@ const NewsPage = () => (
       <SectionBottomNav />
     </div>
   </section>
-);
+  );
+};
 
 const EventCard = ({ 
   title, 
@@ -2009,6 +2148,11 @@ const SectionBottomNav = () => {
 const NewsDetailPage = ({ openRegistration }: { openRegistration: (id: string) => void }) => {
   const { id } = useParams<{ id: string }>();
   const newsItem = NEWS.find(item => item.id === id);
+
+  useSEO({
+    title: newsItem ? `${newsItem.title}` : "Jaunumi",
+    description: newsItem ? `${newsItem.excerpt}` : "Biedrības Latvijas Restarts aktualitāšu raksts."
+  });
   
   if (!newsItem) {
     return <div className="pt-52 text-center min-h-screen">Raksts netika atrasts.</div>;
@@ -2266,6 +2410,11 @@ const NewsDetailPage = ({ openRegistration }: { openRegistration: (id: string) =
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
 
+  useSEO({
+    title: "Kontakti un rekvizīti",
+    description: "Sazinieties ar biedrību Latvijas Restarts. Adrese, tālrunis, e-pasts un bankas rekvizīti."
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
@@ -2461,8 +2610,13 @@ const CookieBanner = () => {
   );
 };
 
-const PrivacyPolicyPage = () => (
-  <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
+const PrivacyPolicyPage = () => {
+  useSEO({
+    title: "Privātuma politika",
+    description: "Biedrības Latvijas Restarts privātuma politika un personas datu aizsardzības noteikumi."
+  });
+  return (
+    <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
     <div className="max-w-4xl mx-auto px-6">
       <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-xl border border-zinc-100">
         <h1 className="text-3xl font-black uppercase mb-4 border-b-4 border-latvia-red pb-4 inline-block">Privātuma politika</h1>
@@ -2571,11 +2725,17 @@ const PrivacyPolicyPage = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 
-const CookiePolicyPage = () => (
-  <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
+const CookiePolicyPage = () => {
+  useSEO({
+    title: "Sīkdatņu politika",
+    description: "Biedrības Latvijas Restarts sīkdatņu izmantošanas politika un pārvaldības noteikumi."
+  });
+  return (
+    <section className="pt-32 md:pt-52 pb-24 bg-white min-h-screen">
     <div className="max-w-4xl mx-auto px-6">
       <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-xl border border-zinc-100">
         <h1 className="text-3xl font-black uppercase mb-4 border-b-4 border-latvia-red pb-4 inline-block">Sīkdatņu politika</h1>
@@ -2672,7 +2832,8 @@ const CookiePolicyPage = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
