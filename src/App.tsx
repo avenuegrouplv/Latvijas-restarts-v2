@@ -855,7 +855,7 @@ const Footer = () => {
           </div>
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-zinc-500 text-sm">
             <div className="flex items-center gap-4 text-center md:text-left">
-              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas.</p>
+              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
               <Link to="/privatuma-politika" className="hover:text-white transition-colors">Privātuma politika</Link>
@@ -863,7 +863,7 @@ const Footer = () => {
                 onClick={() => setIsCookiesModalOpen(true)} 
                 className="hover:text-white transition-colors cursor-pointer"
               >
-                Sīkdatņu politika.
+                Sīkdatņu politika
               </button>
             </div>
           </div>
@@ -918,7 +918,7 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
     setMetaTag({ property: 'og:type' }, ogType);
     setMetaTag({ property: 'og:site_name' }, 'Biedrība Latvijas restarts');
 
-    const defaultImage = 'https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp';
+    const defaultImage = 'https://latvijasrestarts.lv/images/social_share_v1.png';
     setMetaTag({ property: 'og:image' }, ogImage || defaultImage);
 
     // 4. Update Twitter specific
