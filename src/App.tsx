@@ -22,6 +22,13 @@ import { LatvianPattern } from './components/VisualElements';
 // --- Image Imports ---
 // Local images replaced by external URLs for better maintenance
 
+// --- Custom X (Twitter) Icon ---
+const XIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
 // --- Scroll to Top Component ---
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -806,13 +813,31 @@ const Footer = () => {
                 Neatkarīga organizācija modernai, tiesiskai un ekonomiski spēcīgai Latvijai.
               </p>
               <div className="flex gap-4">
-                <a href="#" className="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red transition-all">
+                <a 
+                  href="https://www.facebook.com/andris.kulbergs" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red transition-all"
+                  aria-label="Facebook"
+                >
                   <Facebook className="w-6 h-6" />
                 </a>
-                <a href="#" className="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red transition-all">
-                  <Twitter className="w-6 h-6" />
+                <a 
+                  href="https://x.com/andriskulbergs?s=11&t=Y_-qbzD0uVknm-rkHOPh8A" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red transition-all"
+                  aria-label="X (Twitter)"
+                >
+                  <XIcon className="w-6 h-6 text-white" />
                 </a>
-                <a href="#" className="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red transition-all">
+                <a 
+                  href="https://www.instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red transition-all"
+                  aria-label="Instagram"
+                >
                   <Instagram className="w-6 h-6" />
                 </a>
               </div>
@@ -1054,13 +1079,13 @@ const BoardSummary = () => (
   <section className="pt-8 pb-8 bg-white">
     <div className="max-w-7xl mx-auto px-6">
       <ModernTitle 
-        title="Biedrības valde" 
+        title="Mūsu cilvēki" 
         subtitle=""
         centered 
       />
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div className="flex flex-wrap justify-center gap-x-8 gap-y-12">
         {BOARD_MEMBERS.map((member) => (
-          <div key={member.name} className="flex flex-col items-center text-center group">
+          <div key={member.name} className="flex flex-col items-center text-center group w-36 md:w-48">
             <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-zinc-50 rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
               <div className="absolute inset-0 flex items-center justify-center text-zinc-200">
                 {member.image ? (
@@ -1186,11 +1211,11 @@ const AboutPage = () => {
 
       <div className="mb-24">
         <h2 className="text-sm font-black uppercase text-zinc-400 mb-10 tracking-widest flex items-center gap-3">
-          <span className="w-8 h-1 bg-latvia-red"></span> Biedrības valde
+          <span className="w-8 h-1 bg-latvia-red"></span> Mūsu cilvēki
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-12">
           {BOARD_MEMBERS.map((member) => (
-            <div key={member.name} className="flex flex-col items-center text-center group">
+            <div key={member.name} className="flex flex-col items-center text-center group w-36 md:w-48">
               <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-zinc-50 rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-200">
                   {member.image ? (
@@ -1793,7 +1818,7 @@ const BOARD_MEMBERS: Member[] = [
     id: "andris-kulbergs",
     name: "Andris Kulbergs", 
     image: "https://pub-b4e9dacb063d49eeb0e49317ea5b4e43.r2.dev/Andris%20Kulbergs.jpg",
-    imageClass: "scale-[1.2] origin-[50%_0%]",
+    imageClass: "scale-[1.2] origin-[50%_0%] translate-y-[-9.6%]",
     role: "Valdes priekšsēdētājs",
     facebook: "https://www.facebook.com/andris.kulbergs",
     twitter: "https://x.com/andriskulbergs?s=11&t=Y_-qbzD0uVknm-rkHOPh8A",
@@ -1801,12 +1826,12 @@ const BOARD_MEMBERS: Member[] = [
       { 
         id: "f1", 
         title: "Rīgas Siltums pārvaldība", 
-        content: "Valainis uzbrūk Rīga RigasDome Kleinbergs Viesturs par RĪGAS SILTUMS nesaimnieciskumu un nespēju sakārtot siltuma tarifu Rīgā. PAREIZI Taisnība, RD kā lielajam akcionāram bija jāuzrauga savs uzņēmums, tikai Viktors Valainis aizmirst, ka viņa rokās un saimniecībā ir pilnībā visi politiskie un reālie instrumenti, lai šo visu sakārtotu, jo EkMin ir 100% īpašnieks Latvenergo, kam veidojas atlikumsiltums, EM ir 49% īpašnieks RSiltums, EM paspārnē ir gan SPRK regulātors (kas nosaka tarifu), gan Konkurences Padome, gan ZZS pakļautībā ir KEM siltuma politikas veidotājs. Ko var vairāk vēlēties, lai atrisinātu?\n\n2022./2023. ziemā valsts subsidēja Rīgas Siltumu 50% apmērā. Visi Latvijas nodokļu maksātāji sameta apmēram 180 miljonus eiro ko iedot RS caur EkMin. Visi, arī tie kas Rīgā nekad nav bijuši!\n\nPIK izmekļešanā esam atklājuši, ka 2023. gada janvārī Ekonomikas ministrijai ir iesniegts lūgums no RS rīkoties, lai pārtrauktu TEC siltuma izmešanu gaisā un to varētu nodot Rīgas sistēmā. Domājiet kaut kas notika? Nē, nekādas rīcības...\n\nValainis varēja pārtraukt šīs izdomātās neskaidrības starp EM iestādēm SPRK, KP, Latvenergo, Rīgas Siltumu. Tieši kā arī norāda Valsts kontrole savā ziņojumā\n\nKāda bija EM reakcija? Esam noskaidrojuši ka EM vienkārši neatbildēja. Neatbildēja vispār NEKO un turpināja mest visu nodokļu maksātāju naudu RS subsīdijās.\n\nTajā laikā ministrijā saimniekoja šie paši politiskie saimnieki.\n\nŠāda amatpersonu bezdarbība ir krimināli sodāms noziegums par ko es ziņošu ģenerālprokuroram.",
+        content: "Valainis uzbrūk Rīga RigasDome Kleinbergs Viesturs par RĪGAS SILTUMS nesaimnieciskumu un nespēju sakārtot siltuma tarifu Rīgā. PAREIZI Taisnība, RD kā lielajam akcionāram bija jāuzrauga savs uzņēmums, tikai Viktors Valainis aizmirst, ka viņa rokās un saimniecībā ir pilnībā visi politiskie un reālie instrumenti, lai šo visu sakārtotu, jo EkMin is 100% īpašnieks Latvenergo, kam veidojas atlikumsiltums, EM ir 49% īpašnieks RSiltums, EM paspārnē ir gan SPRK regulātors (kas nosaka tarifu), gan Konkurences Padome, gan ZZS pakļautībā ir KEM siltuma politikas veidotājs. Ko var vairāk vēlēties, lai atrisinātu?\n\n2022./2023. ziemā valsts subsidēja Rīgas Siltumu 50% apmērā. Visi Latvijas nodokļu maksātāji sameta apmēram 180 miljonus eiro ko iedot RS caur EkMin. Visi, arī tie kas Rīgā nekad nav bijuši!\n\nPIK izmekļešanā esam atklājuši, ka 2023. gada janvārī Ekonomikas ministrijai ir iesniegts lūgums no RS rīkoties, lai pārtrauktu TEC siltuma izmešanu gaisā un to varētu nodot Rīgas sistēmā. Domājiet kaut kas notika? Nē, nekādas rīcības...\n\nValainis varēja pārtraukt šīs izdomātās neskaidrības starp EM iestādēm SPRK, KP, Latvenergo, Rīgas Siltumu. Tieši kā arī norāda Valsts kontrole savā ziņojumā\n\nKāda bija EM reakcija? Esam noskaidrojuši ka EM vienkārši neatbildēja. Neatbildēja vispār NEKO un turpināja mest visu nodokļu maksātāju naudu RS subsīdijās.\n\nTajā laikā ministrijā saimniekoja šie paši politiskie saimnieki.\n\nŠāda amatpersonu bezdarbība ir krimināli sodāms noziegums par ko es ziņošu ģenerālprokuroram.",
         link: "https://www.facebook.com/share/v/18hanyU7Cr/"
       },
       { id: "f2", title: "Mobilitātes paketes ieviešana", content: "Eiropas Savienības transporta regulējumu pielāgošana Latvijas uzņēmēju konkurētspējas stiprināšanai." },
       { id: "f3", title: "Zaļā kursa izaicinājumi", content: "Līdzsvarota pāreja uz ilgtspējīgu transportu, mazinot slogu uz iedzīvotājiem un biznesu." },
-      { id: "f4", title: "Auto nozares caurspīdīgums", content: "Cīņa pret krāpniecību un ēnu ekonomiku auto tirdzniecības un servisa jomā." },
+      { id: "f4", title: "Auto nozares caurspīdīgums", content: "Cīņa pragma pret krāpniecību un ēnu ekonomiku auto tirdzniecības un servisa jomā." },
       { id: "f5", title: "Nākotnes degvielas stratēģija", content: "Ūdeņraža, bio-degvielas un elektroenerģijas infrastruktūras plānošana reģionālā mērogā." }
     ]
   },
@@ -1845,7 +1870,7 @@ const BOARD_MEMBERS: Member[] = [
     id: "guntars-vitols",
     name: "Guntars Vītols", 
     image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/photo_6048728419102559838_y.jpg",
-    imageClass: "scale-[1.3] origin-[80%_0%]",
+    imageClass: "scale-[1.3] origin-[80%_0%] translate-x-[6%] translate-y-[-3.6%]",
     role: "Valdes loceklis",
     facebook: "https://www.facebook.com/guntars.vitols.1",
     twitter: "https://x.com/guntarsv?s=11&t=Y_-qbzD0uVknm-rkHOPh8A",
@@ -1870,6 +1895,51 @@ const BOARD_MEMBERS: Member[] = [
       { id: "f4", title: "Finanšu sektora stabilitāte", content: "Ilgtspējīga kreditēšanas politika un ekonomikas stimulēšanas instrumenti krīzes laikā." },
       { id: "f5", title: "Energoefektivitātes programmas", content: "Atbalsts uzņēmējiem un mājsaimniecībām enerģijas pašpatēriņa risinājumu vienmērīgai ieviešanai." }
     ]
+  },
+  {
+    id: "aivis-cerins",
+    name: "Aivis Ceriņš",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Aivis%20Ceri%C5%86%C5%A1.webp",
+    imageClass: "scale-[1.45] origin-[50%_0%] translate-y-[-8%]",
+    role: "Biedrības biedrs",
+    facebook: "https://www.facebook.com/aivis.cerins",
+    focus: [
+      { id: "f1", title: "Sabiedriskās attiecības un komunikācija", content: "Sabiedrības informēšana, dialoga veidošana starp iedzīvotājiem un lēmumu pieņēmējiem." },
+      { id: "f2", title: "Kultūras un mediju telpas stiprināšana", content: "Neatkarīgu un profesionālu reģionālo un nacionālo mediju atbalsts, sabiedrisko mediju attīstība." },
+      { id: "f3", title: "Jauniešu iesaiste sabiedriskajos procesos", content: "Jauniešu līdzdalības veicināšana vēlēšanās, NVO un pilsoniskajās iniciatīvās." },
+      { id: "f4", title: "Sabiedrības saliedētība un integrācija", content: "Vienotas sabiedrības veidošana, mazinot sociālo un etnisko spriedzi caur kopīgiem projektiem." },
+      { id: "f5", title: "Pasākumu un forumu organizēšana", content: "Izglītojošu diskusiju un viedokļu platformu radīšana par aktuālajiem Latvijas attīstības jautājumiem." }
+    ]
+  },
+  {
+    id: "janis-liepins",
+    name: "Jānis Liepiņš",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/J%C4%81nis%20Liepi%C5%86%C5%A1.webp",
+    imageClass: "scale-[2.45] origin-[35%_15%] translate-y-[-14.4%] translate-x-[-49.8%]",
+    role: "Biedrības biedrs",
+    facebook: "https://www.facebook.com/janis.liepins.969",
+    focus: [
+      { id: "f1", title: "Kultūrpolitika un mākslas attīstība", content: "Valsts stratēģiskā atbalsta nodrošināšana kultūras iestādēm un neatkarīgiem mākslas projektiem." },
+      { id: "f2", title: "Kultūras eksportspējas celšana", content: "Latvijas izcilāko akadēmiskās mūzikas un mākslas pārstāvju atpazīstamības un sadarbības veicināšana pasaulē." },
+      { id: "f3", title: "Kultūras pieejamība reģionos", content: "Profesionālās mākslas, teātru un koncertu pieejamības paplašināšana ārpus galvaspilsētas." },
+      { id: "f4", title: "Jauno talantu atbalsta programmas", content: "Stipendiju sistēmu un mentoru tīklu veidošana jaunajiem mūziķiem un māksliniekiem." },
+      { id: "f5", title: "Mūzikas izglītības modernizācija", content: "Mūsdienīgu mācību metožu un materiālu ieviešana reģionālajās mūzikas un mākslas skolās." }
+    ]
+  },
+  {
+    id: "renars-putnins",
+    name: "Renārs Putniņš",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Ren%C4%81rs%20Putni%C5%86%C5%A1.webp",
+    imageClass: "scale-[2.2] origin-[50%_18%] translate-y-[3%] translate-x-[-3%]",
+    role: "Biedrības biedrs",
+    facebook: "https://www.facebook.com/renars.putnins",
+    focus: [
+      { id: "f1", title: "Veselības aprūpes sistēmas reforma", content: "Finansējuma un resursu lietderīga plānošana, mazinot rindu garumu uz valsts apmaksātiem pakalpojumiem." },
+      { id: "f2", title: "Medicīnas personāla piesaiste reģioniem", content: "Atbalsta mehānismu izveide jauno ārstu un māsu motivēšanai strādāt Latvijas reģionu slimnīcās." },
+      { id: "f3", title: "Slimnīcu pārvaldības efektivitāte", content: "Modernas un caurspīdīgas korporatīvās pārvaldības principu ieviešana vadošajās ārstniecības iestādēs." },
+      { id: "f4", title: "Pacientu tiesību aizsardzība", content: "Medicīnas tiesību un ētikas standartu pilnveidošana, nodrošinot augstāku drošību un cieņu ikvienam pacientam." },
+      { id: "f5", title: "Medicīnas digitalizācija un e-veselība", content: "Vienotas, stabilas un ērti lietojamas e-veselības sistēmas izveide, integrējot mūsdienīgus digitālos risinājumus." }
+    ]
   }
 ];
 
@@ -1879,7 +1949,7 @@ const MemberProfilePage = () => {
   const member = BOARD_MEMBERS.find(m => m.id === id);
 
   useSEO({
-    title: member ? `${member.name} - Valdes loceklis` : "Biedra profils",
+    title: member ? `${member.name} - ${member.role}` : "Biedra profils",
     description: member ? `${member.name} (${member.role}) darbība un tēmas biedrībā Latvijas Restarts.` : "Latvijas Restarts biedra profils."
   });
 
@@ -1904,43 +1974,45 @@ const MemberProfilePage = () => {
           </div>
           <div className="flex-grow text-center md:text-left">
             <h1 className="text-lg md:text-xl font-black uppercase mb-1 text-zinc-900 leading-tight">{member.name}</h1>
-            <div className="flex flex-col md:flex-row md:items-center gap-3">
-              <div className="inline-block text-latvia-red text-[9px] font-black uppercase tracking-widest bg-latvia-red/5 px-2.5 py-1 rounded-full">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-center md:justify-start gap-3 mt-1.5 mb-2">
+              <span className="inline-block text-latvia-red text-[9px] font-black uppercase tracking-widest bg-latvia-red/5 px-2.5 py-1 rounded-full self-center sm:self-auto select-none">
                 {member.role}
+              </span>
+              <div className="flex items-center justify-center gap-1.5">
+                {member.facebook && (
+                  <a 
+                    href={member.facebook} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-7 h-7 bg-zinc-50 rounded-lg border border-zinc-200 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red text-zinc-600 hover:text-white transition-all shadow-sm"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                {member.linkedin && (
+                  <a 
+                    href={member.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-7 h-7 bg-zinc-50 rounded-lg border border-zinc-200 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red text-zinc-600 hover:text-white transition-all shadow-sm"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                {member.twitter && (
+                  <a 
+                    href={member.twitter} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-7 h-7 bg-zinc-50 rounded-lg border border-zinc-200 flex items-center justify-center hover:bg-latvia-red hover:border-latvia-red text-zinc-600 hover:text-white transition-all shadow-sm"
+                    aria-label="X (Twitter)"
+                  >
+                    <XIcon className="w-3.5 h-3.5" />
+                  </a>
+                )}
               </div>
-              {member.facebook && (
-                <a 
-                  href={member.facebook} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#1877F2] transition-colors text-[10px] font-bold uppercase"
-                >
-                  <Facebook className="w-3.5 h-3.5" />
-                  Facebook
-                </a>
-              )}
-              {member.linkedin && (
-                <a 
-                  href={member.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#0A66C2] transition-colors text-[10px] font-bold uppercase"
-                >
-                  <Linkedin className="w-3.5 h-3.5" />
-                  LinkedIn
-                </a>
-              )}
-              {member.twitter && (
-                <a 
-                  href={member.twitter} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-zinc-900 transition-colors text-[10px] font-bold uppercase"
-                >
-                  <Twitter className="w-3.5 h-3.5" />
-                  Twitter
-                </a>
-              )}
             </div>
           </div>
         </div>
