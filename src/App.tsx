@@ -1915,7 +1915,7 @@ const BOARD_MEMBERS: Member[] = [
     id: "janis-liepins",
     name: "Jānis Liepiņš",
     image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/J%C4%81nis%20Liepi%C5%86%C5%A1.webp",
-    imageClass: "scale-[2.45] origin-[35%_15%] translate-y-[-14.4%] translate-x-[-49.8%]",
+    imageClass: "scale-[2.33] origin-[35%_15%] translate-y-[-14.4%] translate-x-[-50.4%]",
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/janis.liepins.969",
     focus: [
@@ -1930,7 +1930,7 @@ const BOARD_MEMBERS: Member[] = [
     id: "renars-putnins",
     name: "Renārs Putniņš",
     image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Ren%C4%81rs%20Putni%C5%86%C5%A1.webp",
-    imageClass: "scale-[2.2] origin-[50%_18%] translate-y-[3%] translate-x-[-3%]",
+    imageClass: "scale-[2.31] origin-[50%_18%] translate-y-[3%] translate-x-[-3%]",
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/renars.putnins",
     focus: [
