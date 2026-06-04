@@ -302,25 +302,11 @@ const GOALS = [
 
 const NEWS = [
   {
-    id: "energetiska-neatkariba",
-    date: "12.05.2026",
-    title: "Latvijas Restarts aicina uz diskusiju par enerģētisko neatkarību",
-    excerpt: "Nākamnedēļ Rīgā notiks biedrības organizēts forums ar nozares ekspertiem par Latvijas enerģētisko drošību.",
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1200"
-  },
-  {
-    id: "regionalais-atbalsts",
-    date: "30.05.2026",
-    title: "Jauna iniciatīva: Atbalsts jauniem speciālistiem reģionos",
-    excerpt: "Biedrība Latvijas Restarts piedāvā konkrētu rīcības plānu jaunu talantu piesaistei Latvijas novadiem.",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1200"
-  },
-  {
     id: "strategija-2026",
-    date: "07.07.2026",
-    title: "Biedrības kopsapulces rezultāti un nākotnes plāni",
-    excerpt: "Esam apstiprinājuši stratēģiju nākamajiem diviem gadiem, fokusu vēršot uz valsts pārvaldes reformu un ekonomikas izaugsmi.",
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200"
+    date: "03.06.2026",
+    title: "Mūsu darbi: Budžeta tēriņu noraidīšana",
+    excerpt: "⛔️  03.06.2026 Budžeta komisijā noraidījām Siliņas valdības sagatavoto apropriāciju pieprasījumu 52,4 miljonu eiro apmērā. Šādi papildu izdevumi radītu negatīvu ietekmi...",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Noraidita-iecere-par-budzeta-izdevumiem.jpeg"
   }
 ];
 
@@ -2158,251 +2144,44 @@ const NewsDetailPage = ({ openRegistration }: { openRegistration: (id: string) =
     return <div className="pt-52 text-center min-h-screen">Raksts netika atrasts.</div>;
   }
 
-  if (id === 'energetiska-neatkariba') {
-    return (
-      <section className="pt-52 pb-24 bg-zinc-50 min-h-screen">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link to="/aktualitates" className="inline-flex items-center gap-2 text-latvia-red font-bold mb-8 hover:gap-4 transition-all">
-            <ChevronRight className="w-5 h-5 rotate-180" /> Atpakaļ uz aktualitātēm
-          </Link>
-          <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-sm">
-            <span className="text-sm font-bold text-latvia-red uppercase border-b-2 border-latvia-red pb-1">12.05.2026</span>
-            <h1 className="text-4xl md:text-6xl font-black mt-8 mb-10 leading-tight uppercase">
-              Latvijas Restarts aicina uz diskusiju par enerģētisko neatkarību
-            </h1>
-            
-            <div className="aspect-video w-full rounded-3xl overflow-hidden mb-12 shadow-md">
-              <img 
-                src={newsItem.image} 
-                alt="Enerģētika" 
-                className="w-full h-full object-cover" 
-              />
-            </div>
-
-            <div className="prose prose-lg max-w-none text-zinc-700 leading-relaxed space-y-6">
-              <p className="text-xl font-medium text-zinc-900 border-l-4 border-latvia-red pl-6 py-2 italic bg-zinc-50 rounded-r-xl">
-                Enerģētiskā neatkarība vairs nav tikai ekonomisks aprēķins – tā ir nacionālās drošības un valsts pašcieņas jautājums. 
-                Pašreizējie ģeopolitiskie izaicinājumi skaidri apliecina, ka paļaušanās uz ārējiem resursiem padara mūs ievainojamus.
-              </p>
-
-              <p>
-                Biedrība "Latvijas Restarts", darbojoties Apvienotā saraksta idejiskajā ietvarā, uzskata, ka ir pienācis laiks fundamentālam pagriezienam mūsu valsts enerģētikas politikā. 
-                Mēs aicinām ikvienu Latvijas iedzīvotāju, nozares ekspertu un politikas veidotāju iesaistīties atklātā diskusijā par to, kā Latviju padarīt par enerģētiski pašpietiekamu un ekonomiski spēcīgu valsti. 
-                Mūsu mērķis ir skaidrs – nodrošināt stabilas, prognozējamas enerģijas cenas mūsu mājsaimniecībām un konkurētspējīgu vidi mūsu uzņēmējiem.
-              </p>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">Ilgtermiņa stratēģija līdz 2050. gadam</h2>
-              <p>
-                Viens no lielākajiem šķēršļiem Latvijas enerģētikas attīstībā ir bijusi saraustīta un īstermiņa plānošana. "Latvijas Restarts" iestājas par vienotu, valstiski apstiprinātu enerģētikas stratēģiju līdz 2050. gadam. 
-                Šādam plānam jākļūst par visu nākamo valdību darba pamatu, neatkarīgi no politiskajām svārstībām. Stratēģijai jāietver skaidri soļi fosilā kurināmā pakāpeniskai aizstāšanai un pārejai uz pilnīgu pašnodrošinājumu ar elektroenerģiju.
-              </p>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">Vietējie resursi: Mūsu zelts ir vējš, saule un biomasa</h2>
-              <p>
-                Latvija ir bagāta ar dabas resursiem, kurus mēs joprojām neizmantojam pilnā potenciālā. Saules parki, vēja turbīnu parki jūrā un uz sauszemes, kā arī gudri izmantota biomasa ir mūsu ceļš uz neatkarību. 
-                Iedomājieties scenāriju, kurā Latvijas lauku reģioni ne tikai nodrošina sevi, bet kļūst par neto enerģijas eksportētājiem. Tas radītu jaunas darba vietas reģionos un stiprinatu mūsu iekšzemes kopproduktu.
-              </p>
-
-              <p>
-                Mēs uzskatām, ka enerģijas ražošanā aktīvāk jāiesaista vietējās kopienas. Enerģētiskās kopienas (solārie paneļi uz daudzdzīvokļu namu jumtiem vai kopīgas biomasas katlu mājas) ļauj iedzīvotājiem pašiem kļūt par tirgus dalībniekiem, nevis tikai pasīviem patērētājiem. 
-                Tas ne tikai samazina rēķinus, bet arī paaugstina sabiedrības informētību un atbildību par resursu lietojumu.
-              </p>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">Ekonomiskais ieguvums un drošība</h2>
-              <p>
-                Katra Latvijā saražotā megavatstunda ir nauda, kas paliek mūsu ekonomikā, nevis aizplūst uz citām valstīm. Zemas enerģijas cenas ir labākais stimuls investīcijām un ražošanas attīstībai. 
-                Ja mēs spēsim piedāvāt lētāku elektroenerģiju nekā kaimiņvalstis, Latvijas uzņēmumi iegūs milzīgas priekšrocības globālajā tirgū. Tas ir drošības garants – enerģētika ir pamats visam pārējam.
-              </p>
-
-              <EventCard 
-                title="Pievienojies diskusijai!"
-                date="12.05.2026."
-                location="Rīgas Latviešu biedrības nams"
-                time="10:00"
-                onRegister={() => openRegistration('energetiska-neatkariba')}
-              />
-            </div>
+  return (
+    <section className="pt-52 pb-24 bg-zinc-50 min-h-screen">
+      <div className="max-w-4xl mx-auto px-6">
+        <Link to="/aktualitates" className="inline-flex items-center gap-2 text-latvia-red font-bold mb-8 hover:gap-4 transition-all">
+          <ChevronRight className="w-5 h-5 rotate-180" /> Atpakaļ uz aktualitātēm
+        </Link>
+        <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-sm">
+          <span className="text-sm font-bold text-latvia-red uppercase border-b-2 border-latvia-red pb-1">{newsItem.date}</span>
+          <h1 className="text-2xl md:text-4xl font-black mt-6 mb-8 leading-tight uppercase">
+            {newsItem.title}
+          </h1>
+          
+          <div className="max-w-2xl mx-auto aspect-video rounded-3xl overflow-hidden mb-12 shadow-md">
+            <img 
+              src={newsItem.image} 
+              alt={newsItem.title} 
+              className="w-full h-full object-cover" 
+            />
           </div>
-          <SectionBottomNav />
-        </div>
-      </section>
-    );
-  }
 
-  if (id === 'regionalais-atbalsts') {
-    return (
-      <section className="pt-52 pb-24 bg-zinc-50 min-h-screen">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link to="/aktualitates" className="inline-flex items-center gap-2 text-latvia-red font-bold mb-8 hover:gap-4 transition-all">
-            <ChevronRight className="w-5 h-5 rotate-180" /> Atpakaļ uz aktualitātēm
-          </Link>
-          <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-sm">
-            <span className="text-sm font-bold text-latvia-red uppercase border-b-2 border-latvia-red pb-1">30.05.2026</span>
-            <h1 className="text-4xl md:text-6xl font-black mt-8 mb-10 leading-tight uppercase">
-              Jauna iniciatīva: Atbalsts jauniem speciālistiem reģionos
-            </h1>
-            
-            <div className="aspect-video w-full rounded-3xl overflow-hidden mb-12 shadow-md">
-              <img 
-                src={newsItem.image} 
-                alt="Jaunie speciālisti reģionos" 
-                className="w-full h-full object-cover" 
-              />
-            </div>
+          <div className="prose prose-lg max-w-none text-zinc-700 leading-relaxed space-y-6">
+            <p className="whitespace-pre-line">
+              ⛔️  03.06.2026 Budžeta komisijā noraidījām Siliņas valdības sagatavoto apropriāciju pieprasījumu 52,4 miljonu eiro apmērā. Šādi papildu izdevumi radītu negatīvu ietekmi uz budžetu, un tajos bija iekļautas pozīcijas, kuras neuzskatu par prioritārām nodokļu maksātāju naudas izlietojumā.
+            </p>
 
-            <div className="prose prose-lg max-w-none text-zinc-700 leading-relaxed space-y-6">
-              <p className="text-xl font-medium text-zinc-900 border-l-4 border-latvia-red pl-6 py-2 italic bg-zinc-50 rounded-r-xl">
-                Reģionu depopulācija un kvalificēta darbaspēka aizplūšana ir viens no lielākajiem izaicinājumiem Latvijas nākotnei. 
-                “Latvijas Restarts” piedāvā risinājumu, kas balstīts uz konkrētu un praktisku rīcības plānu.
-              </p>
+            <p className="whitespace-pre-line">
+              ➡️ Starp pieprasītajiem tēriņiem bija komandējumi un konsultācijas, mobilo tālruņu un portatīvo datoru nomaiņa, starptautisku konferenču organizēšana, mediju treniņi un personāla atlases pakalpojumi.
+            </p>
 
-              <p>
-                Šobrīd novērojam bīstamu tendenci – lielākā daļa jauno speciālistu pēc studiju beigšanas izvēlas palikt Rīgā vai doties peļņā uz ārzemēm. 
-                Tas rada tukšumu reģionu darba tirgū, mazina pašvaldību ieņēmumus un apdraud mūsu valsts teritorijas vienmērīgu attīstību. 
-                Enerģiska un jauna speciālista piesaiste, piemēram, Kuldīgai, Alūksnei vai Daugavpilij, nav tikai viena cilvēka dzīves izvēle – tas ir ieguldījums lokālajā ekonomikā un sabiedrības drošībā.
-              </p>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">Rīcības plāna galvenie virzieni</h2>
-              
-              <div className="grid md:grid-cols-2 gap-8 mt-8">
-                <div className="bg-zinc-50 p-8 rounded-3xl border border-zinc-100">
-                  <h3 className="text-xl font-black mb-4 uppercase">Mājokļu pieejamība</h3>
-                  <p className="text-sm">Mēs ierosinām valsts garantētu atbalstu pirmā mājokļa iegādei vai īrei tieši reģionos, sadarbībā ar pašvaldībām attīstot mūsdienīgus īres namus.</p>
-                </div>
-                <div className="bg-zinc-50 p-8 rounded-3xl border border-zinc-100">
-                  <h3 className="text-xl font-black mb-4 uppercase">Nodokļu atvieglojumi</h3>
-                  <p className="text-sm">Konkrēts plāns paredz iedzīvotāju ienākuma nodokļa (IIN) atlaides speciālistiem, kuri izvēlas savu dzīvesvietu deklarēt ārpus Pierīgas.</p>
-                </div>
-              </div>
-
-              <p className="mt-8">
-                Būtiska loma mūsu plānā ir **izglītības un darba tirgus sasaistei**. Mēs paredzam valsts finansētas mērķstipendijas un garantētas darba vietas reģionālo uzņēmumu vajadzībām. 
-                Tas nozīmē, ka students jau studiju laikā zina, kur viņš būs vajadzīgs un ka viņa kompetence tiks atbilstoši novērtēta.
-              </p>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">Digitālā infrastruktūra un attālinātais darbs</h2>
-              <p>
-                Mūsdienu pasaule sniedz iespēju strādāt no jebkuras vietas, ja vien ir pieejams kvalitatīvs internets. Mūsu plāns ietver digitālās infrastruktūras attīstību pat visattālākajos punktos, veidojot modernus kopstrādes centrus (hub), kur jaunie profesionāļi var tikties un radīt jaunas idejas.
-              </p>
-
-              <p className="font-bold text-zinc-900">
-                Šis nav teorētisks redzējums, bet gan rīcības plānu ar skaidriem termiņiem un atbildīgajām institūcijām. Mēs nesolām tukšas cerības, mēs radām mehānismus.
-              </p>
-
-              <EventCard 
-                title="Pievienojies plāna prezentācijai!"
-                date="30.05.2026."
-                location="Rīga, viesnīcas Radisson Blue konferenču zāle #9"
-                time="11:00"
-                onRegister={() => openRegistration('regionalais-atbalsts')}
-              />
-            </div>
+            <p className="whitespace-pre-line">
+              ❗️ Katrs eiro jāiegulda pārdomāti un atbildīgi, tādēļ šis pieprasījums ir jāpārstrādā.
+            </p>
           </div>
-          <SectionBottomNav />
         </div>
-      </section>
-    );
-  }
-
-  if (id === 'strategija-2026') {
-    return (
-      <section className="pt-52 pb-24 bg-zinc-50 min-h-screen">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link to="/aktualitates" className="inline-flex items-center gap-2 text-latvia-red font-bold mb-8 hover:gap-4 transition-all">
-            <ChevronRight className="w-5 h-5 rotate-180" /> Atpakaļ uz aktualitātēm
-          </Link>
-          <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-sm">
-            <span className="text-sm font-bold text-latvia-red uppercase border-b-2 border-latvia-red pb-1">07.07.2026</span>
-            <h1 className="text-4xl md:text-6xl font-black mt-8 mb-10 leading-tight uppercase">
-              Biedrības kopsapulces rezultāti un nākotnes plāni
-            </h1>
-            
-            <div className="aspect-video w-full rounded-3xl overflow-hidden mb-12 shadow-md">
-              <img 
-                src={newsItem.image} 
-                alt="Biedrības kopsapulce un stratēģija" 
-                className="w-full h-full object-cover" 
-              />
-            </div>
-
-            <div className="prose prose-lg max-w-none text-zinc-700 leading-relaxed space-y-6">
-              <p className="text-xl font-medium text-zinc-900 border-l-4 border-latvia-red pl-6 py-2 italic bg-zinc-50 rounded-r-xl">
-                Ilgtermiņa redzējums un skaidrs rīcības plāns ir jebkuras jēgpilnas attīstības pamats. Biedrība "Latvijas Restarts" ar kopsapulces lēmumu nostiprina savu virzību uz modernu un ekonomiski drošu Latviju.
-              </p>
-
-              <p>
-                Biedrības kopsapulce ir kļuvusi par nozīmīgu atskaites punktu mūsu darbībā. Tas nav tikai formāls pasākums, bet gan augstākais lēmējinstitūcijas formāts, kurā mēs kopīgi ar biedriem, nozares profesionāļiem un partneriem definējam mūsu valsts attīstības kritiskos punktus. Pašreizējā mainīgajā pasaulē stratēģiska plānošana vairs nav izvēle – tā ir nepieciešamība, lai spētu ne tikai reaģēt uz krīzēm, bet arī modelēt pozitīvu un stabilu nākotni.
-              </p>
-
-              <p>
-                Organizācijas "Latvijas Restarts" galvenais mērķis, darbojoties Apvienotā saraksta idejiskajā telpā, ir stiprināt Latvijas ilgtspēju. Kopsapulce vienbalsīgi apstiprināja stratēģiju nākamajiem diviem gadiem, kas kalpos kā rīcības ietvars katrai mūsu iniciatīvai.
-              </p>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">Galvenie stratēģijas virzieni</h2>
-              
-              <ul className="list-none space-y-4 !pl-0">
-                <li className="flex gap-4">
-                  <div className="w-6 h-6 rounded-full bg-latvia-red flex-shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-zinc-900 block uppercase">Ekonomikas stiprināšana un uzņēmējdarbība</strong>
-                    <p className="text-sm mt-1">Mēs iestājamies par birokrātisko šķēršļu mazināšanu un inovatīvu uzņēmumu atbalstu, lai Latvija kļūtu par konkurētspējīgāko investīciju vidi Baltijā.</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="w-6 h-6 rounded-full bg-latvia-red flex-shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-zinc-900 block uppercase">Līdzsvarota reģionu izaugsme</strong>
-                    <p className="text-sm mt-1">Nākamie divi gadi būs veltīti tam, lai mazinātu plaisu starp Rīgu un novadiem, veicinot ekonomisko aktivitāti un piesaistot speciālistus reģioniem.</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="w-6 h-6 rounded-full bg-latvia-red flex-shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-zinc-900 block uppercase">Sabiedrības līdzdalība un drošība</strong>
-                    <p className="text-sm mt-1">Stipra pilsoniskā sabiedrība ir valsts drošības pamats. Mēs attīstīsim platformas iedzīvotāju iesaistei lēmumu pieņemšanā vietējā un valsts līmenī.</p>
-                  </div>
-                </li>
-              </ul>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">No mērķiem uz darbiem</h2>
-              <p>
-                Mūsu stratēģija nav tikai vispārīgu mērķu uzskaitījums. Katrs virziens ir papildināts ar konkrētiem rīcības soļiem. Piemēram, jomā, kas skar jaunos speciālistus, mēs ne tikai runājam par atbalstu, bet gan rosinām konkrētas izmaiņas nodokļu likumdošanā, kas stātos spēkā jau nākamajā budžeta ciklā. Tas ir mūsu veids, kā ietekmēt labklājību – caur precīzi tēmētiem, sistēmiskiem uzlabojumiem.
-              </p>
-
-              <p>
-                Iedomājieties scenāriju, kurā pēc diviem gadiem, pateicoties mūsu iniciatīvām, jauns uzņēmējs var reģistrēt savu ražotni un saņemt nepieciešamās atļaujas nedēļas, nevis mēnešu laikā, vienlaikus saņemot nodokļu brīvdienas par jaunu darba vietu radīšanu novados. Tas ir tas, uz ko mēs tiecamies.
-              </p>
-
-              <h2 className="text-3xl font-black text-zinc-900 mt-12 mb-6 uppercase">Kopsapulces norise</h2>
-              <div className="bg-zinc-50 p-8 rounded-3xl border border-zinc-100">
-                <p className="mb-4">Kopsapulce pulcēja vairāk nekā 200 biedrus un nozares ekspertus, kuri aktīvi iesaistījās diskusijās par stratēģijas dokumentu.</p>
-                <div className="flex flex-col gap-2">
-                  <span className="font-bold">Datums: 07.07.2026.</span>
-                  <span className="font-bold">Norises vieta: Rīga, "Grand Hotel Latvija" konferenču zāle "Alfa"</span>
-                  <span className="font-bold">Dalībnieki: Biedri, uzaicinātie eksperti, nevalstisko organizāciju pārstāvji</span>
-                </div>
-              </div>
-
-              <p className="mt-8">
-                Tuvākie soļi pēc stratēģijas apstiprināšanas ir tās prezentēšana politikas veidotājiem un tikšanās ar reģionālajām pašvaldībām, lai sāktu praktisko plāna iedzīvināšanu. Latvijas Restarts tic, ka tikai kopīgiem spēkiem mēs varam panākt valsts uzplaukumu.
-              </p>
-
-              <EventCard 
-                title="Pievienojies nākotnes veidošanai!"
-                date="07.07.2026."
-                location='Rīga, "Grand Hotel Latvija" konferenču zāle "Alfa"'
-                time="10:00"
-                onRegister={() => openRegistration('strategija-2026')}
-              />
-            </div>
-          </div>
-          <SectionBottomNav />
-        </div>
-      </section>
-    );
-  }
-
-  return <div className="pt-40 text-center min-h-screen">Raksts netika atrasts.</div>;
+        <SectionBottomNav />
+      </div>
+    </section>
+  );
 };
 
 
