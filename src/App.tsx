@@ -1126,15 +1126,15 @@ const NewsSummary = () => (
       </div>
       <div className="grid md:grid-cols-3 gap-10">
         {NEWS.map((item) => (
-          <article key={item.id} className="bg-white rounded-3xl overflow-hidden shadow-sm">
-            <div className="h-48 overflow-hidden">
+          <article key={item.id} className="bg-white rounded-3xl overflow-hidden shadow-sm max-w-sm mx-auto w-full">
+            <div className="h-40 overflow-hidden">
               <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
             </div>
-            <div className="p-8">
+            <div className="p-6">
               <span className="text-xs font-bold text-latvia-red uppercase">{item.date}</span>
-              <h3 className="text-xl font-black mt-2 mb-4 leading-tight">{item.title}</h3>
-              <p className="text-zinc-500 text-sm mb-6">{item.excerpt}</p>
-              <Link to={`/aktualitates/${item.id}`} className="inline-flex items-center gap-2 text-sm font-bold hover:text-latvia-red transition-colors">Lasīt vairāk <ArrowUpRight className="w-4 h-4" /></Link>
+              <h3 className="text-lg font-black mt-2 mb-4 leading-tight">{item.title}</h3>
+              <p className="text-zinc-500 text-xs mb-6 leading-relaxed line-clamp-3">{item.excerpt}</p>
+              <Link to={`/aktualitates/${item.id}`} className="inline-flex items-center gap-2 text-xs font-bold hover:text-latvia-red transition-colors">Lasīt vairāk <ArrowUpRight className="w-4 h-4" /></Link>
             </div>
           </article>
         ))}
@@ -2051,7 +2051,7 @@ const NewsPage = () => {
       <h3 className="text-xl font-black uppercase mb-8 border-l-4 border-latvia-red pl-4">Aktualitātes</h3>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-black">
         {NEWS.map((item) => (
-          <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all">
+          <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all max-w-sm mx-auto w-full">
             <div className="h-40 overflow-hidden relative">
               <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
