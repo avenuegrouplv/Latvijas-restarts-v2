@@ -929,11 +929,11 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
     setMetaTag({ property: 'og:type' }, ogType);
     setMetaTag({ property: 'og:site_name' }, 'Biedrība Latvijas restarts');
 
-    const defaultImage = 'https://latvijasrestarts.lv/images/social_share_v1.png';
+    const defaultImage = 'https://latvijasrestarts.lv/images/logo_share.png?v=20';
     setMetaTag({ property: 'og:image' }, ogImage || defaultImage);
 
     // 4. Update Twitter specific
-    setMetaTag({ name: 'twitter:card' }, 'summary_large_image');
+    setMetaTag({ name: 'twitter:card' }, 'summary');
     setMetaTag({ name: 'twitter:title' }, formattedTitle);
     setMetaTag({ name: 'twitter:description' }, description);
     setMetaTag({ name: 'twitter:image' }, ogImage || defaultImage);

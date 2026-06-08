@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 async function generateSocialShare() {
-  console.log('Izveido jaunu sociālo tīklu priekšskatījuma bildi (social_share_v1.png)...');
+  console.log('Sākās sociālo tīklu priekšskatījuma bilžu ģenerēšana...');
 
   try {
     const publicDir = path.resolve('public/images');
@@ -16,7 +16,7 @@ async function generateSocialShare() {
       fs.mkdirSync(distDir, { recursive: true });
     }
 
-    // Lejupielādējam oriģinālo Margrietas ziedu no R2 krātuves (priekš lielā attēla)
+    // Lejupielādējam oriģinālo Margrietas ziedu no R2 krātuves
     const daisyUrl = 'https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp';
     console.log(`Lejupielādē Margrietas ziedu no ${daisyUrl}...`);
     
@@ -26,14 +26,18 @@ async function generateSocialShare() {
       if (response.ok) {
         const imageBytes = await response.arrayBuffer();
         baseMargrieta = Buffer.from(imageBytes);
+        console.log('Margrietas zieda attēls sekmīgi lejupielādēts.');
+      } else {
+        console.warn(`Zieda lejupielādes kļūda: status ${response.status}`);
       }
     } catch (e) {
-      console.warn('Neizdevās ielādēt Margrietu lielajai bildei, tiks izmantots drošais teksts:', e.message);
+      console.warn('Neizdevās lejupielādēt Margrietu, tiks izmantota rezerves grafika:', e.message);
     }
 
     // ====================================================================
-    // 1. GENDERĒJAM LIELO ATTEĒLU (1200x630) - social_share_v1.png
+    // 1. GENERĒJAM LIELO ATTEĒLU (1200x630) - social_share_v1.png
     // ====================================================================
+    console.log('Veido lielo sociālo tīklu bildi (social_share_v1.png)...');
     const largeSvgText = `
     <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -87,31 +91,29 @@ async function generateSocialShare() {
     // Saglabājam lielo attēlu abās vietās
     fs.writeFileSync(path.join(publicDir, 'social_share_v1.png'), largeImage);
     fs.writeFileSync(path.join(distDir, 'social_share_v1.png'), largeImage);
-    console.log(`Lielais attēls sekmīgi saglabāts.`);
+    console.log(`Lielais attēls (social_share_v1.png) sekmīgi saglabāts.`);
 
 
     // ====================================================================
-    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (200x200) - logo_share.png
+    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (300x300) - logo_share.png
     // ====================================================================
-    console.log('Veido kvadrātisko logotipu (logo_share.png)...');
+    console.log('Veido kvadrātisko logotipu ar Margrietas ziedu un tekstu (logo_share.png)...');
     
-    // Mēs pilnībā centrējam "LATVIJAS RESTARTS" tekstu bez jebkāda zieda, un precīzās krāsās:
-    // "LATVIJAS" -> #18181b (tumšs charcoal/zinc kā mājaslapā kreisajā augšpusē)
-    // "RESTARTS" -> #9e1b32 (Latvijas sarkanais)
+    // Divrindu zīmols identisks mājaslapas augšdaļai (ar pareizām krāsām un margrietas ziedu kreisajā pusē)
     const squareSvgText = `
-    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <style>
           .brand-latv {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 900;
             fill: #18181b;
             letter-spacing: -0.5px;
           }
           .brand-rest {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 900;
             fill: #9e1b32;
             letter-spacing: -0.5px;
@@ -120,18 +122,37 @@ async function generateSocialShare() {
       </defs>
       
       <!-- Tīri balts fons -->
-      <rect width="200" height="200" fill="#ffffff" />
+      <rect width="300" height="300" fill="#ffffff" />
       
-      <!-- Divu rindu zīmols ideāli iecentrēts pa vidu un bez margrietas -->
-      <text x="100" y="85" class="brand-latv" text-anchor="middle" dominant-baseline="middle">LATVIJAS</text>
-      <text x="100" y="122" class="brand-rest" text-anchor="middle" dominant-baseline="middle">RESTARTS</text>
+      <!-- Latvijas karoga dekoratīvās līnijas rāmim -->
+      <rect x="0" y="0" width="300" height="10" fill="#9e1b32" />
+      <rect x="0" y="290" width="300" height="10" fill="#9e1b32" />
+      
+      <!-- Divas rindiņas zīmola teksta ar sānu nobīdi no zieda -->
+      <text x="125" y="142" class="brand-latv" dominant-baseline="middle">LATVIJAS</text>
+      <text x="125" y="178" class="brand-rest" dominant-baseline="middle">RESTARTS</text>
     </svg>
     `;
 
-    // Konvertējam SVG uz maksimāli asu PNG ar Sharp
-    const squareImage = await sharp(Buffer.from(squareSvgText))
-      .png()
-      .toBuffer();
+    let squareImage;
+    if (baseMargrieta) {
+      // Resizojam margrietu uz 80x80px kvadrātam
+      const squareFlowerBuffer = await sharp(baseMargrieta)
+        .resize(80, 80)
+        .png()
+        .toBuffer();
+
+      // Kompozitējam ziedu un tekstu
+      squareImage = await sharp(Buffer.from(squareSvgText))
+        .composite([{ input: squareFlowerBuffer, left: 30, top: 110 }])
+        .png()
+        .toBuffer();
+    } else {
+      // Rezerves variants bez zieda, ja lejupielāde neizdevās
+      squareImage = await sharp(Buffer.from(squareSvgText))
+        .png()
+        .toBuffer();
+    }
 
     // Saglabājam logo_share.png abās vietās (public un dist)
     const publicSqPath = path.join(publicDir, 'logo_share.png');
@@ -139,7 +160,7 @@ async function generateSocialShare() {
     
     fs.writeFileSync(publicSqPath, squareImage);
     fs.writeFileSync(distSqPath, squareImage);
-    console.log(`Mazais kvadrātiskais logo (logo_share.png) sekmīgi saglabāts bez ziedlapām (${publicSqPath})`);
+    console.log(`Mazais kvadrātiskais logo (logo_share.png) ar ziedu sekmīgi saglabāts (${publicSqPath})`);
 
     // Dzēšam vecos pagaidu failus, ja tādi ir, lai nerastos juceklis
     const oldPublicSq = path.join(publicDir, 'logo_share_v2.png');
@@ -147,7 +168,7 @@ async function generateSocialShare() {
     if (fs.existsSync(oldPublicSq)) fs.unlinkSync(oldPublicSq);
     if (fs.existsSync(oldDistSq)) fs.unlinkSync(oldDistSq);
 
-    console.log('Visu attēlu ģenerēšana pabeigta sekmīgi!');
+    console.log('Viss process pabeigts sekmīgi!');
   } catch (error) {
     console.error('Kļūda attēla ģenerēšanas laikā:', error);
     process.exit(1);
