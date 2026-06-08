@@ -79,39 +79,35 @@ async function generateSocialShare() {
     // ====================================================================
     // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (300x300) - logo_share.png
     // ====================================================================
-    console.log('Veido kvadrātisko logotipu ar Margrietas ziedu un tekstu (logo_share.png)...');
+    console.log('Veido kvadrātisko logotipu ar pašu Margrietas zieda logo (logo_share.png)...');
     
-    // Divrindu zīmols identisks mājaslapas augšdaļai (ar inline stiliem, lai darbotos jebkurā Linux vidē bez CSS)
+    // SVG fons un dekoratīvais rāmis (bez nedrošas teksta renderēšanas, kas var sabojāt attēlu uz Linux)
     const squareSvgText = `
     <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
       <!-- Tīri balts fons -->
       <rect width="300" height="300" fill="#ffffff" />
       
-      <!-- Latvijas karoga dekoratīvās līnijas rāmim -->
-      <rect x="0" y="0" width="300" height="10" fill="#9e1b32" />
-      <rect x="0" y="290" width="300" height="10" fill="#9e1b32" />
-      
-      <!-- Divas rindiņas zīmola teksta ar inline stiliem, kas garantē to attēlošanu bez ārējiem stiliem vai reģistrētiem sistēmas fontiem -->
-      <text x="120" y="142" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="950" fill="#18181b" letter-spacing="-0.5">LATVIJAS</text>
-      <text x="120" y="178" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="950" fill="#9e1b32" letter-spacing="-0.5">RESTARTS</text>
+      <!-- Latvijas karoga dekoratīvās līnijas rāmim (Latvijas Restarts identitāte) -->
+      <rect x="0" y="0" width="300" height="12" fill="#9e1b32" />
+      <rect x="0" y="288" width="300" height="12" fill="#9e1b32" />
     </svg>
     `;
 
     let squareImage;
     if (baseMargrieta) {
-      // Resizojam margrietu uz 80x80px kvadrātam
+      // Resizojam margrietu uz lielāku, izteiksmīgāku 210x210px izmēru, lai tas lieliski aizpilda laukumu
       const squareFlowerBuffer = await sharp(baseMargrieta)
-        .resize(80, 80)
+        .resize(210, 210)
         .png()
         .toBuffer();
 
-      // Kompozitējam ziedu un tekstu
+      // Centrējam ziedu perfekti rāmī (300px platumā un augstumā: (300-210)/2 = 45px no katras malas)
       squareImage = await sharp(Buffer.from(squareSvgText))
-        .composite([{ input: squareFlowerBuffer, left: 30, top: 110 }])
+        .composite([{ input: squareFlowerBuffer, left: 45, top: 45 }])
         .png()
         .toBuffer();
     } else {
-      // Rezerves variants bez zieda, ja lejupielāde neizdevās
+      // Drošības variants, ja nelejupielādējās
       squareImage = await sharp(Buffer.from(squareSvgText))
         .png()
         .toBuffer();
