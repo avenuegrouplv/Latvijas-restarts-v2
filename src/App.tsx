@@ -1919,11 +1919,130 @@ const BOARD_MEMBERS: Member[] = [
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/janis.liepins.969",
     focus: [
-      { id: "f1", title: "Kultūrpolitika un mākslas attīstība", content: "Valsts stratēģiskā atbalsta nodrošināšana kultūras iestādēm un neatkarīgiem mākslas projektiem." },
-      { id: "f2", title: "Kultūras eksportspējas celšana", content: "Latvijas izcilāko akadēmiskās mūzikas un mākslas pārstāvju atpazīstamības un sadarbības veicināšana pasaulē." },
-      { id: "f3", title: "Kultūras pieejamība reģionos", content: "Profesionālās mākslas, teātru un koncertu pieejamības paplašināšana ārpus galvaspilsētas." },
-      { id: "f4", title: "Jauno talantu atbalsta programmas", content: "Stipendiju sistēmu un mentoru tīklu veidošana jaunajiem mūziķiem un māksliniekiem." },
-      { id: "f5", title: "Mūzikas izglītības modernizācija", content: "Mūsdienīgu mācību metožu un materiālu ieviešana reģionālajās mūzikas un mākslas skolās." }
+      {
+        id: "f1",
+        title: "Pašvaldību loma Latvijā",
+        content: `Latvijā pēc administratīvi teritoriālās reformas (2021) ir 43 pašvaldības (novadi un valstspilsētas).
+
+Galvenās funkcijas:
+* Izglītība (skolas, bērnudārzi)
+* Sociālie pakalpojumi
+* Ceļi un infrastruktūra
+* Sabiedriskais transports
+* Teritorijas attīstības plānošana
+
+👉 Pašvaldības ir tuvākā pārvaldes forma iedzīvotājiem.
+
+📈 Reģionu attīstības galvenie virzieni
+
+1. Ekonomikas attīstība
+* Uzņēmējdarbības veicināšana
+* Industriālo zonu veidošana
+* Investīciju piesaiste
+
+2. Infrastruktūra
+* Ceļu un transporta uzlabošana
+* Interneta pieejamība (digitālā attīstība)
+* Mājokļu attīstība
+
+3. Iedzīvotāju noturēšana
+* Darba vietas reģionos
+* Kvalitatīva izglītība un veselības aprūpe
+* Kultūras un sporta iespējas
+
+4. Ilgtspējīga attīstība
+* Zaļā enerģija
+* Dabas resursu saglabāšana
+
+⸻
+
+⚖️ Galvenās problēmas
+* Reģionālā nevienlīdzība (Rīga vs. pārējie reģioni)
+* Iedzīvotāju skaita samazināšanās
+* Migrācija uz galvaspilsētu vai ārzemēm
+* Darba vietu trūkums
+* Sabiedriskā transporta pieejamība
+
+👉 Īpaši izaicinājumi ir Latgale reģionā.
+
+⸻
+
+🚀 Attīstības risinājumi
+
+Valsts un pašvaldību līmenī:
+* ES fondu efektīva izmantošana
+* Atbalsts uzņēmējiem reģionos
+* Reģionālo centru stiprināšana (piemēram, Daugavpils, Liepāja, Valmiera)
+
+Ilgtermiņā:
+* Gudra specializācija katram reģionam
+* Digitalizācija un attālinātā darba iespējas
+* Izglītības kvalitātes uzlabošana
+
+🔗 Secinājums
+
+Latvijas pašvaldību un reģionu attīstība balstās uz līdzsvaru starp:
+* ekonomiku,
+* infrastruktūru,
+* cilvēkresursiem.
+
+👉 Jo spēcīgāki būs reģioni, jo stabilāka un ilgtspējīgāka būs visa valsts attīstība.`
+      },
+      {
+        id: "f2",
+        title: "Jaunatnes sports",
+        content: `Jaunatnes sports attīstība
+
+Mērķis: veidot plašu sporta bāzi un veselīgu sabiedrību.
+
+Galvenie virzieni:
+* Pieejamība visiem bērniem
+    * sporta skolas, interešu izglītība
+    * zemas izmaksas vai valsts/pašvaldību atbalsts
+* Agrīna talantu identificēšana
+    * atlases sistēmas, sacensības
+* Kvalitatīvi treneri
+    * izglītība, sertifikācija, profesionālā pilnveide
+* Daudzpusīga attīstība
+    * ne tikai specializācija, bet vispārējā fiziskā sagatavotība
+* Izglītības un sporta balanss
+
+❗️Jaunatnes sports ir pamats visai sistēmai – bez tā nav iespējams attīstīt augstu sasniegumu sportu.`
+      },
+      {
+        id: "f3",
+        title: "Augstu sasniegumu sports",
+        content: `Mērķis: sasniegt starptautiskus rezultātus (Olimpiskās spēles, pasaules čempionāti).
+
+Galvenie elementi:
+* Talantu atlase no jaunatnes sporta
+* Augstas kvalitātes treniņu process
+* Sporta medicīna un zinātne
+    * fizioterapija, uzturs, psiholoģija
+* Finansējums
+    * valsts, sponsori, federācijas
+* Starptautiskā pieredze
+    * treniņnometnes, sacensības
+
+❗️Šis līmenis ir “piramīdas virsotne”, kas balstās uz plašu jaunatnes sporta bāzi.
+
+Reģionālo olimpisko centru attīstība
+
+Reģionālie olimpiskie centri ir infrastruktūras pamats sporta attīstībai.
+
+Piemēri Latvijā:
+* Rīgas “Rimi Olimpiskais centrs” – daudzfunkcionāls komplekss ar baseiniem un sporta zālēm  
+* Liepājas Olimpiskais centrs – viens no modernākajiem daudzfunkcionālajiem kompleksiem Baltijā  
+* Ventspils Olimpiskais centrs – plaša infrastruktūra (stadioni, halles, akvaparks u.c.)  
+
+Funkcijas:
+* Treniņu vieta jauniešiem un elitei
+* Sacensību organizēšana
+* Reģionālā attīstība
+* Sabiedrības veselības veicināšana
+
+👉 Olimpiskie centri Latvijā attīstās kopš 1990. gadiem, lai veicinātu gan masu sportu, gan augstu sasniegumu sportu.`
+      }
     ]
   },
   {
@@ -2069,7 +2188,7 @@ const MemberTopicDetailPage = () => {
           </div>
           
           <div className="prose prose-lg prose-zinc mb-10">
-            <div className="text-zinc-600 leading-relaxed text-sm whitespace-pre-wrap">
+            <div className="font-display text-lg text-zinc-600 leading-relaxed font-medium whitespace-pre-wrap">
               {topic.content}
             </div>
           </div>
