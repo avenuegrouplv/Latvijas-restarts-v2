@@ -2385,22 +2385,36 @@ const ContactPage = () => {
     description: "Sazinieties ar biedrību Latvijas Restarts. Adrese, tālrunis, e-pasts un bankas rekvizīti."
   });
 
-  // Netlify Forms submit handler
-  // Notifies configured emails: latvijasrestarts@gmail.com and info@latvijasrestarts.lv
+  // Web3Forms submit handler
+  // Forwards form submissions to configured emails linked with access key
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    
-    fetch("/", {
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString()
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
     })
-      .then(() => setSubmitted(true))
+      .then(async (response) => {
+        const res = await response.json();
+        if (res.success) {
+          setSubmitted(true);
+        } else {
+          console.error("Web3Forms submission error:", res);
+          // Fallback to success screen for clean UX
+          setSubmitted(true);
+        }
+      })
       .catch((error) => {
-        console.error("Netlify form submission error:", error);
-        // Fallback to showing success screen anyway for best UX
+        console.error("Web3Forms connection error:", error);
+        // Fallback to success screen for clean UX
         setSubmitted(true);
       });
   };
@@ -2448,15 +2462,12 @@ const ContactPage = () => {
                   exit={{ opacity: 0, y: -20 }}
                   onSubmit={handleSubmit} 
                   className="relative z-10 space-y-6"
-                  name="contacts"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
                  >
-                    {/* Hidden fields required by Netlify Forms */}
-                    <input type="hidden" name="form-name" value="contacts" />
-                    <p className="hidden">
-                      <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                    </p>
+                    {/* Hidden fields required by Web3Forms */}
+                    <input type="hidden" name="access_key" value="3d857782-378e-44ae-b59e-1e13eba708f3" />
+                    <input type="hidden" name="subject" value="Jauna ziņa no Latvijas Restarts mājaslapas" />
+                    <input type="hidden" name="from_name" value="Latvijas Restarts" />
+                    <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
 
                     <div className="group">
                       <label className="font-display text-xs font-bold uppercase text-zinc-400 block mb-3 group-focus-within:text-latvia-red transition-colors">
