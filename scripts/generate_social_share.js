@@ -130,6 +130,58 @@ async function generateSocialShare() {
     await image.write(distPath);
     console.log(`Attēls saglabāts dist mapē: ${distPath}`);
 
+    // == JAUNUMS: Ģenerējam mazu, kvadrātisku logo WhatsApp un citiem sociālajiem tīkliem (300x300px) ==
+    console.log('Izveido jaunu kvadrātisku logo priekšskatījumam (logo_share.png)...');
+    const squareLogo = new Jimp({ width: 300, height: 300, color: 0xffffffff });
+    const sqCX = 150;
+    const sqCY = 150;
+
+    // Zīmējam 12 ziedlapiņas (margarita ziedu) centrā (ieliksim izmērus, lai izskatās izcili)
+    const sqNumPetals = 12;
+    const sqRadiusPetal = 20;
+    const sqOffset = 38;
+
+    for (let i = 0; i < sqNumPetals; i++) {
+      const angle = (i * 2 * Math.PI) / sqNumPetals;
+      const petalX = Math.round(sqCX + Math.cos(angle) * sqOffset);
+      const petalY = Math.round(sqCY + Math.sin(angle) * sqOffset);
+      
+      // fillCircle tieši priekš square mērķa
+      for (let y = -sqRadiusPetal; y <= sqRadiusPetal; y++) {
+        for (let x = -sqRadiusPetal; x <= sqRadiusPetal; x++) {
+          if (x * x + y * y <= sqRadiusPetal * sqRadiusPetal) {
+            const px = petalX + x;
+            const py = petalY + y;
+            if (px >= 0 && px < 300 && py >= 0 && py < 300) {
+              squareLogo.setPixelColor(latvianCrimson, px, py);
+            }
+          }
+        }
+      }
+    }
+
+    // Zīmējam zelta viduci pa virsu
+    const sqGoldenRadius = 24;
+    for (let y = -sqGoldenRadius; y <= sqGoldenRadius; y++) {
+      for (let x = -sqGoldenRadius; x <= sqGoldenRadius; x++) {
+        if (x * x + y * y <= sqGoldenRadius * sqGoldenRadius) {
+          const px = sqCX + x;
+          const py = sqCY + y;
+          if (px >= 0 && px < 300 && py >= 0 && py < 300) {
+            squareLogo.setPixelColor(goldenCenter, px, py);
+          }
+        }
+      }
+    }
+
+    const publicSqPath = path.join(publicDir, 'logo_share.png');
+    await squareLogo.write(publicSqPath);
+    console.log(`Kvadrātiskais logo saglabāts public mapē: ${publicSqPath}`);
+
+    const distSqPath = path.join(distDir, 'logo_share.png');
+    await squareLogo.write(distSqPath);
+    console.log(`Kvadrātiskais logo saglabāts dist mapē: ${distSqPath}`);
+
     console.log('Attēla ģenerēšana pabeigta sekmīgi!');
   } catch (error) {
     console.error('Kļūda attēla ģenerēšanas laikā:', error);
