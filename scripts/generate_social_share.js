@@ -133,46 +133,34 @@ async function generateSocialShare() {
     // == JAUNUMS: Ģenerējam mazu, kvadrātisku logo WhatsApp un citiem sociālajiem tīkliem (300x300px) ==
     console.log('Izveido jaunu kvadrātisku logo priekšskatījumam (logo_share.png)...');
     const squareLogo = new Jimp({ width: 300, height: 300, color: 0xffffffff });
-    const sqCX = 150;
-    const sqCY = 150;
 
-    // Zīmējam 12 ziedlapiņas (margarita ziedu) centrā (ieliksim izmērus, lai izskatās izcili)
-    const sqNumPetals = 12;
-    const sqRadiusPetal = 20;
-    const sqOffset = 38;
+    // Latvijas karoga sarkanās svītras augšā un apakšā elegantam rāmim
+    fillRect(squareLogo, 0, 0, 300, 10, latvianCrimson);
+    fillRect(squareLogo, 0, 290, 300, 10, latvianCrimson);
 
-    for (let i = 0; i < sqNumPetals; i++) {
-      const angle = (i * 2 * Math.PI) / sqNumPetals;
-      const petalX = Math.round(sqCX + Math.cos(angle) * sqOffset);
-      const petalY = Math.round(sqCY + Math.sin(angle) * sqOffset);
-      
-      // fillCircle tieši priekš square mērķa
-      for (let y = -sqRadiusPetal; y <= sqRadiusPetal; y++) {
-        for (let x = -sqRadiusPetal; x <= sqRadiusPetal; x++) {
-          if (x * x + y * y <= sqRadiusPetal * sqRadiusPetal) {
-            const px = petalX + x;
-            const py = petalY + y;
-            if (px >= 0 && px < 300 && py >= 0 && py < 300) {
-              squareLogo.setPixelColor(latvianCrimson, px, py);
-            }
-          }
-        }
-      }
-    }
+    // Teksts
+    const sqFont = await loadFont(SANS_32_BLACK);
+    const text1 = 'LATVIJAS';
+    const text2 = 'RESTARTS';
 
-    // Zīmējam zelta viduci pa virsu
-    const sqGoldenRadius = 24;
-    for (let y = -sqGoldenRadius; y <= sqGoldenRadius; y++) {
-      for (let x = -sqGoldenRadius; x <= sqGoldenRadius; x++) {
-        if (x * x + y * y <= sqGoldenRadius * sqGoldenRadius) {
-          const px = sqCX + x;
-          const py = sqCY + y;
-          if (px >= 0 && px < 300 && py >= 0 && py < 300) {
-            squareLogo.setPixelColor(goldenCenter, px, py);
-          }
-        }
-      }
-    }
+    const w1 = measureText(sqFont, text1);
+    const w2 = measureText(sqFont, text2);
+
+    const x1 = Math.round((300 - w1) / 2);
+    const y1 = 100;
+    const x2 = Math.round((300 - w2) / 2);
+    const y2 = 160;
+
+    squareLogo.print({ font: sqFont, x: x1, y: y1, text: text1 });
+    squareLogo.print({ font: sqFont, x: x2, y: y2, text: text2 });
+
+    // Uzzīmējam garumzīmi (macron) virs 'I' vārdā 'LATVIJAS' (5. burts)
+    const latvWidth = measureText(sqFont, 'LATV');
+    const iWidth = measureText(sqFont, 'I');
+    const iCenterX = x1 + latvWidth + Math.round(iWidth / 2);
+    
+    // Zīmējam mazu elegantu taisnstūri virs burta I
+    fillRect(squareLogo, iCenterX - 7, y1 + 4, 14, 3, charcoalColor);
 
     const publicSqPath = path.join(publicDir, 'logo_share.png');
     await squareLogo.write(publicSqPath);
