@@ -40,33 +40,15 @@ async function generateSocialShare() {
     console.log('Veido lielo sociālo tīklu bildi (social_share_v1.png)...');
     const largeSvgText = `
     <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <style>
-          .brand-title {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            font-size: 38px;
-            font-weight: 900;
-            fill: #18181b;
-            letter-spacing: 0.5px;
-          }
-          .brand-desc {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            font-size: 20px;
-            font-weight: 500;
-            fill: #4b5563;
-          }
-        </style>
-      </defs>
-      
       <!-- Balts fons -->
       <rect width="1200" height="630" fill="#ffffff" />
       
       <!-- Latvijas karoga karmīnsarkanā josla apakšā -->
       <rect x="0" y="618" width="1200" height="12" fill="#9e1b32" />
       
-      <!-- Teksta sadaļas -->
-      <text x="600" y="410" class="brand-title" text-anchor="middle">BIEDRĪBA LATVIJAS RESTARTS</text>
-      <text x="600" y="465" class="brand-desc" text-anchor="middle">Neatkarīga organizācija modernai, tiesiskai un ekonomiski spēcīgai Latvijai</text>
+      <!-- Teksta sadaļas ar inline stiliem, kas garantē to renderēšanu visās vidēs -->
+      <text x="600" y="410" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="900" fill="#18181b" letter-spacing="0.5" text-anchor="middle">BIEDRĪBA LATVIJAS RESTARTS</text>
+      <text x="600" y="465" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" font-weight="500" fill="#4b5563" text-anchor="middle">Neatkarīga organizācija modernai, tiesiskai un ekonomiski spēcīgai Latvijai</text>
     </svg>
     `;
 
@@ -99,28 +81,9 @@ async function generateSocialShare() {
     // ====================================================================
     console.log('Veido kvadrātisko logotipu ar Margrietas ziedu un tekstu (logo_share.png)...');
     
-    // Divrindu zīmols identisks mājaslapas augšdaļai (ar pareizām krāsām un margrietas ziedu kreisajā pusē)
+    // Divrindu zīmols identisks mājaslapas augšdaļai (ar inline stiliem, lai darbotos jebkurā Linux vidē bez CSS)
     const squareSvgText = `
     <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <style>
-          .brand-latv {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            fill: #18181b;
-            letter-spacing: -0.5px;
-          }
-          .brand-rest {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            fill: #9e1b32;
-            letter-spacing: -0.5px;
-          }
-        </style>
-      </defs>
-      
       <!-- Tīri balts fons -->
       <rect width="300" height="300" fill="#ffffff" />
       
@@ -128,9 +91,9 @@ async function generateSocialShare() {
       <rect x="0" y="0" width="300" height="10" fill="#9e1b32" />
       <rect x="0" y="290" width="300" height="10" fill="#9e1b32" />
       
-      <!-- Divas rindiņas zīmola teksta ar sānu nobīdi no zieda -->
-      <text x="125" y="142" class="brand-latv" dominant-baseline="middle">LATVIJAS</text>
-      <text x="125" y="178" class="brand-rest" dominant-baseline="middle">RESTARTS</text>
+      <!-- Divas rindiņas zīmola teksta ar inline stiliem, kas garantē to attēlošanu bez ārējiem stiliem vai reģistrētiem sistēmas fontiem -->
+      <text x="120" y="142" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="950" fill="#18181b" letter-spacing="-0.5">LATVIJAS</text>
+      <text x="120" y="178" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="950" fill="#9e1b32" letter-spacing="-0.5">RESTARTS</text>
     </svg>
     `;
 
