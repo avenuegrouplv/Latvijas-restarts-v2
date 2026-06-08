@@ -47,10 +47,10 @@ async function generateSocialShare() {
     const latvianCrimson = 0x9e1b32ff;
     const goldenCenter = 0xdfb332ff;
 
-    // Zīmējam 12 ziedlapiņas (petals) apkārt centram
+    // Zīmējam 12 ziedlapiņas (petals) apkārt centram, samazinātas aptuveni 3 reizes pēc lietotāja lūguma
     const numPetals = 12;
-    const radiusPetal = 24;
-    const offset = 46;
+    const radiusPetal = 8;
+    const offset = 15;
 
     for (let i = 0; i < numPetals; i++) {
       const angle = (i * 2 * Math.PI) / numPetals;
@@ -60,7 +60,7 @@ async function generateSocialShare() {
     }
 
     // Zīmējam zelta viduci pāri ziedlapu pamatnei
-    fillCircle(image, cx, cy, 28, goldenCenter);
+    fillCircle(image, cx, cy, 9, goldenCenter);
 
     // 3. Ielādējam Jimp fontus un uzzīmējam tekstus
     const font = await loadFont(SANS_32_BLACK);
