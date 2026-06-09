@@ -77,27 +77,27 @@ async function generateSocialShare() {
 
 
     // ====================================================================
-    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (300x300) - logo_share.png
+    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (150x150) - logo_share.png
     // ====================================================================
     console.log('Veido kvadrātisko logotipu ar lietotāja augšupielādēto LATRES.png attēlu...');
     
     const latresPath = path.resolve('LATRES.png');
     let squareImage;
     if (fs.existsSync(latresPath)) {
-      console.log(`Atrasts LATRES.png fails, apstrādājam to uz precīzu 1x1 (300x300px) izmēru...`);
+      console.log(`Atrasts LATRES.png fails, apstrādājam to uz precīzu 1x1 (150x150px) izmēru...`);
       squareImage = await sharp(latresPath)
-        .resize(300, 300, {
+        .resize(150, 150, {
           fit: 'cover' // Nodrošina perfektu 1:1 proporciju dabiski bez attēla kropļošanas
         })
         .png()
         .toBuffer();
     } else {
-      console.warn('LATRES.png netika atrasts! Izmantojam rezerves balto 300x300 attēlu...');
+      console.warn('LATRES.png netika atrasts! Izmantojam rezerves balto 150x150 attēlu...');
       const fallbackSvg = `
-      <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <rect width="300" height="300" fill="#ffffff" />
-        <text x="150" y="125" font-family="system-ui, sans-serif" font-size="80" font-weight="900" fill="#18181b" text-anchor="middle">LAT</text>
-        <text x="150" y="225" font-family="system-ui, sans-serif" font-size="80" font-weight="900" fill="#9e1b32" text-anchor="middle">RES</text>
+      <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+        <rect width="150" height="150" fill="#ffffff" />
+        <text x="75" y="62" font-family="system-ui, sans-serif" font-size="40" font-weight="900" fill="#18181b" text-anchor="middle">LAT</text>
+        <text x="75" y="112" font-family="system-ui, sans-serif" font-size="40" font-weight="900" fill="#9e1b32" text-anchor="middle">RES</text>
       </svg>
       `;
       squareImage = await sharp(Buffer.from(fallbackSvg))
