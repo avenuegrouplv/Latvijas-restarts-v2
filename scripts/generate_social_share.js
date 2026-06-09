@@ -77,27 +77,27 @@ async function generateSocialShare() {
 
 
     // ====================================================================
-    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (150x150) - logo_share.png
+    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (120x120) - logo_share.png
     // ====================================================================
     console.log('Veido kvadrātisko logotipu ar lietotāja augšupielādēto LATRES.png attēlu...');
     
     const latresPath = path.resolve('LATRES.png');
     let squareImage;
     if (fs.existsSync(latresPath)) {
-      console.log(`Atrasts LATRES.png fails, apstrādājam to uz precīzu 1x1 (150x150px) izmēru...`);
+      console.log(`Atrasts LATRES.png fails, apstrādājam to uz precīzu 1x1 (120x120px) izmēru...`);
       squareImage = await sharp(latresPath)
-        .resize(150, 150, {
+        .resize(120, 120, {
           fit: 'cover' // Nodrošina perfektu 1:1 proporciju dabiski bez attēla kropļošanas
         })
         .png()
         .toBuffer();
     } else {
-      console.warn('LATRES.png netika atrasts! Izmantojam rezerves balto 150x150 attēlu...');
+      console.warn('LATRES.png netika atrasts! Izmantojam rezerves balto 120x120 attēlu...');
       const fallbackSvg = `
-      <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-        <rect width="150" height="150" fill="#ffffff" />
-        <text x="75" y="62" font-family="system-ui, sans-serif" font-size="40" font-weight="900" fill="#18181b" text-anchor="middle">LAT</text>
-        <text x="75" y="112" font-family="system-ui, sans-serif" font-size="40" font-weight="900" fill="#9e1b32" text-anchor="middle">RES</text>
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="120" height="120" fill="#ffffff" />
+        <text x="14" y="48" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#18181b" letter-spacing="-1">LATV</text>
+        <text x="14" y="85" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#9e1b32" letter-spacing="-1">REST</text>
       </svg>
       `;
       squareImage = await sharp(Buffer.from(fallbackSvg))
