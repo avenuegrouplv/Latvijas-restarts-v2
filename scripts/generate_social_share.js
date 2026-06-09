@@ -79,28 +79,43 @@ async function generateSocialShare() {
     // ====================================================================
     // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (120x120) - logo_share.png
     // ====================================================================
-    console.log('Veido kvadrātisko logotipu ar lietotāja augšupielādēto LATRES.png attēlu...');
+    console.log('Veido mazo kvadrātisko logotipu ar margrietu kreisajā pusē un Latvijas Restarts labajā pusē...');
     
-    const latresPath = path.resolve('LATRES.png');
+    // Veidojam SVG priekšplānu un tekstu (precīzs mājaslapas galvenes logotipa stils)
+    const squareSvgText = `
+    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- Balts fons -->
+      <rect width="120" height="120" fill="#ffffff" />
+      
+      <!-- Teksta daļa, kas saskan ar mājaslapas augšējā logotipa stilu -->
+      <text x="50" y="58" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="900" fill="#18181b" letter-spacing="-0.3">Latvijas</text>
+      <text x="50" y="72" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="900" fill="#9e1b32" letter-spacing="-0.3">Restarts</text>
+    </svg>
+    `;
+    
     let squareImage;
-    if (fs.existsSync(latresPath)) {
-      console.log(`Atrasts LATRES.png fails, apstrādājam to uz precīzu 1x1 (120x120px) izmēru...`);
-      squareImage = await sharp(latresPath)
-        .resize(120, 120, {
-          fit: 'cover' // Nodrošina perfektu 1:1 proporciju dabiski bez attēla kropļošanas
-        })
+    if (baseMargrieta) {
+      console.log('Kompozitējam mazo attēlu ar Margrietas ziedu un teksta SVG...');
+      const smallFlowerBuffer = await sharp(baseMargrieta)
+        .resize(34, 34)
+        .png()
+        .toBuffer();
+        
+      squareImage = await sharp(Buffer.from(squareSvgText))
+        .composite([{ input: smallFlowerBuffer, left: 11, top: 43 }])
         .png()
         .toBuffer();
     } else {
-      console.warn('LATRES.png netika atrasts! Izmantojam rezerves balto 120x120 attēlu...');
-      const fallbackSvg = `
+      console.warn('Margrietas zieds nav pieejams, veidojam rezerves vizuālo attēlu ar apļveida ziedu...');
+      const fullFallbackSvg = `
       <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
         <rect width="120" height="120" fill="#ffffff" />
-        <text x="14" y="48" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#18181b" letter-spacing="-1">LATV</text>
-        <text x="14" y="85" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#9e1b32" letter-spacing="-1">REST</text>
+        <circle cx="28" cy="60" r="14" fill="#facc15" />
+        <text x="50" y="58" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="900" fill="#18181b" letter-spacing="-0.3">Latvijas</text>
+        <text x="50" y="72" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="900" fill="#9e1b32" letter-spacing="-0.3">Restarts</text>
       </svg>
       `;
-      squareImage = await sharp(Buffer.from(fallbackSvg))
+      squareImage = await sharp(Buffer.from(fullFallbackSvg))
         .png()
         .toBuffer();
     }
