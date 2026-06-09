@@ -81,19 +81,12 @@ async function generateSocialShare() {
     // ====================================================================
     console.log('Veido kvadrātisko logotipu ar pašu zīmola logo (logo_share.png)...');
     
-    // SVG fons, dekoratīvās sarkanās Latvijas karoga joslas un logo teksts slaidā 1x1 formātā (tikai centrēts teksts, bez zieda)
+    // SVG satur tikai un vienīgi teksta burtus LAT un RES, bez fona, bez rāmjiem un bez karoga līnijām
     const squareSvgText = `
     <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-      <!-- Tīri balts fons -->
-      <rect width="300" height="300" fill="#ffffff" />
-      
-      <!-- Latvijas karoga dekoratīvās līnijas rāmim (Latvijas Restarts identitāte) -->
-      <rect x="0" y="0" width="300" height="12" fill="#9e1b32" />
-      <rect x="0" y="288" width="300" height="12" fill="#9e1b32" />
-      
-      <!-- Divas rindiņas zīmola teksta, liela, bieza un perfekti centrēta horizontāli un vertikāli -->
-      <text x="150" y="135" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#18181b" letter-spacing="-0.5" text-anchor="middle">LATVIJAS</text>
-      <text x="150" y="195" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#9e1b32" letter-spacing="-0.5" text-anchor="middle">RESTARTS</text>
+      <!-- Tikai un vienīgi zīmola teksta sākuma burti, biezā bezserifa fontā, perfekti centrēti -->
+      <text x="150" y="125" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="95" font-weight="950" fill="#18181b" letter-spacing="-1" text-anchor="middle">LAT</text>
+      <text x="150" y="225" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="95" font-weight="950" fill="#9e1b32" letter-spacing="-1" text-anchor="middle">RES</text>
     </svg>
     `;
 
