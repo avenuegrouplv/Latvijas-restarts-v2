@@ -81,7 +81,7 @@ async function generateSocialShare() {
     // ====================================================================
     console.log('Veido kvadrātisko logotipu ar pašu zīmola logo (logo_share.png)...');
     
-    // SVG fons, dekoratīvās sarkanās Latvijas karoga joslas un logo teksts
+    // SVG fons, dekoratīvās sarkanās Latvijas karoga joslas un logo teksts slaidā 1x1 formātā (tikai centrēts teksts, bez zieda)
     const squareSvgText = `
     <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
       <!-- Tīri balts fons -->
@@ -91,31 +91,16 @@ async function generateSocialShare() {
       <rect x="0" y="0" width="300" height="12" fill="#9e1b32" />
       <rect x="0" y="288" width="300" height="12" fill="#9e1b32" />
       
-      <!-- Divas rindiņas zīmola teksta ar precīziem inline stiliem un izmēriem, kas sakrīt ar mājaslapas fontiem -->
-      <text x="165" y="138" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="950" fill="#18181b" letter-spacing="-0.5">LATVIJAS</text>
-      <text x="165" y="178" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="950" fill="#9e1b32" letter-spacing="-0.5">RESTARTS</text>
+      <!-- Divas rindiņas zīmola teksta, liela, bieza un perfekti centrēta horizontāli un vertikāli -->
+      <text x="150" y="135" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#18181b" letter-spacing="-0.5" text-anchor="middle">LATVIJAS</text>
+      <text x="150" y="195" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="950" fill="#9e1b32" letter-spacing="-0.5" text-anchor="middle">RESTARTS</text>
     </svg>
     `;
 
-    let squareImage;
-    if (baseMargrieta) {
-      // Resizojam margrietu uz 140x140px izmēru, lai tā aizņemtu izteiksmīgu vietu kreisajā pusē blakus tekstam
-      const squareFlowerBuffer = await sharp(baseMargrieta)
-        .resize(140, 140)
-        .png()
-        .toBuffer();
-
-      // Kompozitējam mazo ziedu kreisajā pusē blakus divrindu tekstam ar precīzām koordinātām
-      squareImage = await sharp(Buffer.from(squareSvgText))
-        .composite([{ input: squareFlowerBuffer, left: 15, top: 80 }])
-        .png()
-        .toBuffer();
-    } else {
-      // Rezerves variants bez zieda, ja lejupielāde neizdevās
-      squareImage = await sharp(Buffer.from(squareSvgText))
-        .png()
-        .toBuffer();
-    }
+    // 1x1 logotips sastāv tikai no zīmola teksta, ziedu šeit nekompozitējam
+    const squareImage = await sharp(Buffer.from(squareSvgText))
+      .png()
+      .toBuffer();
 
     // Saglabājam logo_share.png abās vietās (public un dist)
     const publicSqPath = path.join(publicDir, 'logo_share.png');
