@@ -77,23 +77,28 @@ async function generateSocialShare() {
 
 
     // ====================================================================
-    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (300x300) - logo_share.png
+    // 2. GENDERĒJAM MAZO KVADRĀTISKO LOGOTIPU (47x46) - logo_share.png
     // ====================================================================
-    console.log('Veido kvadrātisko logotipu ar pašu zīmola logo (logo_share.png)...');
+    console.log('Veido kvadrātisko logotipu ar lietotāja augšupielādēto LATRES.png attēlu...');
     
-    // SVG satur tikai un vienīgi teksta burtus LAT un RES, bez fona, bez rāmjiem un bez karoga līnijām
-    const squareSvgText = `
-    <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-      <!-- Tikai un vienīgi zīmola teksta sākuma burti, biezā bezserifa fontā, perfekti centrēti -->
-      <text x="150" y="125" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="95" font-weight="950" fill="#18181b" letter-spacing="-1" text-anchor="middle">LAT</text>
-      <text x="150" y="225" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="95" font-weight="950" fill="#9e1b32" letter-spacing="-1" text-anchor="middle">RES</text>
-    </svg>
-    `;
-
-    // 1x1 logotips sastāv tikai no zīmola teksta, ziedu šeit nekompozitējam
-    const squareImage = await sharp(Buffer.from(squareSvgText))
-      .png()
-      .toBuffer();
+    const latresPath = path.resolve('LATRES.png');
+    let squareImage;
+    if (fs.existsSync(latresPath)) {
+      console.log(`Atrasts LATRES.png fails, kopējam to tieši par logo_share.png...`);
+      squareImage = fs.readFileSync(latresPath);
+    } else {
+      console.warn('LATRES.png netika atrasts! Izmantojam rezerves balto 47x46 attēlu...');
+      const fallbackSvg = `
+      <svg width="47" height="46" viewBox="0 0 47 46" xmlns="http://www.w3.org/2000/svg">
+        <rect width="47" height="46" fill="#ffffff" />
+        <text x="23" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="900" fill="#18181b" text-anchor="middle">LAT</text>
+        <text x="23" y="34" font-family="system-ui, sans-serif" font-size="12" font-weight="900" fill="#9e1b32" text-anchor="middle">RES</text>
+      </svg>
+      `;
+      squareImage = await sharp(Buffer.from(fallbackSvg))
+        .png()
+        .toBuffer();
+    }
 
     // Saglabājam logo_share.png abās vietās (public un dist)
     const publicSqPath = path.join(publicDir, 'logo_share.png');
@@ -101,7 +106,7 @@ async function generateSocialShare() {
     
     fs.writeFileSync(publicSqPath, squareImage);
     fs.writeFileSync(distSqPath, squareImage);
-    console.log(`Mazais kvadrātiskais logo (logo_share.png) ar ziedu sekmīgi saglabāts (${publicSqPath})`);
+    console.log(`Mazais kvadrātiskais logo (logo_share.png) sekmīgi saglabāts (${publicSqPath})`);
 
     // Dzēšam vecos pagaidu failus, ja tādi ir, lai nerastos juceklis
     const oldPublicSq = path.join(publicDir, 'logo_share_v2.png');
