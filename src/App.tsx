@@ -313,7 +313,23 @@ const NEWS = [
     date: "03.06.2026",
     title: "Mūsu darbi: Budžeta tēriņu noraidīšana",
     excerpt: "⛔️  03.06.2026 Budžeta komisijā noraidījām Siliņas valdības sagatavoto apropriāciju pieprasījumu 52,4 miljonu eiro apmērā. Šādi papildu izdevumi radītu negatīvu ietekmi...",
-    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Noraidita-iecere-par-budzeta-izdevumiem.jpeg"
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Noraidita-iecere-par-budzeta-izdevumiem.jpeg",
+    content: [
+      "⛔️  03.06.2026 Budžeta komisijā noraidījām Siliņas valdības sagatavoto apropriāciju pieprasījumu 52,4 miljonu eiro apmērā. Šādi papildu izdevumi radītu negatīvu ietekmi uz budžetu, un tajos bija iekļautas pozīcijas, kuras neuzskatu par prioritārām nodokļu maksātāju naudas izlietojumā.",
+      "➡️ Starp pieprasītajiem tēriņiem bija komandējumi un konsultācijas, mobilo tālruņu un portatīvo datoru nomaiņa, starptautisku konferenču organizēšana, mediju treniņi un personāla atlases pakalpojumi.",
+      "❗️ Katrs eiro jāiegulda pārdomāti un atbildīgi, tādēļ šis pieprasījums ir jāpārstrādā."
+    ]
+  },
+  {
+    id: "samazinatais-pvn",
+    date: "19.06.2026",
+    title: "Samazinātais PVN",
+    excerpt: "Latvijas Restorānu biedrības (LRB) pārstāvji 18.jūlijā tikās ar Saeimas Budžeta komisijas vadītāju Aivu Vīksnu, lai pārrunātu kritiski svarīgo samazinātas PVN likmes...",
+    image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=1000",
+    content: [
+      "Latvijas Restorānu biedrības (LRB) pārstāvji 18.jūlijā tikās ar Saeimas Budžeta komisijas vadītāju Aivu Vīksnu, lai pārrunātu kritiski svarīgo samazinātās PVN likmes ieviešanu ēdināšanas nozarei. LRB prezidents Jānis Jenzis sarunā akcentēja samazinātās PVN likmes nozīmi nozares situācijas stabilizēšanai. Kā veiksmīgu piemēru viņš minēja Vāciju, kur kopš šā gada 1. janvāra ieviestā 7 % PVN likme ēdināšanai jau devusi pozitīvu pienesumu ekonomikai un palīdzējusi izdzīvot mazajiem un vidējiem ģimenes uzņēmumiem. Vienlaikus būtiskas ir arī sabiedrības intereses – samazināta PVN likme ļautu samazināt ēdināšanas pakalpojumu cenas, kas pašreiz pārtikas cenu ietekmē ir sasniegušas griestus.",
+      "Aiva Vīksna apliecināja, ka izprot situācijas nopietnību un sadarbībā ar Finanšu ministriju meklēs iespējamos risinājumus, lai šo jautājumu virzītu tālākai izskatīšanai. Esam gandarīti par uzklausīšanu un konstruktīvo dialogu."
+    ]
   }
 ];
 
@@ -866,7 +882,7 @@ const Footer = () => {
           </div>
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-zinc-500 text-sm">
             <div className="flex items-center gap-4 text-center md:text-left">
-              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas.</p>
+              <p className="w-full">2026 © Biedrība “Latvijas restarts” | Visas tiesības aizsargātas</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
               <Link to="/privatuma-politika" className="hover:text-white transition-colors">Privātuma politika</Link>
@@ -1904,11 +1920,27 @@ const BOARD_MEMBERS: Member[] = [
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/aivis.cerins",
     focus: [
-      { id: "f1", title: "Sabiedriskās attiecības un komunikācija", content: "Sabiedrības informēšana, dialoga veidošana starp iedzīvotājiem un lēmumu pieņēmējiem." },
-      { id: "f2", title: "Kultūras un mediju telpas stiprināšana", content: "Neatkarīgu un profesionālu reģionālo un nacionālo mediju atbalsts, sabiedrisko mediju attīstība." },
-      { id: "f3", title: "Jauniešu iesaiste sabiedriskajos procesos", content: "Jauniešu līdzdalības veicināšana vēlēšanās, NVO un pilsoniskajās iniciatīvās." },
-      { id: "f4", title: "Sabiedrības saliedētība un integrācija", content: "Vienotas sabiedrības veidošana, mazinot sociālo un etnisko spriedzi caur kopīgiem projektiem." },
-      { id: "f5", title: "Pasākumu un forumu organizēšana", content: "Izglītojošu diskusiju un viedokļu platformu radīšana par aktuālajiem Latvijas attīstības jautājumiem." }
+      {
+        id: "f1",
+        title: "SABIEDRISKĀS ATTIECĪBAS UN KOMINIKĀCIJA",
+        content: "Izglītojošu diskusiju un viedokļu platformu radīšana par aktuālajiem Latvijas attīstības jautājumiem."
+      },
+      {
+        id: "f2",
+        title: "STARPTAUTISKIE FORUMI",
+        content: "Rīgai un Latvijai kopumā ir visi nepieciešamie izejas dati, lai tā kļūtu par Baltijas tīklošanās metropoli kā biznesa, tā izklaides forumos un pasākumos. Organizatoriskais līmenis jau šobrīd mums ir krietni augstāks par kaimiņvalstīm. Tas ir mans secinājums esot šajā industrijā 12 gadus."
+      },
+      {
+        id: "f3",
+        title: "MEDIJU REFORMA REĢIONOS",
+        content: "Neatkarīgu un profesionālu reģionālo un nacionālo mediju atbalsts, sabiedrisko mediju attīstība. Skaidra un saprotama finasējuma piešķiršana mediju atbalstam. Reģinālo mediju reformēšana, modernizēšana. (Ar finansējuma piešķiršanu izaicinājums netiek atrisināts. Reģinālajiem medijiem ir jāspēj iet līdz laikam, esošo saturu veidojot dažādām vecuma auditorijām). Sabiedriskā medija pozīcijas stiprināšana, Baltijas mediju telpas fokušēšana."
+      },
+      {
+        id: "f4",
+        title: "JAUNSARDZE ZEMESSARDZE UN CIVILMILITĀRĀ AIZSARDZĪBA",
+        content: `Uz doto brīdi Latvijā ir aizsākta intensīva ārējās drošības kampaņa, kuras pamatkodolu veido gaisa un akvatorijas aizsardzība, kā arī sauszemes spēki. Kara gadījumā Zemessardze nokļūst NBS vadībā. Būtībā katrs zemessargs tiek pielīdzināts profesionļaā dienesta karavīram. 
+Jaunsardzē un Zemessardzē strauji jāstriprina materiāltehniskā bāze, jāpārskata apmācību saturs, kas daudzviet atpaliek no mūsdienu karavešanas aktuālitātēm. Valsts aizsardzības dienests, jaunsardze un zemessardze ir jāpadara par goda lietu katram pilsonim. Jau šobrīd ir uzsākts darbs pie civilmilitārās sadrabības starp bruņotajiem spēkiem, pašvaldībām un uzņēmējiem. Šis darba ir jāpaplašina, iesaistot pēc iespējas plašāku civilo perosnu skaitu, jo konflikta situācijā, monolītai sadarbībai būs izšķirīga loma valsts aizsardzībā.`
+      }
     ]
   },
   {
@@ -2053,11 +2085,31 @@ Funkcijas:
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/renars.putnins",
     focus: [
-      { id: "f1", title: "Veselības aprūpes sistēmas reforma", content: "Finansējuma un resursu lietderīga plānošana, mazinot rindu garumu uz valsts apmaksātiem pakalpojumiem." },
-      { id: "f2", title: "Medicīnas personāla piesaiste reģioniem", content: "Atbalsta mehānismu izveide jauno ārstu un māsu motivēšanai strādāt Latvijas reģionu slimnīcās." },
-      { id: "f3", title: "Slimnīcu pārvaldības efektivitāte", content: "Modernas un caurspīdīgas korporatīvās pārvaldības principu ieviešana vadošajās ārstniecības iestādēs." },
-      { id: "f4", title: "Pacientu tiesību aizsardzība", content: "Medicīnas tiesību un ētikas standartu pilnveidošana, nodrošinot augstāku drošību un cieņu ikvienam pacientam." },
-      { id: "f5", title: "Medicīnas digitalizācija un e-veselība", content: "Vienotas, stabilas un ērti lietojamas e-veselības sistēmas izveide, integrējot mūsdienīgus digitālos risinājumus." }
+      { 
+        id: "f1", 
+        title: "VESELĪBAS APRŪPES SISTĒMAS REFORMA", 
+        content: "Esmu Renārs Putniņš – neiroķirurgs un veselības aprūpes nozares vadītājs, kurš ikdienā strādā ar cilvēkiem un redz gan Latvijas medicīnas sistēmas stiprās puses, gan problēmas, kas prasa izlēmīgu rīcību. Gadu gaitā esmu guvis pieredzi ne tikai pacientu ārstēšanā, bet arī slimnīcu darba organizēšanā un pārmaiņu vadībā." 
+      },
+      { 
+        id: "f2", 
+        title: "MEDICĪNAS PERSONĀLA PIESAISTE REĢIONIEM", 
+        content: "Politikā iesaistos ar pārliecību, ka valstij nepieciešami profesionāļi ar praktisku pieredzi un spēju pieņemt atbildīgus lēmumus. Mana prioritāte ir pieejama, kvalitatīva un uz pacientu vērsta veselības aprūpe visā Latvijā, īpaši reģionos, kur cilvēkiem nereti jāmēro liels attālums, lai saņemtu nepieciešamo palīdzību." 
+      },
+      { 
+        id: "f3", 
+        title: "SLIMNĪCU PĀRVALDĪBAS EFEKTIVITĀTE", 
+        content: "Ticu, ka Latvija var veidot modernu veselības aprūpes sistēmu, kurā tiek novērtēti mediķi, gudri izmantoti resursi un tehnoloģijas kalpo cilvēkam. Mūsu valstij jāspēj izmantot arī Eiropas labā pieredze, vienlaikus aizstāvot Latvijas iedzīvotāju intereses." 
+      },
+      { 
+        id: "f4", 
+        title: "PACIENTU TIESĪBU AIZSARDZĪBA", 
+        content: "Pacientam ir tiesības uz cieņpilnu attieksmi, saprotamu informāciju un iesaisti lēmumu pieņemšanā par savu veselību." 
+      },
+      { 
+        id: "f5", 
+        title: "MEDICĪNAS DIGITALIZĀCIJA UN E-VESELĪBA", 
+        content: "Digitālajiem risinājumiem jāatvieglo gan pacientu, gan mediķu ikdiena. E-veselībai jābūt drošai, ērtai un efektīvai sistēmai, kas samazina administratīvo slogu, uzlabo informācijas apriti un palīdz nodrošināt kvalitatīvāku veselības aprūpi. Mana pārliecība - Veselības aprūpei jābūt pieejamai tuvāk cilvēka mājām. Latvijas iedzīvotāji ir pelnījuši savlaicīgu, profesionālu un cieņpilnu aprūpi neatkarīgi no tā, kurā Latvijas reģionā viņi dzīvo. Savu pieredzi medicīnā un veselības aprūpes vadībā vēlos izmantot, lai veidotu atbildīgu politiku, kuras pamatā ir zināšanas, praktiski risinājumi un rūpes par cilvēku. 2026. gada Saeimas vēlēšanās esmu gatavs šo pieredzi ieguldīt Latvijas attīstībā." 
+      }
     ]
   }
 ];
@@ -2356,17 +2408,27 @@ const NewsDetailPage = ({ openRegistration }: { openRegistration: (id: string) =
           </div>
 
           <div className="prose prose-lg max-w-none text-zinc-700 leading-relaxed space-y-6">
-            <p className="whitespace-pre-line">
-              ⛔️  03.06.2026 Budžeta komisijā noraidījām Siliņas valdības sagatavoto apropriāciju pieprasījumu 52,4 miljonu eiro apmērā. Šādi papildu izdevumi radītu negatīvu ietekmi uz budžetu, un tajos bija iekļautas pozīcijas, kuras neuzskatu par prioritārām nodokļu maksātāju naudas izlietojumā.
-            </p>
+            {(newsItem as any).content ? (
+              (newsItem as any).content.map((p: string, idx: number) => (
+                <p key={idx} className="whitespace-pre-line">
+                  {p}
+                </p>
+              ))
+            ) : (
+              <>
+                <p className="whitespace-pre-line">
+                  ⛔️  03.06.2026 Budžeta komisijā noraidījām Siliņas valdības sagatavoto apropriāciju pieprasījumu 52,4 miljonu eiro apmērā. Šādi papildu izdevumi radītu negatīvu ietekmi uz budžetu, un tajos bija iekļautas pozīcijas, kuras neuzskatu par prioritārām nodokļu maksātāju naudas izlietojumā.
+                </p>
 
-            <p className="whitespace-pre-line">
-              ➡️ Starp pieprasītajiem tēriņiem bija komandējumi un konsultācijas, mobilo tālruņu un portatīvo datoru nomaiņa, starptautisku konferenču organizēšana, mediju treniņi un personāla atlases pakalpojumi.
-            </p>
+                <p className="whitespace-pre-line">
+                  ➡️ Starp pieprasītajiem tēriņiem bija komandējumi un konsultācijas, mobilo tālruņu un portatīvo datoru nomaiņa, starptautisku konferenču organizēšana, mediju treniņi un personāla atlases pakalpojumi.
+                </p>
 
-            <p className="whitespace-pre-line">
-              ❗️ Katrs eiro jāiegulda pārdomāti un atbildīgi, tādēļ šis pieprasījums ir jāpārstrādā.
-            </p>
+                <p className="whitespace-pre-line">
+                  ❗️ Katrs eiro jāiegulda pārdomāti un atbildīgi, tādēļ šis pieprasījums ir jāpārstrādā.
+                </p>
+              </>
+            )}
           </div>
         </div>
         <SectionBottomNav />
@@ -2430,23 +2492,27 @@ const ContactPage = () => {
           <div>
             <h3 className="font-display text-2xl md:text-4xl font-bold mb-4 md:mb-6 leading-tight text-latvia-red py-2">Mēs esam šeit, lai dzirdētu Jūs</h3>
             <p className="font-display text-base md:text-lg mb-6 md:mb-10 font-medium text-zinc-600">Rakstiet mums, ja jums ir jautājumi, ieteikumi vai vēlaties sazināties par sadarbību.</p>
-            <div className="space-y-6 px-4 md:px-0">
+            <div className="space-y-4 px-4 md:px-0">
               <div className="flex flex-col">
-                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-1">Biedrība</span>
-                <p className="font-display text-lg font-bold mb-2 text-zinc-900 border-b-2 border-latvia-red/10 pb-2 w-fit">Latvijas Restarts</p>
+                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-0.5">Biedrība</span>
+                <p className="font-display text-base font-bold mb-1 text-zinc-900 border-b border-latvia-red/10 pb-1 w-fit">Latvijas Restarts</p>
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-1">Adrese</span>
-                <p className="font-display text-lg font-bold mb-2">Rīga, Ogļu iela 12A, LV-1048</p>
+                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-0.5">Reģistrācijas numurs</span>
+                <p className="font-display text-base font-bold text-zinc-900">40008317099</p>
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-1">E-pasts</span>
-                <a href="mailto:info@latvijasrestarts.lv" className="font-display text-xl font-bold hover:text-latvia-red transition-colors w-fit">info@latvijasrestarts.lv</a>
+                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-0.5">Adrese</span>
+                <p className="font-display text-base font-bold text-zinc-900">Rīga, Ogļu iela 12A, LV-1048</p>
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-1">Bankas rekvizīti</span>
-                <p className="font-display text-lg font-bold text-zinc-900">AS "Swedbank"</p>
-                <p className="font-display text-lg font-bold text-zinc-900 font-mono">LV44HABA0001234567890</p>
+                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-0.5">E-pasts</span>
+                <a href="mailto:info@latvijasrestarts.lv" className="font-display text-base font-bold text-zinc-900 hover:text-latvia-red transition-colors w-fit">info@latvijasrestarts.lv</a>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display text-[10px] font-bold uppercase text-zinc-400 mb-0.5">Bankas rekvizīti</span>
+                <p className="font-display text-base font-bold text-zinc-900">AS "Swedbank"</p>
+                <p className="font-display text-sm font-bold text-zinc-800 font-mono">LV44HABA0001234567890</p>
               </div>
             </div>
           </div>
