@@ -1836,8 +1836,8 @@ const BOARD_MEMBERS: Member[] = [
     ]
   },
   { 
-    id: "aija-viksna",
-    name: "Aija Vīksna", 
+    id: "aiva-viksna",
+    name: "Aiva Vīksna", 
     image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/photo_6043944804787359160_x.jpg",
     imageClass: "scale-[1.1] origin-[15%_0%]",
     role: "Priekšsēdētāja vietniece",
