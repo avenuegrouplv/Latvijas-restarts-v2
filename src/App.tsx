@@ -309,6 +309,27 @@ const GOALS = [
 
 const NEWS = [
   {
+    id: "es-kohezijas-politika",
+    date: "16.07.2026",
+    title: "Aiva Vīksna: Jāmaina ES kohēzijas politika",
+    excerpt: "“Es mainītu ES kohēzijas politiku - no naudas apgūšanas uz izmērāmu ekonomisko atdevi. Katram Eiropas eiro Latvijā jārada lielāka produktivitāte, eksports, privātās investīcijas...”",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Prioritates.webp",
+    imageClass: "object-[center_34%]",
+    detailImageClass: "object-contain bg-zinc-50 w-full h-full",
+    content: [
+      "Ja man būtu iespēja mainīt vienu lietu ES budžetā vai ES politikā, kas dotu vislielāko ieguvumu Latvijai nākamajos 10 – 20 gados?\n\nĪsā mana atbilde:\n“Es mainītu ES kohēzijas politiku - no naudas apgūšanas uz izmērāmu ekonomisko atdevi. Katram Eiropas eiro Latvijā jārada lielāka produktivitāte, eksports, privātās investīcijas un labi apmaksātas darbavietas.”",
+      "Manuprāt, viena pārmaiņa, kas Latvijai dotu vislielāko ieguvumu nākamajos 10 - 20 gados, būtu ES kohēzijas politikas pārorientēšana no naudas apgūšanas uz produktivitātes, privāto investīciju un reģionu ekonomiskās jaudas palielināšanu.",
+      "Ja man būtu iespēja mainīt vienu lietu Eiropas Savienības budžetā, es panāktu, lai kohēzijas finansējuma galvenais kritērijs būtu nevis tas, cik daudz naudas valsts ir iztērējusi, bet gan tas, kādu ilgtermiņa ekonomisko atdevi šī nauda rada.",
+      "Latvijai nākamajos 10 - 20 gados vairs nepietiek tikai ar jauniem ceļiem, renovētām ēkām un atsevišķiem projektiem. Mums nepieciešams Eiropas finansējumu daudz mērķtiecīgāk ieguldīt produktivitātē, eksportspējīgos uzņēmumos, tehnoloģijās, enerģētiskajā neatkarībā, profesionālajā izglītībā un reģionu uzņēmējdarbībā.",
+      "Es rosinātu noteikt, ka būtiska kohēzijas finansējuma daļa jāizmanto kopā ar privāto kapitālu. Katram Eiropas budžeta eiro būtu jāpiesaista papildu privātās investīcijas, jārada labi apmaksātas darbavietas un jāpalielina Latvijas eksports.",
+      "Tas būtu īpaši nozīmīgi Latvijas reģioniem. Finansējums būtu jāpiešķir ne tikai pēc iedzīvotāju skaita, bet arī ņemot vērā pierobežas drošību, iedzīvotāju skaita samazināšanos, attālumu no lielajiem Eiropas tirgiem un infrastruktūras izmaksas.",
+      "Mūsu mērķim jābūt skaidram, ka pēc 15 vai 20 gadiem Latvijai nav jākļūst par valsti, kas joprojām gaida nākamo Eiropas fondu periodu. Latvijai jākļūst par valsti, kuras uzņēmumi, cilvēkkapitāls un reģioni spēj paši radīt arvien lielākus ienākumus.",
+      "Tādēļ mana viena izvēle būtu Eiropas kohēzijas politika, kas finansē nevis patēriņu un formālu naudas apguvi, bet Latvijas ekonomisko izrāvienu.",
+      "Šāda nostāja is īpaši aktuāla, jo ES pašlaik apspriež gandrīz divus triljonus eiro lielo budžetu 2028. - 2034. gadam, vienlaikus palielinot finansējumu konkurētspējai, drošībai un aizsardzībai. Latvijai kohēzijas finansējuma saglabāšana ir oficiāli noteikta kā viena no galvenajām sarunu prioritātēm, un Eiropas Komisija norāda, ka Latvijas investīciju atjaunošanos jau būtiski veicina ES fondu ieplūde.",
+      "Autors: Aiva Vīksna"
+    ]
+  },
+  {
     id: "strategija-2026",
     date: "03.06.2026",
     title: "Mūsu darbi: Budžeta tēriņu noraidīšana",
@@ -1102,7 +1123,7 @@ const BoardSummary = () => (
       <div className="flex flex-wrap justify-center gap-x-8 gap-y-12">
         {BOARD_MEMBERS.map((member) => (
           <div key={member.name} className="flex flex-col items-center text-center group w-36 md:w-48">
-            <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-zinc-50 rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
+            <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-transparent rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
               <div className="absolute inset-0 flex items-center justify-center text-zinc-200">
                 {member.image ? (
                   <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
@@ -1165,17 +1186,17 @@ const NewsSummary = () => (
           Visi jaunumi <ArrowUpRight className="w-4 h-4" />
         </Link>
       </div>
-      <div className="grid md:grid-cols-3 gap-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-black">
         {NEWS.map((item) => (
-          <article key={item.id} className="bg-white rounded-3xl overflow-hidden shadow-sm max-w-sm mx-auto w-full">
-            <div className="h-40 overflow-hidden">
-              <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+          <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all max-w-sm mx-auto w-full">
+            <div className="h-40 overflow-hidden relative">
+              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} />
             </div>
-            <div className="p-6">
-              <span className="text-xs font-bold text-latvia-red uppercase">{item.date}</span>
-              <h3 className="text-lg font-black mt-2 mb-4 leading-tight">{item.title}</h3>
-              <p className="text-zinc-500 text-xs mb-6 leading-relaxed line-clamp-3">{item.excerpt}</p>
-              <Link to={`/aktualitates/${item.id}`} className="inline-flex items-center gap-2 text-xs font-bold hover:text-latvia-red transition-colors">Lasīt vairāk <ArrowUpRight className="w-4 h-4" /></Link>
+            <div className="p-6 flex flex-col flex-grow">
+              <span className="text-[10px] font-black text-latvia-red uppercase tracking-wider mb-2">{item.date}</span>
+              <h3 className="text-lg font-black mb-3 leading-tight text-zinc-900 line-clamp-2">{item.title}</h3>
+              <p className="text-zinc-500 mb-6 text-xs leading-relaxed line-clamp-3">{item.excerpt}</p>
+              <Link to={`/aktualitates/${item.id}`} className="mt-auto font-black flex items-center gap-2 text-latvia-red hover:gap-4 transition-all text-[10px] uppercase">Lasīt vairāk <ArrowUpRight className="w-3.5 h-3.5"/></Link>
             </div>
           </article>
         ))}
@@ -1232,7 +1253,7 @@ const AboutPage = () => {
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-12">
           {BOARD_MEMBERS.map((member) => (
             <div key={member.name} className="flex flex-col items-center text-center group w-36 md:w-48">
-              <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-zinc-50 rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
+              <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-transparent rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-200">
                   {member.image ? (
                     <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
@@ -1901,8 +1922,8 @@ const BOARD_MEMBERS: Member[] = [
   { 
     id: "valters-bolevics",
     name: "Valters Bolevics", 
-    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/photo_6024966710105934976_x(1).jpg",
-    imageClass: "scale-[1.5] origin-[50%_0%]",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/valters%20bolevics2.webp",
+    imageClass: "scale-[1.3] translate-y-[14%] -translate-x-[3%]",
     role: "Valdes loceklis",
     focus: [
       { id: "f1", title: "Biznesa vides efektivizācija", content: "Birokrātijas mazināšana un valsts pakalpojumu digitalizācija uzņēmēju ērtībai." },
@@ -1946,8 +1967,8 @@ Jaunsardzē un Zemessardzē strauji jāstriprina materiāltehniskā bāze, jāp�
   {
     id: "janis-liepins",
     name: "Jānis Liepiņš",
-    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/J%C4%81nis%20Liepi%C5%86%C5%A1.webp",
-    imageClass: "scale-[2.33] origin-[35%_15%] translate-y-[-14.4%] translate-x-[-50.4%]",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/janis%20liepins2.webp",
+    imageClass: "scale-[1.3] translate-y-[11%]",
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/janis.liepins.969",
     focus: [
@@ -2111,6 +2132,45 @@ Funkcijas:
         content: "Digitālajiem risinājumiem jāatvieglo gan pacientu, gan mediķu ikdiena. E-veselībai jābūt drošai, ērtai un efektīvai sistēmai, kas samazina administratīvo slogu, uzlabo informācijas apriti un palīdz nodrošināt kvalitatīvāku veselības aprūpi. Mana pārliecība - Veselības aprūpei jābūt pieejamai tuvāk cilvēka mājām. Latvijas iedzīvotāji ir pelnījuši savlaicīgu, profesionālu un cieņpilnu aprūpi neatkarīgi no tā, kurā Latvijas reģionā viņi dzīvo. Savu pieredzi medicīnā un veselības aprūpes vadībā vēlos izmantot, lai veidotu atbildīgu politiku, kuras pamatā ir zināšanas, praktiski risinājumi un rūpes par cilvēku. 2026. gada Saeimas vēlēšanās esmu gatavs šo pieredzi ieguldīt Latvijas attīstībā." 
       }
     ]
+  },
+  {
+    id: "janis-jenzis",
+    name: "Jānis Jenzis",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/janis%20jenzis2.png",
+    imageClass: "scale-[1.32] translate-y-[12%]",
+    role: "Biedrības biedrs",
+    focus: [
+      {
+        id: "f1",
+        title: "Tūrisms un viesmīlība",
+        content: `Tūrisma un viesmīlības nozare kopš 2020. gada piedzīvojusi vairākas smagas krīzes – Covid-19 pandēmiju, Krievijas agresiju Ukrainā un energoresursu sadārdzinājumu. Rezultātā Latvija ir pēdējā vietā Eiropas Savienībā pēc ārvalstu viesu nakšņojumu atjaunošanās, salīdzinot ar 2019. gadu, kamēr lielākā daļa Eiropas valstu šo līmeni jau ir sasniegušas vai pārsniegušas.
+
+Lai situāciju mainītu, nepieciešams mērķtiecīgs un profesionāls Latvijas tūrisma mārketings, pietiekams finansējums un cieša sadarbība starp valsti un nozari.
+
+Nacionālajai aviokompānijai airBaltic jābūt vienam no galvenajiem instrumentiem tūristu piesaistei Latvijai, nevis citu valstu pilsētām. Tikpat svarīgi ir atjaunot regulāru prāmju satiksmi ar Rīgu un skaidri komunicēt starptautiskajai auditorijai, ka Latvija ir droša valsts darījumu, kultūras, sporta un atpūtas tūrismam.
+
+Tūrisma nozarei nepieciešams profesionāls krīžu menedžments, regulārs dialogs ar uzņēmējiem un datos balstīti lēmumi.`
+      },
+      {
+        id: "f2",
+        title: "Bērni un jaunieši",
+        content: `Latvijas nākotne sākas ar kvalitatīvu izglītību. Mums jāveido izglītības sistēma, kur skolotāji un pasniedzēji saņem konkurētspējīgu un cilvēka cienīgu atalgojumu, bet galvenās investīcijas tiek ieguldītas cilvēkos, nevis tikai infrastruktūrā.
+
+Jau no skolas gadiem bērniem jāapgūst finanšu pratība, uzņēmējdarbības pamati un praktiss darba iemaņas. Valstij ir jārada vide, kur jaunieši var iegūt pirmo darba pieredzi, vienlaikus nezaudējot ģimenēm paredzētos nodokļu atvieglojumus. Vecāki nevar tikt sodīti par to, ka viņu bērni strādā, atņemot viņiem nodokļu atvieglojumus. Darbiem viesmīlības uzņēmumos, produktu piegādēs ir jābūt pieejamiem mūsu jauniešiem, ne trešo valstu pilsoņiem, lai mūsu jaunieši varētu iegūt pirmās sociālās prasmes strādājot un palīdzot stiprināt savas ģimenes budžetu.`
+      },
+      {
+        id: "f3",
+        title: "Kultūra",
+        content: `Latvija ir talantu valsts. Nav pieņemami, ka izciliem māksliniekiem un profesionāliem mūziķiem jāstrādā vairākās darbavietās, lai nodrošinātu sev cienīgu dzīvi, vai jāmeklē iespējas ārvalstīs. Mums nepieciešama mērķtiecīga kultūrpolitika, kas palīdz saglabāt talantus Latvijā. Rīgai nepieciešama moderna akustiskā koncertzāle. Daudzu Eiropas pilsētu pieredze pierāda, ka tā kļūst ne tikai par kultūras centru, bet arī par nozīmīgu tūrisma un ekonomikas attīstības virzītāju.`
+      },
+      {
+        id: "f4",
+        title: "Atbildīga valsts budžeta pārvaldība",
+        content: `Valsts budžets ir mūsu visu, nodokļu maksātāju, nauda. Tāpēc tai jābūt pārvaldītai atbildīgi, caurskatāmi un efektīvi.
+
+Atbalstu nulles budžeta principa ieviešanu, regulāru ministriju un valsts iestāžu izdevumu izvērtēšanu, analizējot katras aktivitātes lietderību un pienesumu sabiedrībai. Nepieciešams atteikties no novecojušām vai neefektīvām aktivitātēm un vairāk ieguldīt tajās jomās, kas rada ilgtermiņa ieguvumu – veselības aprūpē, izglītībā, kultūrā, drošībā un uzņēmējdarbības attīstībā. Tikpat svarīga ir valsts budžeta lielāka atklātība un saprotamība, lai sociālie partneri, uzņēmēji un sabiedrība varētu pilnvērtīgi iesaistīties diskusijās par nodokļu maksātāju līdzekļu efektīvu izmantošanu.`
+      }
+    ]
   }
 ];
 
@@ -2134,7 +2194,7 @@ const MemberProfilePage = () => {
         </Link>
         
         <div className="flex flex-col md:flex-row gap-6 items-center md:items-center mb-10">
-          <div className="w-14 h-14 md:w-16 md:h-16 bg-zinc-50 rounded-xl overflow-hidden border-2 border-latvia-red/10 shrink-0 shadow-sm">
+          <div className="w-14 h-14 md:w-16 md:h-16 bg-transparent rounded-xl overflow-hidden border-2 border-latvia-red/10 shrink-0 shadow-sm">
             <div className="w-full h-full flex items-center justify-center text-zinc-200">
               {member.image ? (
                 <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
@@ -2259,7 +2319,7 @@ const MemberTopicDetailPage = () => {
           
           <div className="mt-16 pt-12 border-t border-zinc-200 flex items-center gap-12">
              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-latvia-red/20 shrink-0">
-               <div className="w-full h-full bg-zinc-200 flex items-center justify-center text-zinc-400">
+               <div className="w-full h-full bg-transparent flex items-center justify-center text-zinc-400">
                  {member.image ? (
                    <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
                  ) : (
@@ -2296,7 +2356,7 @@ const NewsPage = () => {
         {NEWS.map((item) => (
           <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all max-w-sm mx-auto w-full">
             <div className="h-40 overflow-hidden relative">
-              <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} />
             </div>
             <div className="p-6 flex flex-col flex-grow">
               <span className="text-[10px] font-black text-latvia-red uppercase tracking-wider mb-2">{item.date}</span>
@@ -2399,11 +2459,11 @@ const NewsDetailPage = ({ openRegistration }: { openRegistration: (id: string) =
             {newsItem.title}
           </h1>
           
-          <div className="max-w-2xl mx-auto aspect-video rounded-3xl overflow-hidden mb-12 shadow-md">
+          <div className="max-w-2xl mx-auto aspect-video rounded-3xl overflow-hidden mb-12 shadow-md bg-zinc-50">
             <img 
               src={newsItem.image} 
               alt={newsItem.title} 
-              className="w-full h-full object-cover" 
+              className={`w-full h-full ${(newsItem as any).detailImageClass || 'object-cover ' + ((newsItem as any).imageClass || '')}`} 
             />
           </div>
 
@@ -2719,7 +2779,7 @@ const PrivacyPolicyPage = () => {
               <li><strong>Kontaktinformācija:</strong> vārds, uzņēmuma nosaukums, e-pasta adrese, tālruņa numurs</li>
               <li><strong>Tehniskā informācija:</strong> IP adrese, pārlūkprogrammas veids, ierīces informācija, apmeklējuma laiks un datums</li>
               <li><strong>Lietošanas dati:</strong> informācija par to, kā Jūs izmantojat mūsu mājas lapu un pakalpojumus</li>
-              <li><strong>Saziņas dati:</strong> Jūsu ziņojumu un komunikācijas saturs ar mūsu biedrību</li>
+              <li><strong>Saziņas dati:</strong> Jūsu ziņojumu un komunikācijas saturs ar mūsu uzņēmumu</li>
             </ul>
           </div>
 
@@ -2727,9 +2787,9 @@ const PrivacyPolicyPage = () => {
             <h2 className="font-black text-zinc-900 uppercase mb-4 text-xl">4. Kā mēs izmantojam Jūsu datus</h2>
             <p className="mb-4">Mēs izmantojam Jūsu personas datus šādiem mērķiem:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Lai sniegtu Jūsu pieprasītos pakalpojumus un atbildētu uz Jūsu pieprasījumiem</li>
-              <li>Lai sazinātos ar Jums par mūsu biedrības darbību un piedāvājumiem</li>
-              <li>Lai uzlabotu mūsu mājas lapas un biedrības darbības kvalitāti</li>
+              <li>Lai sniegtu Jums pieprasītos pakalpojumus un atbildētu uz Jūsu pieprasījumiem</li>
+              <li>Lai sazinātos ar Jums par mūsu pakalpojumiem un piedāvājumiem</li>
+              <li>Lai uzlabotu mūsu mājas lapu un pakalpojumu kvalitāti</li>
               <li>Lai izpildītu juridiskās saistības un aizsargātu savas likumīgās intereses</li>
             </ul>
           </div>
@@ -2739,15 +2799,15 @@ const PrivacyPolicyPage = () => {
             <p className="mb-4">Mēs apstrādājam Jūsu personas datus, pamatojoties uz:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Jūsu piekrišanu</strong> – kad Jūs aizpildāt mūsu kontaktformu un piekrītat datu apstrādes noteikumiem</li>
-              <li><strong>Līguma izpildi</strong> – lai sniegtu Jums pieprasītos pakalpojumus vai iestāšanās iespējas</li>
-              <li><strong>Likumīgas intereses</strong> – lai uzlabotu mūsu pakalpojumus un aizsargātu biedrību</li>
+              <li><strong>Līguma izpildi</strong> – lai sniegtu Jums pieprasītos pakalpojumus</li>
+              <li><strong>Likumīgas intereses</strong> – lai uzlabotu mūsu pakalpojumus un aizsargātu uzņēmumu</li>
             </ul>
           </div>
 
           <div>
             <h2 className="font-black text-zinc-900 uppercase mb-4 text-xl">6. Datu uzglabāšana un drošība</h2>
             <p className="mb-4">Mēs uzglabājam Jūsu personas datus tikai tik ilgi, cik tas ir nepieciešams šajā politikā norādīto mērķu sasniegšanai vai saskaņā ar likumu.</p>
-            <p className="mb-4">Mēs izmantojam atbilstošus tehniskos un organizatoriskos drošības pasākumus, lai aizsargātu Jūsu datus:</p>
+            <p className="mb-4">Mēs izmantojam atbilstošus tehniskos un organizatoriskos drošības pasākumus, lai aizsargātu Jūsu datus pret nesankcionētu piekļuvi, izmantošanu vai izpaušanu:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>SSL šifrēšana datu pārsūtīšanai</li>
               <li>Ierobežota piekļuve personas datiem</li>
@@ -2758,32 +2818,43 @@ const PrivacyPolicyPage = () => {
           <div>
             <h2 className="font-black text-zinc-900 uppercase mb-4 text-xl">7. Jūsu tiesības</h2>
             <p className="mb-4">Saskaņā ar GDPR Jums ir šādas tiesības attiecībā uz Saviem personas datiem:</p>
-            <div className="grid sm:grid-cols-2 gap-4 text-xs font-bold uppercase">
-              <div className="p-3 bg-zinc-50 rounded-lg">Piekļuves tiesības</div>
-              <div className="p-3 bg-zinc-50 rounded-lg">Labošanas tiesības</div>
-              <div className="p-3 bg-zinc-50 rounded-lg">Dzēšanas tiesības</div>
-              <div className="p-3 bg-zinc-50 rounded-lg">Ierobežošanas tiesības</div>
-              <div className="p-3 bg-zinc-50 rounded-lg">Pārnesamības tiesības</div>
-              <div className="p-3 bg-zinc-50 rounded-lg">Iebildumu tiesības</div>
-              <div className="p-3 bg-zinc-50 rounded-lg">Atsaukt piekrišanu</div>
-            </div>
-            <p className="mt-6 text-sm">Lai izmantotu Savas tiesības, lūdzu, sazinieties ar mums, izmantojot kontaktinformāciju, kas norādīta šīs politikas sākumā.</p>
+            <ul className="list-disc pl-6 space-y-2 mb-6">
+              <li><strong>Piekļuves tiesības</strong> – pieprasīt piekļuvi Saviem personas datiem</li>
+              <li><strong>Labošanas tiesības</strong> – labot neprecīzus vai nepilnīgus datus</li>
+              <li><strong>Dzēšanas tiesības</strong> – pieprasīt Savu datu dzēšanu (&quot;tiesības tikt aizmirstam&quot;)</li>
+              <li><strong>Ierobežošanas tiesības</strong> – ierobežot Savu datu apstrādi</li>
+              <li><strong>Pārnesamības tiesības</strong> – saņemt Savus datus strukturētā formātā</li>
+              <li><strong>Iebildumu tiesības</strong> – iebilst pret Savu datu apstrādi</li>
+              <li><strong>Atsaukt piekrišanu</strong> – jebkurā laikā atsaukt Savu piekrišanu datu apstrādei</li>
+            </ul>
+            <p className="text-sm">Lai izmantotu Savas tiesības, lūdzu, sazinieties ar mums, izmantojot kontaktinformāciju, kas norādīta šīs politikas sākumā.</p>
           </div>
 
           <div>
             <h2 className="font-black text-zinc-900 uppercase mb-4 text-xl">8. Sīkdatnes (Cookies)</h2>
-            <p>Mūsu mājas lapa izmanto sīkdatnes, lai uzlabotu Jūsu lietošanas pieredzi un analizētu mājas lapas apmeklējumu. Detalizētāku informāciju skatiet mūsu <Link to="/sikdatnu-politika" className="text-latvia-red hover:underline font-bold">Sīkdatņu politikā</Link>.</p>
+            <p className="mb-4">Mūsu mājas lapa izmanto sīkdatnes, lai uzlabotu Jūsu lietošanas pieredzi un analizētu mājas lapas apmeklējumu. Sīkdatnes ir mazi teksta faili, kas tiek saglabāti Jūsu ierīcē.</p>
+            <p>Mēs izmantojam nepieciešamās sīkdatnes (nodrošina pamata funkcionalitāti) un analītikas sīkdatnes (palīdz saprast, kā apmeklētāji izmanto lapu). Jūs varat pārvaldīt sīkdatnes Savā pārlūkprogrammā.</p>
+          </div>
+
+          <div>
+            <h2 className="font-black text-zinc-900 uppercase mb-4 text-xl">9. Trešo pušu pakalpojumi</h2>
+            <p>Mēs varam izmantot uzticamus trešo pušu pakalpojumu sniedzējus, piemēram, mājas lapas mitināšanas pakalpojumus, e-pasta sūtīšanas pakalpojumus un analītikas rīkus (Google Analytics). Šie sniedzēji piekļūst datiem tikai tiktāl, cik tas nepieciešams to uzdevumu veikšanai.</p>
+          </div>
+
+          <div>
+            <h2 className="font-black text-zinc-900 uppercase mb-4 text-xl">10. Izmaiņas privātuma politikā</h2>
+            <p>Mēs paturam tiesības jebkurā laikā atjaunināt šo privātuma politiku. Izmaiņas stāsies spēkā, tiklīdz atjauninātā politika tiks publicēta mūsu mājas lapā.</p>
           </div>
 
           <div>
             <h2 className="font-black text-zinc-900 uppercase mb-4 text-xl">11. Sūdzības</h2>
             <p className="mb-4">Ja Jums ir sūdzības, lūdzu, vispirms sazinieties ar mums. Jums ir arī tiesības iesniegt sūdzību Datu valsts inspekcijā:</p>
-            <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100 text-xs">
+            <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100 text-xs md:text-sm">
               <p className="font-bold mb-1">Datu valsts inspekcija</p>
               <p className="mb-1">Adrese: Blaumaņa iela 11/13-15, Rīga, LV-1011</p>
               <p className="mb-1">E-pasts: info@dvi.gov.lv</p>
               <p className="mb-1">Tālrunis: +371 67 22 31 31</p>
-              <p>Mājas lapa: www.dvi.gov.lv</p>
+              <p>Mājas lapa: <a href="https://www.dvi.gov.lv" target="_blank" rel="noopener noreferrer" className="text-latvia-red hover:underline">www.dvi.gov.lv</a></p>
             </div>
           </div>
         </div>
