@@ -753,6 +753,9 @@ const Logo = ({ className = "h-[53px]", isDark = false }: { className?: string, 
           alt="Latvijas Restarts" 
           className="h-full w-auto object-contain"
           referrerPolicy="no-referrer"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
       </div>
       <div className="flex flex-col justify-center space-y-0.5">
@@ -929,9 +932,19 @@ interface SEOProps {
   ogType?: string;
   ogImage?: string;
   noIndex?: boolean;
+  articleData?: {
+    headline: string;
+    image?: string;
+    datePublished?: string;
+    authorName?: string;
+  };
+  serviceData?: {
+    name: string;
+    description: string;
+  };
 }
 
-const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = false }: SEOProps) => {
+const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = false, articleData, serviceData }: SEOProps) => {
   const location = useLocation();
 
   useEffect(() => {
@@ -962,7 +975,8 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
     // 3. Update Open Graph
     setMetaTag({ property: 'og:title' }, formattedTitle);
     setMetaTag({ property: 'og:description' }, description);
-    setMetaTag({ property: 'og:url' }, window.location.origin + location.pathname);
+    const pageUrl = window.location.origin + location.pathname;
+    setMetaTag({ property: 'og:url' }, pageUrl);
     setMetaTag({ property: 'og:type' }, ogType);
     setMetaTag({ property: 'og:site_name' }, 'Biedrība Latvijas restarts');
 
@@ -982,15 +996,49 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
       setMetaTag({ name: 'robots' }, 'index, follow');
     }
 
-    // 6. JSON-LD Schema Markup for Organization
-    let schemaScript = document.getElementById('jsonld-org');
-    if (!schemaScript) {
-      schemaScript = document.createElement('script');
-      schemaScript.id = 'jsonld-org';
-      schemaScript.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(schemaScript);
+    // 6. Update Canonical Link
+    let canonicalLink = document.head.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
     }
-    const schemaMarkup = {
+    canonicalLink.setAttribute('href', pageUrl);
+
+    // 7. Dynamic JSON-LD Schemas
+    const updateSchema = (id: string, markup: Record<string, any>) => {
+      let schemaScript = document.getElementById(id);
+      if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = id;
+        schemaScript.setAttribute('type', 'application/ld+json');
+        document.head.appendChild(schemaScript);
+      }
+      schemaScript.textContent = JSON.stringify(markup);
+    };
+
+    const removeSchema = (id: string) => {
+      const schemaScript = document.getElementById(id);
+      if (schemaScript) {
+        schemaScript.remove();
+      }
+    };
+
+    // A. WebSite Schema
+    updateSchema('jsonld-website', {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Biedrība Latvijas restarts",
+      "url": window.location.origin,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${window.location.origin}/aktualitates?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    });
+
+    // B. Organization Schema
+    const orgMarkup = {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Biedrība Latvijas restarts",
@@ -1010,8 +1058,126 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
         "contactType": "Klientu atbalsts"
       }
     };
-    schemaScript.textContent = JSON.stringify(schemaMarkup);
-  }, [title, description, ogType, ogImage, noIndex, location.pathname]);
+    updateSchema('jsonld-org', orgMarkup);
+
+    // C. WebPage Schema (for all pages)
+    updateSchema('jsonld-webpage', {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      "url": pageUrl,
+      "name": formattedTitle,
+      "description": description,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": `${window.location.origin}/#website`
+      }
+    });
+
+    // D. BreadcrumbList Schema (if not home page)
+    if (location.pathname !== '/') {
+      const pathParts = location.pathname.split('/').filter(Boolean);
+      const itemListElement = [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Sākums",
+          "item": window.location.origin
+        }
+      ];
+
+      let accumulatedPath = '';
+      pathParts.forEach((part, index) => {
+        accumulatedPath += `/${part}`;
+        let readableName = part;
+        if (part === 'par-biedribu') readableName = 'Par biedrību';
+        else if (part === 'statuti') readableName = 'Biedrības Statūti';
+        else if (part === 'iesniegums') readableName = 'Iesniegums dalībai';
+        else if (part === 'programma') readableName = 'Programma';
+        else if (part === 'aktualitates') readableName = 'Aktualitātes';
+        else if (part === 'kontakti') readableName = 'Kontakti';
+        else if (part === 'privatuma-politika') readableName = 'Privātuma politika';
+        else if (part === 'sikdatnu-politika') readableName = 'Sīkdatņu politika';
+        else if (part === 'biedri') readableName = 'Biedri';
+        else {
+          readableName = title.split('|')[0].trim();
+        }
+
+        itemListElement.push({
+          "@type": "ListItem",
+          "position": index + 2,
+          "name": readableName,
+          "item": window.location.origin + accumulatedPath
+        });
+      });
+
+      updateSchema('jsonld-breadcrumbs', {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": itemListElement
+      });
+    } else {
+      removeSchema('jsonld-breadcrumbs');
+    }
+
+    // E. Blog/Article Schema (News details)
+    if (articleData) {
+      updateSchema('jsonld-article', {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": articleData.headline,
+        "image": articleData.image || defaultImage,
+        "datePublished": articleData.datePublished || "2026-05-27",
+        "author": {
+          "@type": "Organization",
+          "name": articleData.authorName || "Biedrība Latvijas restarts"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Biedrība Latvijas restarts",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp"
+          }
+        },
+        "description": description,
+        "url": pageUrl
+      });
+    } else {
+      removeSchema('jsonld-article');
+    }
+
+    // F. Service Schema (Program detail)
+    if (serviceData) {
+      updateSchema('jsonld-service', {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Rīcības programma",
+        "name": serviceData.name,
+        "provider": {
+          "@type": "Organization",
+          "name": "Biedrība Latvijas restarts",
+          "url": window.location.origin
+        },
+        "description": serviceData.description
+      });
+    } else {
+      removeSchema('jsonld-service');
+    }
+
+    // Cleanup on unmount or route change
+    return () => {
+      if (location.pathname === '/') {
+        removeSchema('jsonld-breadcrumbs');
+      }
+      if (!articleData) {
+        removeSchema('jsonld-article');
+      }
+      if (!serviceData) {
+        removeSchema('jsonld-service');
+      }
+    };
+  }, [title, description, ogType, ogImage, noIndex, location.pathname, articleData, serviceData]);
 };
 
 // --- Page Components ---
@@ -1042,6 +1208,7 @@ const Hero = () => {
           className="w-full h-full object-cover object-[30%_center] md:object-center opacity-100"
           loading="eager"
           fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-white/10 z-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-transparent z-10" />
@@ -1126,7 +1293,7 @@ const BoardSummary = () => (
             <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-transparent rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
               <div className="absolute inset-0 flex items-center justify-center text-zinc-200">
                 {member.image ? (
-                  <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
+                  <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} loading="lazy" />
                 ) : (
                   <Users className="w-10 h-10 md:w-12 md:h-12" />
                 )}
@@ -1190,7 +1357,7 @@ const NewsSummary = () => (
         {NEWS.map((item) => (
           <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all max-w-sm mx-auto w-full">
             <div className="h-40 overflow-hidden relative">
-              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} />
+              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} loading="lazy" />
             </div>
             <div className="p-6 flex flex-col flex-grow">
               <span className="text-[10px] font-black text-latvia-red uppercase tracking-wider mb-2">{item.date}</span>
@@ -1256,7 +1423,7 @@ const AboutPage = () => {
               <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-transparent rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-200">
                   {member.image ? (
-                    <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
+                    <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} loading="lazy" />
                   ) : (
                     <Users className="w-10 h-10 md:w-12 md:h-12" />
                   )}
@@ -1768,7 +1935,11 @@ const ProgramDetailPage = () => {
 
   useSEO({
     title: item ? `${item.title}` : "Programma",
-    description: item ? `${item.description.substring(0, 150)}` : "Biedrības Latvijas Restarts rīcības programma un darba joma."
+    description: item ? `${item.description.substring(0, 150)}` : "Biedrības Latvijas Restarts rīcības programma un darba joma.",
+    serviceData: item ? {
+      name: item.title,
+      description: item.description
+    } : undefined
   });
 
   if (!item) {
@@ -2197,7 +2368,7 @@ const MemberProfilePage = () => {
           <div className="w-14 h-14 md:w-16 md:h-16 bg-transparent rounded-xl overflow-hidden border-2 border-latvia-red/10 shrink-0 shadow-sm">
             <div className="w-full h-full flex items-center justify-center text-zinc-200">
               {member.image ? (
-                <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
+                <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} loading="lazy" />
               ) : (
                 <Users className="w-6 h-6 md:w-8 md:h-8" />
               )}
@@ -2321,7 +2492,7 @@ const MemberTopicDetailPage = () => {
              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-latvia-red/20 shrink-0">
                <div className="w-full h-full bg-transparent flex items-center justify-center text-zinc-400">
                  {member.image ? (
-                   <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} />
+                   <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} loading="lazy" />
                  ) : (
                    <Users className="w-8 h-8" />
                  )}
@@ -2356,7 +2527,7 @@ const NewsPage = () => {
         {NEWS.map((item) => (
           <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all max-w-sm mx-auto w-full">
             <div className="h-40 overflow-hidden relative">
-              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} />
+              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} loading="lazy" />
             </div>
             <div className="p-6 flex flex-col flex-grow">
               <span className="text-[10px] font-black text-latvia-red uppercase tracking-wider mb-2">{item.date}</span>
@@ -2440,7 +2611,15 @@ const NewsDetailPage = ({ openRegistration }: { openRegistration: (id: string) =
 
   useSEO({
     title: newsItem ? `${newsItem.title}` : "Jaunumi",
-    description: newsItem ? `${newsItem.excerpt}` : "Biedrības Latvijas Restarts aktualitāšu raksts."
+    description: newsItem ? `${newsItem.excerpt}` : "Biedrības Latvijas Restarts aktualitāšu raksts.",
+    ogType: 'article',
+    ogImage: newsItem?.image,
+    articleData: newsItem ? {
+      headline: newsItem.title,
+      image: newsItem.image,
+      datePublished: newsItem.date,
+      authorName: "Biedrība Latvijas restarts"
+    } : undefined
   });
   
   if (!newsItem) {
@@ -2681,12 +2860,12 @@ const CookieBanner = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-[9999] flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 bg-black/35 backdrop-blur-xs z-[9999] flex items-end justify-center p-4 sm:p-6 md:pb-10"
         >
           <motion.div 
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
             transition={{ 
               type: "spring", 
               damping: 25, 
