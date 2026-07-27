@@ -1210,7 +1210,7 @@ const Hero = () => {
     <section className="relative min-h-[85vh] flex items-center pt-20 overflow-hidden bg-[#f8faf7]">
       <div className="absolute inset-0 z-0 text-white">
         <img 
-          src="https://pub-b4e9dacb063d49eeb0e49317ea5b4e43.r2.dev/Fons.png" 
+          src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Fons2.webp" 
           alt="Latvijas Restarts" 
           className="w-full h-full object-cover object-[30%_center] md:object-center opacity-100"
           loading="eager"
@@ -1259,9 +1259,9 @@ const AboutSummary = () => (
         <div className="flex justify-center md:justify-start">
           <div className="w-full max-w-[500px] rounded-[3rem] overflow-hidden relative group border-2 border-latvia-red/10 aspect-[16/10] bg-zinc-100 shadow-2xl">
             <img 
-              src="https://pub-b4e9dacb063d49eeb0e49317ea5b4e43.r2.dev/Par%20biedr%C4%ABbu.png" 
+              src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Par%20biedr%C4%ABbu2.webp" 
               alt="Biedrība - Par mums" 
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]" 
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-latvia-red/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -1405,9 +1405,9 @@ const AboutPage = () => {
         <div className="order-1 lg:order-2">
           <div className="relative aspect-video lg:aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-zinc-100 bg-zinc-200 mb-6">
             <img 
-              src="https://pub-b4e9dacb063d49eeb0e49317ea5b4e43.r2.dev/Par%20biedr%C4%ABbu.png" 
+              src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Par%20biedr%C4%ABbu2.webp" 
               alt="Biedrība - Par mums" 
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-[3000ms]"
+              className="w-full h-full object-cover hover:scale-[1.025] transition-transform duration-[3000ms]"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
