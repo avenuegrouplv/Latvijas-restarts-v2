@@ -445,6 +445,7 @@ const RegistrationModal = ({
               <button 
                 onClick={onClose}
                 className="absolute top-8 right-8 p-2 hover:bg-zinc-100 rounded-full transition-colors"
+                aria-label="Aizvērt"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -608,6 +609,7 @@ const CookiesModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 onClick={onClose}
                 className="absolute top-8 right-8 p-2 hover:bg-zinc-100 rounded-full transition-colors"
                 id="cookies-modal-close"
+                aria-label="Aizvērt"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -802,8 +804,13 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
+        <button 
+          className="md:hidden p-2 rounded-lg text-zinc-700 hover:text-zinc-900 focus:outline-none" 
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Aizvērt izvēlni" : "Atvērt izvēlni"}
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
