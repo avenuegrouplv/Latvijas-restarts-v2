@@ -2077,8 +2077,8 @@ const BOARD_MEMBERS: Member[] = [
   { 
     id: "guntars-vitols",
     name: "Guntars Vītols", 
-    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/photo_6048728419102559838_y.jpg",
-    imageClass: "scale-[1.3] origin-[80%_0%] translate-x-[6%] translate-y-[-3.6%]",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/guntars%20vitols.webp",
+    imageClass: "scale-[1.3] origin-top object-[center_0%] -translate-x-[4%]",
     role: "Valdes loceklis",
     facebook: "https://www.facebook.com/guntars.vitols.1",
     twitter: "https://x.com/guntarsv?s=11&t=Y_-qbzD0uVknm-rkHOPh8A",
@@ -2107,8 +2107,8 @@ const BOARD_MEMBERS: Member[] = [
   {
     id: "aivis-cerins",
     name: "Aivis Ceriņš",
-    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Aivis%20Ceri%C5%86%C5%A1.webp",
-    imageClass: "scale-[1.45] origin-[50%_0%] translate-y-[-8%]",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/aivis%20cerins.webp",
+    imageClass: "scale-[1.46] origin-top object-[center_20%]",
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/aivis.cerins",
     focus: [
@@ -2272,8 +2272,8 @@ Funkcijas:
   {
     id: "renars-putnins",
     name: "Renārs Putniņš",
-    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Ren%C4%81rs%20Putni%C5%86%C5%A1.webp",
-    imageClass: "scale-[2.31] origin-[50%_18%] translate-y-[3%] translate-x-[-3%]",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/renars%20putnins.webp",
+    imageClass: "scale-[1.1] origin-top object-[center_0%] -translate-y-[2.5%]",
     role: "Biedrības biedrs",
     facebook: "https://www.facebook.com/renars.putnins",
     focus: [
@@ -2305,10 +2305,35 @@ Funkcijas:
     ]
   },
   {
+    id: "martins-brencis",
+    name: "Mārtiņš Brencis",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/martins%20brencis.webp",
+    imageClass: "scale-[1.4] origin-top object-[center_20%]",
+    role: "Biedrības biedrs",
+    focus: [
+      {
+        id: "f1",
+        title: "VALSTS PĀRVALDE",
+        content: `Visu savu profesionālo mūžu esmu strādājis valsts pārvaldē. Šie 25 gadi man ir devuši ne tikai pieredzi un izpratni par valsts pārvaldes darbu, bet arī pārliecību, ka mūsu valsts var būt daudz efektīvāka, godīgāka un cilvēkiem tuvāka.
+
+Kopš Ministru prezidenta amatā stājās Andris Kulbergs, esmu strādājis ar viņu plecu pie pleca. Kopīgi veidojām valdības deklarāciju. Un šis darbs ir tikai nostiprinājis manu pārliecību, ka valsts pārvaldē ir iespējama cita pieeja – prasīgāka, atklātāka, mērķtiecīgāka un balstīta reālos darbos, nevis tukšos solījumos.`
+      },
+      {
+        id: "f2",
+        title: "IZGLĪTĪBA",
+        content: `Esmu lielu daļu savas dzīves pavadījis Latvijas Universitātē. Gan studējot LU "juristos", gan darbojoties fakultātes pašpārvaldē, gan darbojoties LU Studentu padomē. Esmu bijis arī Latvijas Studenu apvienības valdes loceklis kas man iemācīja demokrātijas skolu - sadarboties, diskutēt, risināt. Esmu piedalījies septiņos Fizmatu laivu braucienos, iepazinis lieliskus un interesantus domu biedrus.
+
+Uzskatu, ka izcila augstākā izglītība ir iespējama Latvijā tad, ja centrā ir students. Tāpēc jautājumi par studiju kvalitāti, drošu studiju vidi, pieejamiem pakalpojumiem un mākslīgā intelekta saprātīga izmantošana ir jārisina jau šodien, nevis kaut kad nākotnē.
+
+2015.gadā ar domu biedriem izveidojām LU Absolventu klubu, kura mērķis ir apvienot absolventus un celt LU diploma vērtību. Šī gada jūlijā turpināšu darbu ar LU padomē, kur man būs viena galvenā prioritāte - studiju kvalitāte.`
+      }
+    ]
+  },
+  {
     id: "janis-jenzis",
     name: "Jānis Jenzis",
     image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/janis%20jenzis2.png",
-    imageClass: "scale-[1.32] translate-y-[12%]",
+    imageClass: "scale-[1.38] translate-y-[14.5%] -translate-x-[2%]",
     role: "Biedrības biedrs",
     focus: [
       {
