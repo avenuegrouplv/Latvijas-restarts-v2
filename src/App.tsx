@@ -949,7 +949,7 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
 
   useEffect(() => {
     // 1. Update Title
-    const formattedTitle = title.endsWith('Latvijas Restarts') ? title : `${title} | Latvijas Restarts`;
+    const formattedTitle = title.includes('Latvijas Restarts') ? title : `${title} | Latvijas Restarts`;
     document.title = formattedTitle;
 
     // Helper to select/create meta tags
@@ -1184,7 +1184,7 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
 
 const HomePage = () => {
   useSEO({
-    title: "Sākums",
+    title: "Latvijas Restarts | Par Latvijas nākotni",
     description: "Biedrība Latvijas Restarts apvieno dažādu jomu profesionāļus un ekspertus sekmīgai krīžu pārvarēšanai un dinamiskai Latvijas attīstībai."
   });
   return (
