@@ -1,4 +1,4 @@
-# Latvijas Restarts
+# Latvijas Restarts - Pilns Apraksts
 
 > Biedrība "Latvijas Restarts" ir neatkarīga sabiedriska organizācija, kas apvieno dažādu nozaru vadošos ekspertus un profesionāļus sekmīgai krīžu pārvarēšanai un modernai, tiesiskai un ekonomiski spēcīgai Latvijai.
 
@@ -14,7 +14,6 @@
 - [Privātuma politika](https://latvijasrestarts.lv/privatuma-politika): Personas datu aizsardzības noteikumi
 - [Sīkdatņu politika](https://latvijasrestarts.lv/sikdatnu-politika): Sīkdatņu izmantošanas noteikumi
 
-## Kontaktainformācija
+## Vadība un Eksperti
 
-- [Oficiālā mājaslapa](https://latvijasrestarts.lv/): Latvijas Restarts tīmekļa vietne
-- [Rakstīt e-pastu](mailto:info@latvijasrestarts.lv): Saziņa pa e-pastu info@latvijasrestarts.lv
+Biedrības valdes priekšsēdētājs ir Andris Kulbergs, un valdē darbojas nozaru eksperti un profesionāļi (Valters Bolevics, Juris Gulbis, Andris Bitāns, Gunārs Nāgels u.c.).
