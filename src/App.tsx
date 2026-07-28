@@ -751,7 +751,7 @@ const Logo = ({ className = "h-[53px]", isDark = false }: { className?: string, 
     <div className={`flex items-center gap-3 group ${className}`}>
       <div className="relative h-[85%] aspect-square flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
         <img 
-          src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp" 
+          src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta2.webp" 
           alt="Latvijas Restarts" 
           className="h-full w-auto object-contain"
           referrerPolicy="no-referrer"
@@ -1050,7 +1050,7 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
       "@type": "Organization",
       "name": "Biedrība Latvijas restarts",
       "url": window.location.origin,
-      "logo": "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp",
+      "logo": "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta2.webp",
       "description": "Neatkarīga organizācija modernai, tiesiskai un ekonomiski spēcīgai Latvijai.",
       "address": {
         "@type": "PostalAddress",
@@ -1144,7 +1144,7 @@ const useSEO = ({ title, description, ogType = 'website', ogImage, noIndex = fal
           "name": "Biedrība Latvijas restarts",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta.webp"
+            "url": "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta2.webp"
           }
         },
         "description": description,
