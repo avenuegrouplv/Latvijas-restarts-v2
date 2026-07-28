@@ -201,7 +201,7 @@ const NewsSummary = () => (
 
 export default function HomePage() {
   useSEO({
-    title: "Latvijas Restarts | Biedrība modernai un spēcīgai Latvijai",
+    title: "Latvijas Restarts | Par Latvijas nākotni un cilvēku labklājību",
     description: "Biedrība Latvijas Restarts apvieno profesionāļus un ekspertus Latvijas izaugsmei, ekonomikas reformām un valsts pārvaldes uzlabošanai."
   });
 
