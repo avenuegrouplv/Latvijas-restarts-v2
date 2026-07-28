@@ -2339,7 +2339,7 @@ Uzskatu, ka izcila augstākā izglītība ir iespējama Latvijā tad, ja centrā
   {
     id: "janis-jenzis",
     name: "Jānis Jenzis",
-    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/janis%20jenzis2.png",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/janis%20jenzis3.webp",
     imageClass: "scale-[1.38] translate-y-[14.5%] -translate-x-[2%]",
     role: "Biedrības biedrs",
     focus: [
