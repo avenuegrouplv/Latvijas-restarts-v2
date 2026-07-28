@@ -166,7 +166,7 @@ const NewsSummary = () => (
         {NEWS.map((item) => (
           <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all max-w-sm mx-auto w-full">
             <div className="h-40 overflow-hidden relative">
-              <img src={item.image} alt={item.title} className={`w-full h-full ${item.imageClass || ''}`} loading="lazy" />
+              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} loading="lazy" />
             </div>
             <div className="p-6 flex flex-col flex-grow">
               <span className="text-[10px] font-black text-latvia-red uppercase tracking-wider mb-2">{item.date}</span>
