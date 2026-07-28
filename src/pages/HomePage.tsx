@@ -14,6 +14,8 @@ const Hero = () => {
         <img 
           src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Fons3.webp" 
           alt="Latvijas Restarts" 
+          width={1920}
+          height={1080}
           className="w-full h-full object-cover object-[30%_center] md:object-center opacity-100"
           loading="eager"
           fetchPriority="high"
@@ -63,6 +65,8 @@ const AboutSummary = () => (
             <img 
               src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Par%20biedr%C4%ABbu2.webp" 
               alt="Biedrība - Par mums" 
+              width={1600}
+              height={1000}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]" 
               loading="lazy"
             />
@@ -102,7 +106,14 @@ const BoardSummary = () => (
             <Link to={`/biedri/${member.id}`} className="block w-24 h-24 md:w-32 md:h-32 bg-transparent rounded-full mb-4 overflow-hidden relative border-2 border-latvia-red/10 group-hover:border-latvia-red transition-all">
               <div className="absolute inset-0 flex items-center justify-center text-zinc-200">
                 {member.image ? (
-                  <img src={member.image} alt={member.name} className={`w-full h-full object-cover ${member.imageClass || ''}`} loading="lazy" />
+                  <img
+                    src={member.image} 
+                    alt={member.name}
+                    width={256}
+                    height={256}
+                    className={`w-full h-full object-cover ${member.imageClass || ''}`} 
+                    loading="lazy" 
+                  />
                 ) : (
                   <Users className="w-10 h-10 md:w-12 md:h-12" />
                 )}
@@ -166,7 +177,14 @@ const NewsSummary = () => (
         {NEWS.map((item) => (
           <article key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col group hover:shadow-xl transition-all max-w-sm mx-auto w-full">
             <div className="h-40 overflow-hidden relative">
-              <img src={item.image} alt={item.title} className={`w-full h-full object-cover ${item.imageClass || ''}`} loading="lazy" />
+              <img
+                src={item.image} 
+                alt={item.title}
+                width={800}
+                height={500}
+                className={`w-full h-full object-cover ${item.imageClass || ''}`} 
+                loading="lazy" 
+              />
             </div>
             <div className="p-6 flex flex-col flex-grow">
               <span className="text-[10px] font-black text-latvia-red uppercase tracking-wider mb-2">{item.date}</span>
