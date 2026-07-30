@@ -290,8 +290,8 @@ export const BOARD_MEMBERS: Member[] = [
   { 
     id: "andris-kulbergs",
     name: "Andris Kulbergs", 
-    image: "https://pub-b4e9dacb063d49eeb0e49317ea5b4e43.r2.dev/Andris%20Kulbergs.jpg",
-    imageClass: "scale-[1.2] origin-[50%_0%] translate-y-[-9.6%]",
+    image: "/andris-kulbergs.webp",
+    imageClass: "scale-[1.015] origin-top object-[center_14.4%]",
     role: "Valdes priekšsēdētājs",
     facebook: "https://www.facebook.com/andris.kulbergs",
     twitter: "https://x.com/andriskulbergs?s=11&t=Y_-qbzD0uVknm-rkHOPh8A",
