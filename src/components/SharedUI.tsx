@@ -3,7 +3,8 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import { 
   Menu, X, Facebook, Instagram, CheckCircle2, 
-  ExternalLink, ShieldCheck, Loader2, ArrowUp, Home 
+  ExternalLink, ShieldCheck, Loader2, ArrowUp, Home,
+  Sliders, Check, Lock
 } from 'lucide-react';
 import { NAV_ITEMS, NEWS } from '../data';
 import { RegistrationFormData } from '../types';
@@ -218,6 +219,18 @@ export const Footer = () => {
                 className="hover:text-white transition-colors cursor-pointer"
               >
                 Sīkdatņu politika
+              </button>
+              <button 
+                onClick={() => {
+                  try {
+                    localStorage.removeItem('cookie-consent-v2');
+                    localStorage.removeItem('cookie-consent');
+                  } catch (e) {}
+                  window.dispatchEvent(new Event('open-cookie-banner'));
+                }} 
+                className="hover:text-white transition-colors cursor-pointer text-latvia-red font-bold"
+              >
+                Sīkdatņu iestatījumi
               </button>
             </div>
           </div>
@@ -653,86 +666,285 @@ export const SectionBottomNav = () => {
 
 export const CookieBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showCustomizeModal, setShowCustomizeModal] = useState(false);
+
+  // Cookie preference states
+  const [analytics, setAnalytics] = useState(true);
+  const [functional, setFunctional] = useState(true);
+  const [marketing, setMarketing] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
-      setIsVisible(true);
+    let consent = null;
+    try {
+      consent = localStorage.getItem('cookie-consent-v2');
+      if (consent) {
+        const parsed = JSON.parse(consent);
+        if (parsed && typeof parsed === 'object') {
+          if (typeof parsed.analytics === 'boolean') setAnalytics(parsed.analytics);
+          if (typeof parsed.functional === 'boolean') setFunctional(parsed.functional);
+          if (typeof parsed.marketing === 'boolean') setMarketing(parsed.marketing);
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage error:', e);
     }
+
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    
+    if (!consent) {
+      timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 3000);
+    }
+
+    const handleOpen = () => {
+      setIsVisible(true);
+      setShowCustomizeModal(true);
+    };
+
+    window.addEventListener('open-cookie-banner', handleOpen);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      window.removeEventListener('open-cookie-banner', handleOpen);
+    };
   }, []);
 
-  const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
+  const savePreferences = (prefs: { necessary: boolean; analytics: boolean; functional: boolean; marketing: boolean }) => {
+    try {
+      localStorage.setItem('cookie-consent-v2', JSON.stringify({
+        ...prefs,
+        timestamp: new Date().toISOString()
+      }));
+    } catch (e) {}
     setIsVisible(false);
+    setShowCustomizeModal(false);
   };
 
-  const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'declined');
-    setIsVisible(false);
+  const handleAcceptAll = () => {
+    setAnalytics(true);
+    setFunctional(true);
+    setMarketing(true);
+    savePreferences({ necessary: true, analytics: true, functional: true, marketing: true });
+  };
+
+  const handleDeclineAll = () => {
+    setAnalytics(false);
+    setFunctional(false);
+    setMarketing(false);
+    savePreferences({ necessary: true, analytics: false, functional: false, marketing: false });
+  };
+
+  const handleSaveCustom = () => {
+    savePreferences({ necessary: true, analytics, functional, marketing });
   };
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/35 backdrop-blur-xs z-[9999] flex items-end justify-center p-4 sm:p-6 md:pb-10"
-        >
+    <>
+      <AnimatePresence>
+        {isVisible && !showCustomizeModal && (
           <motion.div 
-            initial={{ y: 100, opacity: 0 }}
+            initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
+            exit={{ y: "100%", opacity: 0 }}
             transition={{ 
               type: "spring", 
-              damping: 25, 
-              stiffness: 150
+              damping: 28, 
+              stiffness: 200 
             }}
-            className="bg-white rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-zinc-100 relative max-w-2xl w-full overflow-hidden"
+            className="fixed bottom-0 left-0 right-0 w-full z-[9999] bg-white border-t border-zinc-200/90 shadow-[0_-10px_35px_rgba(0,0,0,0.12)]"
           >
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-latvia-red" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-latvia-red" />
             
-            <button 
-              onClick={handleDecline}
-              className="absolute top-5 right-5 text-zinc-400 hover:text-latvia-red transition-all p-1.5 hover:bg-latvia-red/5 rounded-full group cursor-pointer"
-              aria-label="Aizvērt"
-            >
-              <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
-            </button>
-            
-            <div className="pr-4 sm:pr-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-latvia-red/10 rounded-xl flex items-center justify-center text-latvia-red shrink-0">
-                  <ShieldCheck className="w-6 h-6" />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-8 relative">
+              <div className="flex items-start gap-3.5 flex-1 pr-6 md:pr-0">
+                <div className="w-9 h-9 bg-latvia-red/10 rounded-xl flex items-center justify-center text-latvia-red shrink-0 mt-0.5">
+                  <ShieldCheck className="w-5 h-5" />
                 </div>
-                <h3 className="font-display font-black uppercase text-sm sm:text-base md:text-lg tracking-tight text-zinc-900">
-                  Šī vietne izmanto sīkdatnes
-                </h3>
+                <div>
+                  <h3 className="font-display font-black uppercase text-xs sm:text-sm tracking-tight text-zinc-900 mb-1">
+                    Šī vietne izmanto sīkdatnes
+                  </h3>
+                  <p className="text-zinc-600 text-[11px] sm:text-xs md:text-sm leading-relaxed font-medium">
+                    Mēs izmantojam sīkdatnes, lai uzlabotu Jūsu lietošanas pieredzi, nodrošinātu vietnes darbību un analizētu apmeklētāju plūsmu. Jūs varat piekrist visām sīkdatnēm vai pielāgot savas izvēles. Vairāk informācijas mūsu <Link to="/privatuma-politika" className="text-latvia-red underline font-bold hover:text-zinc-900 transition-colors">Privātuma politikā</Link> un <Link to="/sikdatnu-politika" className="text-latvia-red underline font-bold hover:text-zinc-900 transition-colors">Sīkdatņu politikā</Link>.
+                  </p>
+                </div>
               </div>
 
-              <p className="text-zinc-600 text-[11px] sm:text-sm leading-relaxed mb-6 font-medium">
-                Mēs izmantojam savas un trešo pušu sīkdatnes, lai nodrošinātu un uzlabotu tīmekļa vietnes darbību, pielāgotu informāciju par mūsu produktiem un pakalpojumiem, kā arī analizētu vietnes apmeklējumu. Spiežot «Apstiprināt visas», jūs piekrītat visu sīkdatņu izmantošanai. Sīkdatņu loga aizvēršana ar «X» neaktivizē sīkdatnes. Lapas apakšējā stūrī lasiet vairāk par <Link to="/sikdatnu-politika" className="text-latvia-red underline font-bold hover:underline">Sīkdatņu politiku</Link> un <Link to="/privatuma-politika" className="text-latvia-red underline font-bold hover:underline">Privātuma politiku</Link>.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex items-center gap-2 sm:gap-2.5 w-full md:w-auto shrink-0 justify-end flex-wrap sm:flex-nowrap">
                 <button 
-                  onClick={handleAccept}
-                  className="py-3 px-6 bg-latvia-red text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-900 transition-all shadow-md hover:shadow-latvia-red/10 active:scale-[0.98] font-display flex-1 text-center cursor-pointer"
+                  onClick={handleAcceptAll}
+                  className="py-2.5 px-4 sm:px-5 bg-latvia-red text-white text-xs font-black uppercase tracking-wider rounded-xl hover:bg-zinc-900 transition-all shadow-sm active:scale-[0.98] font-display flex-1 md:flex-none text-center cursor-pointer whitespace-nowrap"
                 >
-                  Apstiprināt visas
+                  Piekrītu visām
                 </button>
                 <button 
-                  onClick={handleDecline}
-                  className="py-3 px-6 bg-zinc-100 text-zinc-600 text-xs font-black uppercase tracking-widest rounded-xl hover:bg-zinc-200 transition-all active:scale-[0.98] font-display flex-1 text-center cursor-pointer"
+                  onClick={() => setShowCustomizeModal(true)}
+                  className="py-2.5 px-4 sm:px-5 bg-zinc-800 text-white hover:bg-zinc-900 text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] font-display flex-1 md:flex-none text-center cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap"
+                >
+                  <Sliders className="w-3.5 h-3.5 text-zinc-300" />
+                  Pielāgot
+                </button>
+                <button 
+                  onClick={handleDeclineAll}
+                  className="py-2.5 px-4 sm:px-5 bg-zinc-100 text-zinc-700 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] font-display flex-1 md:flex-none text-center cursor-pointer whitespace-nowrap"
                 >
                   Noraidīt
+                </button>
+                <button 
+                  onClick={handleDeclineAll}
+                  className="p-2 text-zinc-400 hover:text-latvia-red transition-colors rounded-lg hover:bg-zinc-100 shrink-0 cursor-pointer hidden sm:block"
+                  aria-label="Aizvērt"
+                >
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
           </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
+
+      {/* Customize Preferences Modal */}
+      <AnimatePresence>
+        {isVisible && showCustomizeModal && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/50 backdrop-blur-xs">
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-zinc-200 overflow-hidden relative my-auto max-h-[90vh] flex flex-col"
+            >
+              <div className="p-6 sm:p-8 bg-zinc-900 text-white flex items-center justify-between border-b border-zinc-800 relative">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-latvia-red" />
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-latvia-red/20 text-latvia-red rounded-xl flex items-center justify-center shrink-0">
+                    <Sliders className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-black uppercase text-base sm:text-lg tracking-tight">
+                      Sīkdatņu iestatījumu pielāgošana
+                    </h3>
+                    <p className="text-zinc-400 text-xs">
+                      Pārvaldiet savas sīkdatņu preferences katrai kategorijai
+                    </p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowCustomizeModal(false)}
+                  className="p-2 text-zinc-400 hover:text-white rounded-full hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 text-zinc-800 text-sm">
+                {/* 1. Necessary */}
+                <div className="bg-zinc-50 p-5 rounded-2xl border border-zinc-200/80 space-y-2">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-2">
+                      <Lock className="w-4 h-4 text-zinc-500" />
+                      <h4 className="font-bold text-zinc-900 text-sm sm:text-base">
+                        Nepieciešamās sīkdatnes (Obligātas)
+                      </h4>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-200 text-zinc-700 text-xs font-bold rounded-full">
+                      <Check className="w-3.5 h-3.5 text-zinc-600" />
+                      Vienmēr aktīvas
+                    </span>
+                  </div>
+                  <p className="text-zinc-600 text-xs leading-relaxed">
+                    Šīs sīkdatnes ir nepieciešamas vietnes pamata funkcijām, drošībai un nepārtrauktai darbībai (piemēram, sesijas uzturēšanai, navigācijai un kontaktformu apstrādei). Bez tām vietne nevar pareizi darboties.
+                  </p>
+                </div>
+
+                {/* 2. Analytics */}
+                <div className="bg-zinc-50 p-5 rounded-2xl border border-zinc-200/80 space-y-2">
+                  <div className="flex items-center justify-between gap-4">
+                    <h4 className="font-bold text-zinc-900 text-sm sm:text-base">
+                      Analītiskās & Statistiskās sīkdatnes
+                    </h4>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={analytics} 
+                        onChange={(e) => setAnalytics(e.target.checked)}
+                        className="sr-only peer" 
+                      />
+                      <div className="w-11 h-6 bg-zinc-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-latvia-red"></div>
+                    </label>
+                  </div>
+                  <p className="text-zinc-600 text-xs leading-relaxed">
+                    Izmanto trešo pušu analītikas rīkus (piemēram, Google Analytics), lai apkopotu anonīmu statistiku par apmeklētāju skaitu, populārākajām lapām un uzturēšanās ilgumu. Tas palīdz uzlabot vietnes struktūru un saturu.
+                  </p>
+                </div>
+
+                {/* 3. Functional */}
+                <div className="bg-zinc-50 p-5 rounded-2xl border border-zinc-200/80 space-y-2">
+                  <div className="flex items-center justify-between gap-4">
+                    <h4 className="font-bold text-zinc-900 text-sm sm:text-base">
+                      Funkcionālās sīkdatnes
+                    </h4>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={functional} 
+                        onChange={(e) => setFunctional(e.target.checked)}
+                        className="sr-only peer" 
+                      />
+                      <div className="w-11 h-6 bg-zinc-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-latvia-red"></div>
+                    </label>
+                  </div>
+                  <p className="text-zinc-600 text-xs leading-relaxed">
+                    Ļauj vietnei atcerēties Jūsu veiktās izvēles (piemēram, valodas iestatījumus, fontu izmēru un reģionu), nodrošinot ērtāku un personalizētāku lietošanu.
+                  </p>
+                </div>
+
+                {/* 4. Marketing */}
+                <div className="bg-zinc-50 p-5 rounded-2xl border border-zinc-200/80 space-y-2">
+                  <div className="flex items-center justify-between gap-4">
+                    <h4 className="font-bold text-zinc-900 text-sm sm:text-base">
+                      Mārketinga & Reklāmas sīkdatnes
+                    </h4>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={marketing} 
+                        onChange={(e) => setMarketing(e.target.checked)}
+                        className="sr-only peer" 
+                      />
+                      <div className="w-11 h-6 bg-zinc-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-latvia-red"></div>
+                    </label>
+                  </div>
+                  <p className="text-zinc-600 text-xs leading-relaxed">
+                    Izmanto, lai rādītu Jūsu interesēm atbilstošākus paziņojumus un piedāvājumus sociālajos tīklos vai sadarbības partneru vietnēs.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-5 sm:p-6 bg-zinc-100 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-end gap-3">
+                <button 
+                  onClick={handleDeclineAll}
+                  className="w-full sm:w-auto py-2.5 px-5 bg-white border border-zinc-300 text-zinc-700 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider rounded-xl transition-all font-display text-center cursor-pointer"
+                >
+                  Noraidīt
+                </button>
+                <button 
+                  onClick={handleSaveCustom}
+                  className="w-full sm:w-auto py-2.5 px-5 bg-zinc-900 text-white hover:bg-black text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-sm font-display text-center cursor-pointer"
+                >
+                  Saglabāt izvēli
+                </button>
+                <button 
+                  onClick={handleAcceptAll}
+                  className="w-full sm:w-auto py-2.5 px-5 bg-latvia-red text-white hover:bg-zinc-900 text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md font-display text-center cursor-pointer"
+                >
+                  Piekrītu visām
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };

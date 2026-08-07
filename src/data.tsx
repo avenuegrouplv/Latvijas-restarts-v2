@@ -243,7 +243,7 @@ export const NEWS: NewsItem[] = [
   {
     id: "pilsoniska-sabiedriba-un-valsts-finansejums",
     date: "07.08.2026",
-    title: "Pilsoniskā sabiedrība un valsts finansējums",
+    title: "Jānis Jenzis: Pilsoniskā sabiedrība un valsts finansējums",
     excerpt: "“Vienmēr esmu iestājies par stiprām NVO, sabiedrības līdzdalību lēmumu pieņemšanā, aktīvāku pilsonisko sabiedrību. Visai nodokļu maksātāju naudai jāaiziet atbalstam tām NVO, kas dara svētīgu darbu...”",
     image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/janis%20jenzis3.webp",
     imageClass: "object-cover object-top",
