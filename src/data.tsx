@@ -241,6 +241,23 @@ export const GOALS: GoalItem[] = [
 
 export const NEWS: NewsItem[] = [
   {
+    id: "pilsoniska-sabiedriba-un-valsts-finansejums",
+    date: "07.08.2026",
+    title: "Pilsoniskā sabiedrība un valsts finansējums",
+    excerpt: "“Vienmēr esmu iestājies par stiprām NVO, sabiedrības līdzdalību lēmumu pieņemšanā, aktīvāku pilsonisko sabiedrību. Visai nodokļu maksātāju naudai jāaiziet atbalstam tām NVO, kas dara svētīgu darbu...”",
+    image: "https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/janis%20jenzis3.webp",
+    imageClass: "object-cover object-top",
+    detailImageClass: "object-contain bg-zinc-50 w-full h-full",
+    content: [
+      "Vienmēr esmu iestājies par stiprām NVO, sabiedrības līdzdalību lēmumu pieņemšanā, aktīvāku pilsonisko sabiedrību. Esmu ieguldījis pats savu laiku bez atlīdzības darbojoties dažādās organizācijās, sarēķināju, ka dzīves laikā tie ir 2 pilni gadi. Uzskatu, ka sabiedrībai ir jādod, jākalpo, nevis jāprasa no tās. Kalpošana atmaksājas un labie darbi tiek uzskaitīti tur augšā un enerģijas veidā atgriežas ar uzviju.",
+      "Pēdējā laika diskusijas ietvaros esmu noraizējies, ka ap 50 marginālu cilvēku, kas pulcējas jebkurā protestā par jebkuru tēmu, izvelk Palestīnas karogus un ir dusmīgi, ka vairs nevarēs saņemt valsts finansējumu, uzdodas par mums - par pilsonisko sabiedrību - un it kā raizējas par demokrātijas nākotni.",
+      "Esmu par demokrātiju un brīvu iespēju paust savu viedokli arī sarežģītā Izraēlas un Palestīnas konfliktā, bet ne par mūsu, nodokļu maksātāju naudu.",
+      "10% NVO, kas faktiski, būdamas atsevišķu partiju jauniešu jeb satelīta organizācijas, ir saņēmušas valsts finansējumu diezgan mīklainos apstākļos un tagad met ēnu uz visu NVO sektoru, kuram esam pateicību parādā, ka daudzas sabiedrības grupas dzīvo labāk. Vai tās būtu organizācijas, kas iestājas par pacientu tiesībām, par cilvēku ar īpašām vajadzībām ikdienas nepieciešamībām, par mūsu bērnu un jauniešu veselību, par cilvēku, paliatīvās aprūpes klientu, tiesībām cieņpilni aiziet no šīs dzīves, vai tās organizācijas, kas pārstāv seniorus, sniedz sociālus pakalpojumus un dara citu svētus darbus.",
+      "Es atbalstu premjerministru Andri Kulbergu, ka neviens cents no valsts budžeta nevar aiziet organizācijām, kuri grib protestēt protestu dēļ, izvilkt Palestīnas karogu vai palielināt nelegālo imigrantu krīzi Latvijā. Un šeit ir vajadzīga pilnīga finanšu caurskatāmība un pārraudzība. Visai nodokļu maksātāju naudai jāaiziet atbalstam tām NVO, kas dara svētīgu darbu.",
+      "Autors: Jānis Jenzis"
+    ]
+  },
+  {
     id: "es-kohezijas-politika",
     date: "16.07.2026",
     title: "Aiva Vīksna: Jāmaina ES kohēzijas politika",
