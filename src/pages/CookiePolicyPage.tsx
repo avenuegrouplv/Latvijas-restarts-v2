@@ -16,7 +16,7 @@ export default function CookiePolicyPage() {
 
   useEffect(() => {
     try {
-      const consent = localStorage.getItem('cookie-consent-v2');
+      const consent = localStorage.getItem('cookie-consent-v4');
       if (consent) {
         const parsed = JSON.parse(consent);
         if (parsed && typeof parsed === 'object') {
@@ -30,7 +30,7 @@ export default function CookiePolicyPage() {
 
   const handleSavePreferences = () => {
     try {
-      localStorage.setItem('cookie-consent-v2', JSON.stringify({
+      localStorage.setItem('cookie-consent-v4', JSON.stringify({
         necessary: true,
         analytics,
         functional,
@@ -193,20 +193,6 @@ export default function CookiePolicyPage() {
                     Izmanto, lai rādītu Jūsu interesēm atbilstošākus paziņojumus un piedāvājumus sociālajos tīklos vai sadarbības partneru vietnēs.
                   </p>
                 </div>
-
-                <div className="flex items-center gap-4 pt-2">
-                  <button 
-                    onClick={handleSavePreferences}
-                    className="py-3 px-6 bg-latvia-red text-white font-bold uppercase text-xs tracking-wider rounded-xl hover:bg-zinc-900 transition-all cursor-pointer shadow-md"
-                  >
-                    Saglabāt izvēli
-                  </button>
-                  {savedMessage && (
-                    <span className="text-green-600 text-xs font-bold animate-fade-in flex items-center gap-1">
-                      <Check className="w-4 h-4" /> Iestatījumi saglabāti!
-                    </span>
-                  )}
-                </div>
               </div>
             </div>
 
@@ -253,11 +239,22 @@ export default function CookiePolicyPage() {
             </div>
           </div>
 
-          <div className="flex justify-center mt-16 pt-12 border-t border-zinc-100">
-            <Link to="/" className="bg-latvia-red text-white px-12 py-4 rounded-full font-black uppercase text-sm hover:bg-zinc-900 transition-all shadow-xl font-display tracking-widest">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-16 pt-12 border-t border-zinc-100">
+            <button 
+              onClick={handleSavePreferences}
+              className="bg-latvia-red text-white px-10 py-4 rounded-full font-black uppercase text-xs sm:text-sm hover:bg-zinc-900 transition-all shadow-xl font-display tracking-widest cursor-pointer"
+            >
+              Saglabāt izvēli
+            </button>
+            <Link to="/" className="bg-zinc-900 text-white px-10 py-4 rounded-full font-black uppercase text-xs sm:text-sm hover:bg-latvia-red transition-all shadow-xl font-display tracking-widest">
               Aizvērt
             </Link>
           </div>
+          {savedMessage && (
+            <p className="text-center text-green-600 text-xs font-bold mt-4 animate-fade-in flex items-center justify-center gap-1">
+              <Check className="w-4 h-4" /> Iestatījumi saglabāti!
+            </p>
+          )}
         </div>
       </div>
     </section>

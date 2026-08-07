@@ -15,6 +15,29 @@ export default defineConfig(({mode}) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      target: 'esnext',
+      cssCodeSplit: true,
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+                return 'vendor-core';
+              }
+              if (id.includes('motion')) {
+                return 'vendor-motion';
+              }
+              if (id.includes('lucide-react')) {
+                return 'vendor-icons';
+              }
+              return 'vendor-other';
+            }
+          }
+        }
+      }
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modifyâfile watching is disabled to prevent flickering during agent edits.

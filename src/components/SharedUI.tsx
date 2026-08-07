@@ -51,6 +51,8 @@ export const Logo = ({ className = "h-[53px]", isDark = false }: { className?: s
         <img 
           src="https://pub-125a4c281d7c440d9eaaedcb178381f9.r2.dev/Margrieta2.webp" 
           alt="Latvijas Restarts" 
+          width="512"
+          height="512"
           className="h-full w-auto object-contain"
           referrerPolicy="no-referrer"
           loading="eager"
@@ -187,16 +189,16 @@ export const Footer = () => {
               </div>
             </div>
             <div>
-              <h5 className="font-medium uppercase text-latvia-red mb-6 text-xs tracking-wider">Navigācija</h5>
-              <ul className="space-y-2 text-zinc-400">
+              <h3 className="font-bold uppercase text-red-500 mb-6 text-xs tracking-wider">Navigācija</h3>
+              <ul className="space-y-2 text-zinc-300">
                 {NAV_ITEMS.map(item => (
                   <li key={item.label}><Link to={item.href} className="hover:text-white transition-colors">{item.label}</Link></li>
                 ))}
               </ul>
             </div>
             <div>
-              <h5 className="font-medium uppercase text-latvia-red mb-6 text-xs tracking-wider">Kontakti</h5>
-              <ul className="space-y-2 text-zinc-400 text-sm">
+              <h3 className="font-bold uppercase text-red-500 mb-6 text-xs tracking-wider">Kontakti</h3>
+              <ul className="space-y-2 text-zinc-300 text-sm">
                 <li className="text-white mb-2 font-bold select-none">Biedrība "Latvijas Restarts"</li>
                 <li>Reģ. Nr. 40008317099</li>
                 <li>Rīga, Ogļu iela 12A, LV-1048</li>
@@ -214,24 +216,7 @@ export const Footer = () => {
             </div>
             <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
               <Link to="/privatuma-politika" className="hover:text-white transition-colors">Privātuma politika</Link>
-              <button 
-                onClick={() => setIsCookiesModalOpen(true)} 
-                className="hover:text-white transition-colors cursor-pointer"
-              >
-                Sīkdatņu politika
-              </button>
-              <button 
-                onClick={() => {
-                  try {
-                    localStorage.removeItem('cookie-consent-v2');
-                    localStorage.removeItem('cookie-consent');
-                  } catch (e) {}
-                  window.dispatchEvent(new Event('open-cookie-banner'));
-                }} 
-                className="hover:text-white transition-colors cursor-pointer text-latvia-red font-bold"
-              >
-                Sīkdatņu iestatījumi
-              </button>
+              <Link to="/sikdatnu-politika" className="hover:text-white transition-colors">Sīkdatņu politika</Link>
             </div>
           </div>
         </div>
@@ -676,7 +661,12 @@ export const CookieBanner = () => {
   useEffect(() => {
     let consent = null;
     try {
-      consent = localStorage.getItem('cookie-consent-v2');
+      // Clear legacy storage keys if present so fresh consent banner can pop up
+      localStorage.removeItem('cookie-consent-v3');
+      localStorage.removeItem('cookie-consent-v2');
+      localStorage.removeItem('cookie-consent');
+      
+      consent = localStorage.getItem('cookie-consent-v4');
       if (consent) {
         const parsed = JSON.parse(consent);
         if (parsed && typeof parsed === 'object') {
@@ -694,12 +684,12 @@ export const CookieBanner = () => {
     if (!consent) {
       timer = setTimeout(() => {
         setIsVisible(true);
-      }, 3000);
+      }, 300);
     }
 
     const handleOpen = () => {
       setIsVisible(true);
-      setShowCustomizeModal(true);
+      setShowCustomizeModal(false);
     };
 
     window.addEventListener('open-cookie-banner', handleOpen);
@@ -712,7 +702,7 @@ export const CookieBanner = () => {
 
   const savePreferences = (prefs: { necessary: boolean; analytics: boolean; functional: boolean; marketing: boolean }) => {
     try {
-      localStorage.setItem('cookie-consent-v2', JSON.stringify({
+      localStorage.setItem('cookie-consent-v4', JSON.stringify({
         ...prefs,
         timestamp: new Date().toISOString()
       }));
@@ -748,9 +738,8 @@ export const CookieBanner = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ 
-              type: "spring", 
-              damping: 28, 
-              stiffness: 200 
+              duration: 0.8, 
+              ease: [0.16, 1, 0.3, 1] 
             }}
             className="fixed bottom-0 left-0 right-0 w-full z-[9999] bg-white border-t border-zinc-200/90 shadow-[0_-10px_35px_rgba(0,0,0,0.12)]"
           >
@@ -766,7 +755,7 @@ export const CookieBanner = () => {
                     Šī vietne izmanto sīkdatnes
                   </h3>
                   <p className="text-zinc-600 text-[11px] sm:text-xs md:text-sm leading-relaxed font-medium">
-                    Mēs izmantojam sīkdatnes, lai uzlabotu Jūsu lietošanas pieredzi, nodrošinātu vietnes darbību un analizētu apmeklētāju plūsmu. Jūs varat piekrist visām sīkdatnēm vai pielāgot savas izvēles. Vairāk informācijas mūsu <Link to="/privatuma-politika" className="text-latvia-red underline font-bold hover:text-zinc-900 transition-colors">Privātuma politikā</Link> un <Link to="/sikdatnu-politika" className="text-latvia-red underline font-bold hover:text-zinc-900 transition-colors">Sīkdatņu politikā</Link>.
+                    Mēs izmantojam sīkdatnes, lai uzlabotu Jūsu lietošanas pieredzi, nodrošinātu vietnes darbību un analizētu apmeklētāju plūsmu. Jūs varat piekrist visām sīkdatnēm vai pielāgot savas izvēles. Vairāk informācijas mūsu <Link to="/privatuma-politika" className="text-latvia-red underline font-bold hover:text-zinc-900 transition-colors">Privātuma politikā</Link>.
                   </p>
                 </div>
               </div>
@@ -780,9 +769,8 @@ export const CookieBanner = () => {
                 </button>
                 <button 
                   onClick={() => setShowCustomizeModal(true)}
-                  className="py-2.5 px-4 sm:px-5 bg-zinc-800 text-white hover:bg-zinc-900 text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] font-display flex-1 md:flex-none text-center cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap"
+                  className="py-2.5 px-4 sm:px-5 bg-zinc-800 text-white hover:bg-zinc-900 text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] font-display flex-1 md:flex-none text-center cursor-pointer whitespace-nowrap"
                 >
-                  <Sliders className="w-3.5 h-3.5 text-zinc-300" />
                   Pielāgot
                 </button>
                 <button 
@@ -790,13 +778,6 @@ export const CookieBanner = () => {
                   className="py-2.5 px-4 sm:px-5 bg-zinc-100 text-zinc-700 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] font-display flex-1 md:flex-none text-center cursor-pointer whitespace-nowrap"
                 >
                   Noraidīt
-                </button>
-                <button 
-                  onClick={handleDeclineAll}
-                  className="p-2 text-zinc-400 hover:text-latvia-red transition-colors rounded-lg hover:bg-zinc-100 shrink-0 cursor-pointer hidden sm:block"
-                  aria-label="Aizvērt"
-                >
-                  <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
